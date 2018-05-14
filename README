@@ -1,3 +1,24 @@
-it is first commit for testing - YB.
+mysql version = 10.2.14-MariaDB-10.2.14+maria~xenial-log
+django version = 2.0
+python version = 3.5.2
 
-Let's dive deeply in this project, together :)
+* first installation
+ - python3 -m venv "your venv name"
+ - pip install django~=2.0
+
+* to developement
+ - type in the command line -> "source "your venv directory"/bin/activate
+ - then, coding.
+
+* after coding some models.py part, type in command-line
+ - python(3) manage.py makemigrations "app name"
+ - python(3) manage.py migrate
+
+
+my directory example.
+
+
+proto_yb	- yb_venv(virtual env)
+		- clap_proto(basic app of django)
+		- guide(app about guide/walkthrough posts)
+		- manage.py
