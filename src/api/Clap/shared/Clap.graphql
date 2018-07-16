@@ -1,0 +1,10 @@
+type Clap {
+  id: Int!
+  senderId: Int!
+  sender: User!
+  receiverId: Int!
+  receiver: User!
+  post: Post!
+  createdAt: String!
+  updatedAt: String
+}

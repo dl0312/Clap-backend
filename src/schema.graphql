@@ -1,9 +1,129 @@
-type Query {
-  sayBye: String!
-  sayHello: Greeting!
+type Achievement {
+  id: Int!
+  name: String!
+  condition: String!
+  achievers: [User]
+  createdAt: String!
+  updatedAt: String
 }
 
-type Greeting {
+type Category {
+  id: Int!
+  name: String!
+  parent: [Category]
+  child: [Category]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Clap {
+  id: Int!
+  senderId: Int!
+  sender: User!
+  receiverId: Int!
+  receiver: User!
+  post: Post!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Comment {
+  id: Int!
+  body: String!
+  creator: User!
+  post: Post!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Game {
+  id: Int!
+  title: String!
+  category: Category!
+  logo: Image
+  icon: Image
+  createdAt: String!
+  updatedAt: String
+}
+
+type Image {
+  id: Int!
+  name: String!
+  filename: String!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
   text: String!
-  error: Boolean!
+  senderId: Int!
+  sender: User!
+  receiverId: User!
+  receiver: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Notification {
+  id: Int!
+  sender: User
+  receiver: User!
+  type: String!
+  postOfFollowers: Post
+  commentOnMyPost: Comment
+  commentOnMyComment: Comment
+  createdAt: String!
+  updatedAt: String
+}
+
+type Post {
+  id: Int!
+  title: String!
+  body: String!
+  creator: User!
+  claps: [Clap]
+  comments: [Comments]
+  view: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
+type User {
+  id: Int!
+  email: String
+  verifiedEmail: Boolean!
+  firstName: String!
+  lastName: String!
+  fullName: String
+  age: Int
+  gender: String
+  password: String
+  phoneNumber: String
+  verifiedPhoneNumber: Boolean!
+  profilePhoto: String
+  fbId: String
+  messages: [Message]
+  certification: Boolean
+  exp: Int!
+  clapPoint: Int!
+  following: [User]
+  followers: [User]
+  achievements: [Achievement]
+  posts: [Post]
+  clapsAsSender: [Clap]
+  clapsAsReceiver: [Clap]
+  comments: [Comment]
+  notificationsAsReceiver: [Notification]
+  wikiImages: [WikiImage]
+  createdAt: String!
+  updatedAt: String
+}
+
+type WikiImage {
+  id: Int!
+  body: String!
+  creator: User!
+  createdAt: String!
+  updatedAt: String
 }

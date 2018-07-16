@@ -1,0 +1,8 @@
+type Achievement {
+  id: Int!
+  name: String!
+  condition: String!
+  achievers: [User]
+  createdAt: String!
+  updatedAt: String
+}

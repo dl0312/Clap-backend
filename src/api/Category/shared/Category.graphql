@@ -1,0 +1,8 @@
+type Category {
+  id: Int!
+  name: String!
+  parent: [Category]
+  child: [Category]
+  createdAt: String!
+  updatedAt: String
+}

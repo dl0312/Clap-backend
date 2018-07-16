@@ -1,0 +1,7 @@
+type Image {
+  id: Int!
+  name: String!
+  filename: String!
+  createdAt: String!
+  updatedAt: String
+}
