@@ -9,8 +9,8 @@ import {
 } from "typeorm";
 import { verificationTarget } from "../types/types";
 
-const PHONE: string = "PHONE";
-const EMAIL: string = "EMAIL";
+const PHONE = "PHONE";
+const EMAIL = "EMAIL";
 
 @Entity()
 class Verification extends BaseEntity {

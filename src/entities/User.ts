@@ -45,7 +45,8 @@ class User extends BaseEntity {
 
   @Column({
     type: "text",
-    enum: ["MALE", "FEMALE"]
+    enum: ["MALE", "FEMALE"],
+    nullable: true
   })
   gender: gender;
 
