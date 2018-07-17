@@ -36,6 +36,11 @@ type Comment {
   updatedAt: String
 }
 
+type Query {
+  comment: Comment
+  user: User
+}
+
 type Game {
   id: Int!
   title: String!
@@ -83,7 +88,7 @@ type Post {
   body: String!
   creator: User!
   claps: [Clap]
-  comments: [Comments]
+  comments: [Comment]
   view: Int!
   createdAt: String!
   updatedAt: String
@@ -118,6 +123,15 @@ type User {
   wikiImages: [WikiImage]
   createdAt: String!
   updatedAt: String
+}
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  used: Boolean!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type WikiImage {

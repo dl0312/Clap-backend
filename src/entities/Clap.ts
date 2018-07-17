@@ -5,8 +5,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  OneToOne
+  UpdateDateColumn
 } from "typeorm";
 import User from "./User";
 import Post from "./Post";

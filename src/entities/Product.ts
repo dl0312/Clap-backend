@@ -4,22 +4,27 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne
 } from "typeorm";
+import Game from "./Game";
 
 @Entity()
-class Image extends BaseEntity {
+class Product extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
   name: string;
 
-  @Column({ type: "text" })
-  filename: string;
+  @Column({ type: "int" })
+  price: number;
+
+  @ManyToOne(type => Game)
+  game: Game;
 
   @CreateDateColumn() createdAt: string;
 
   @UpdateDateColumn() updatedAt: string;
 }
 
-export default Image;
+export default Product;

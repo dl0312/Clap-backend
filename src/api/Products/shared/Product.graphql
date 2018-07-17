@@ -1,0 +1,8 @@
+type Product {
+  id: Int!
+  name: String!
+  price: Int!
+  game: Game!
+  createdAt: String!
+  updatedAt: String!
+}

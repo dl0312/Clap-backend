@@ -40,10 +40,6 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   lastName: string;
 
-  get fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
-  }
-
   @Column({ type: "int", nullable: true })
   age: number;
 
@@ -55,23 +51,6 @@ class User extends BaseEntity {
 
   @Column({ type: "text", nullable: true })
   password: string;
-
-  public comparePassword(password: string): Promise<boolean> {
-    return bcrypt.compare(password, this.password);
-  }
-
-  @BeforeInsert()
-  @BeforeUpdate()
-  async savePassword(): Promise<void> {
-    if (this.password) {
-      const hashedPassword = await this.hashPassword(this.password);
-      this.password = hashedPassword;
-    }
-  }
-
-  private hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, BCRYPT_ROUNDS);
-  }
 
   @Column({ type: "text", nullable: true })
   phoneNumber: string;
@@ -127,6 +106,26 @@ class User extends BaseEntity {
   @CreateDateColumn() createdAt: string;
 
   @UpdateDateColumn() updatedAt: string;
+
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+  public comparePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
+  }
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async savePassword(): Promise<void> {
+    if (this.password) {
+      const hashedPassword = await this.hashPassword(this.password);
+      this.password = hashedPassword;
+    }
+  }
+
+  private hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, BCRYPT_ROUNDS);
+  }
 }
 
 export default User;

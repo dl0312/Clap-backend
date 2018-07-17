@@ -6,3 +6,7 @@ type Comment {
   createdAt: String!
   updatedAt: String
 }
+
+type Query {
+  comment: Comment
+}
