@@ -1,0 +1,12 @@
+type GetPostsByKeywordResponse {
+  ok: Boolean!
+  error: String
+  filterdPosts: [Post]
+}
+
+type Query {
+  GetPostsByKeyword(
+    searchType: String
+    keyword: String!
+  ): GetPostsByKeywordResponse!
+}

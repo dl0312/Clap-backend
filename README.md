@@ -9,33 +9,38 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
 - [x] Sign In / Sign Up with Facebook
 - [x] Sign In with Email
 - [x] Start Phone Number Verification
-- [ ] Complete Phone Number Verification
-- [ ] Sign Up with Email
+- [x] Complete Phone Number Verification
+- [x] Sign Up with Email
 
 ---
 
 ### Authentication:
 
-- [ ] Generate JWT
-- [ ] Verify JWT
+- [x] Generate JWT
+- [x] Verify JWT
 
 ### Private Resolvers:
 
-- [ ] **User**
-  - [ ] _Query_
-    - [ ] Get My Profile
-  - [ ] _Mutation_
-    - [ ] Request Email Verification
-    - [ ] Complete Email Verification
-    - [ ] Update my Profile
-- [ ] **Post**
-  - [ ] _Query_
-    - [ ] Get My Posts
-    - [ ] Search by Keyword
-  - [ ] _Mutation_
-    - [ ] Add Post
-    - [ ] Edit Post
-    - [ ] Delete Post
+- [x] **User**
+  - [x] _Query_
+    - [x] Get My Profile
+    - [ ] Get My Followers
+    - [ ] Get My Following
+  - [x] _Mutation_
+    - [x] Request Email Verification
+    - [x] Complete Email Verification
+    - [x] Update my Profile
+    - [ ] Follow User
+    - [ ] Unfollow User
+- [x] **Post**
+  - [x] _Query_
+    - [x] Get All Posts
+    - [x] Search by Keyword ( Title, Body, Both(fixing) )
+    - [x] Get My Posts
+  - [x] _Mutation_
+    - [x] Add Post
+    - [x] Edit Post
+    - [x] Delete Post
 - [ ] **Comment**
   - [ ] _Query_
     - [ ] Get My Comments
@@ -76,3 +81,10 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
   - [ ] _Query_
     - [ ] Check How Many Users Achieve
   - [ ] _Mutation_
+- [ ] **Product**
+  - [ ] _Query_
+    - [ ] Get All Products
+    - [ ] Get All Products with Game Category
+    - [ ] Get Specific Product
+  - [ ] _Mutation_
+    - [ ] Change amount of Product

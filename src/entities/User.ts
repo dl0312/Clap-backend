@@ -2,24 +2,25 @@ import bcrypt from "bcrypt";
 import { IsEmail } from "class-validator";
 import {
   BaseEntity,
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToMany,
-  CreateDateColumn,
-  UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
-  JoinTable
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm";
 import { gender } from "../types/types";
-import Message from "./Message";
 import Achievement from "./Achievement";
 import Clap from "./Clap";
-import Post from "./Post";
 import Comment from "./Comment";
+import Message from "./Message";
 import Notification from "./Notification";
+import Post from "./Post";
+import WikiImage from "./WikiImage";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -29,7 +30,7 @@ class User extends BaseEntity {
 
   @Column({ type: "text", nullable: true })
   @IsEmail()
-  email: string | null;
+  email: string;
 
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
@@ -65,8 +66,11 @@ class User extends BaseEntity {
   @Column({ type: "text", nullable: true })
   fbId: string;
 
-  @OneToMany(type => Message, message => message.sender || message.receiver)
-  messages: Message[];
+  @OneToMany(type => Message, message => message.sender)
+  messagesAsSender: Message[];
+
+  @OneToMany(type => Message, message => message.receiver)
+  messagesAsReceiver: Message[];
 
   @Column({ type: "boolean", nullable: true })
   certification: boolean;
@@ -77,32 +81,39 @@ class User extends BaseEntity {
   @Column({ type: "int", default: 0 })
   clapPoint: number;
 
-  @ManyToMany(type => User, user => user.followers)
+  @ManyToMany(type => User, user => user.followers, { nullable: true })
   @JoinTable()
   following: User[];
 
-  @ManyToMany(type => User, user => user.following)
+  @ManyToMany(type => User, user => user.following, { nullable: true })
+  @JoinTable()
   followers: User[];
 
-  @ManyToMany(type => Achievement, achievement => achievement.achievers)
+  @ManyToMany(type => Achievement, achievement => achievement.achievers, {
+    nullable: true
+  })
+  @JoinTable()
   achievements: Achievement[];
 
-  @OneToMany(type => Post, post => post.creator)
+  @OneToMany(type => Post, post => post.user)
   posts: Post[];
 
-  @OneToMany(type => Clap, clap => clap.sender)
+  @OneToMany(type => Clap, clap => clap.sender, { nullable: true })
   clapsAsSender: Clap[];
 
-  @OneToMany(type => Clap, clap => clap.receiver)
+  @OneToMany(type => Clap, clap => clap.receiver, { nullable: true })
   clapsAsReceiver: Clap[];
 
-  @OneToMany(type => Comment, commnet => commnet.creator)
+  @OneToMany(type => Comment, commnet => commnet.user, { nullable: true })
   comments: Comment[];
 
-  @OneToMany(type => Notification, notification => notification.receiver)
+  @OneToMany(type => Notification, notification => notification.receiver, {
+    nullable: true
+  })
   notificationsAsReceiver: Notification[];
 
-  wikiImages;
+  @OneToMany(type => WikiImage, wikiimage => wikiimage.user, { nullable: true })
+  wikiImages: WikiImage[];
 
   @CreateDateColumn() createdAt: string;
 

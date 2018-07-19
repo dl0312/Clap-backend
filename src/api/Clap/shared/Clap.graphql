@@ -4,7 +4,7 @@ type Clap {
   sender: User!
   receiverId: Int!
   receiver: User!
-  post: Post!
+  # post: Post!
   createdAt: String!
   updatedAt: String
 }

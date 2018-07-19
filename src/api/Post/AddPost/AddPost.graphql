@@ -1,0 +1,8 @@
+type AddPostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddPost(title: String!, body: String!): AddPostResponse!
+}

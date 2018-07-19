@@ -1,14 +1,14 @@
 import {
   BaseEntity,
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import User from "./User";
 import Post from "./Post";
+import User from "./User";
 
 @Entity()
 class Comment extends BaseEntity {
@@ -17,11 +17,23 @@ class Comment extends BaseEntity {
   @Column({ type: "text" })
   body: string;
 
+  @Column({ nullable: true })
+  userId: number;
+
   @ManyToOne(type => User, user => user.comments)
-  creator: User;
+  user: User;
+
+  @Column({ nullable: true })
+  postId: number;
 
   @ManyToOne(type => Post, post => post.comments)
   post: Post;
+
+  @Column({ nullable: true })
+  parentCommentId: number;
+
+  @ManyToOne(type => Comment, { nullable: true })
+  parentComment: Comment;
 
   @CreateDateColumn() createdAt: string;
 

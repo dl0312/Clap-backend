@@ -1,0 +1,8 @@
+type EditPostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditPost(postId: Int!, title: String, body: String): EditPostResponse!
+}

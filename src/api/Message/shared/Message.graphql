@@ -3,8 +3,8 @@ type Message {
   text: String!
   senderId: Int!
   sender: User!
-  receiverId: User!
-  receiver: Int!
+  receiverId: Int!
+  receiver: User!
   createdAt: String!
   updatedAt: String
 }

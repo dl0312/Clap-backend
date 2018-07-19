@@ -2,7 +2,8 @@ type Post {
   id: Int!
   title: String!
   body: String!
-  creator: User!
+  userId: Int!
+  user: User!
   claps: [Clap]
   comments: [Comment]
   view: Int!

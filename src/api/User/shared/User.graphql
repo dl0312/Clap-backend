@@ -12,7 +12,8 @@ type User {
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
   fbId: String
-  messages: [Message]
+  messagesAsSender: [Message]
+  messagesAsReceiver: [Message]
   certification: Boolean
   exp: Int!
   clapPoint: Int!
@@ -27,8 +28,4 @@ type User {
   wikiImages: [WikiImage]
   createdAt: String!
   updatedAt: String
-}
-
-type Query {
-  user: User
 }

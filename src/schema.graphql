@@ -22,23 +22,55 @@ type Clap {
   sender: User!
   receiverId: Int!
   receiver: User!
-  post: Post!
+  # post: Post!
   createdAt: String!
   updatedAt: String
+}
+
+type AddCommentResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!
+  AddPost(title: String!, body: String!): AddPostResponse!
+  DeletePost(postId: Int!): DeletePostResponse!
+  EditPost(postId: Int!, title: String, body: String): EditPostResponse!
+  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
+  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
+  RequestEmailVerification: RequestEmailVerificationResponse!
+  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type GetCommentsByPostIdResponse {
+  ok: Boolean!
+  error: String
+  comments: [Comment]
+}
+
+type Query {
+  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
+  GetAllPosts(limit: Int!): GetAllPostsResponse!
+  GetMyPosts: GetMyPostsResponse!
+  GetPostsByKeyword(searchType: String, keyword: String!): GetPostsByKeywordResponse!
+  GetMyProfile: GetMyProfileResponse!
 }
 
 type Comment {
   id: Int!
   body: String!
-  creator: User!
+  userId: Int!
+  user: User!
+  postId: Int!
   post: Post!
+  parentCommentId: Int
   createdAt: String!
   updatedAt: String
-}
-
-type Query {
-  comment: Comment
-  user: User
 }
 
 type Game {
@@ -64,8 +96,8 @@ type Message {
   text: String!
   senderId: Int!
   sender: User!
-  receiverId: User!
-  receiver: Int!
+  receiverId: Int!
+  receiver: User!
   createdAt: String!
   updatedAt: String
 }
@@ -82,11 +114,45 @@ type Notification {
   updatedAt: String
 }
 
+type AddPostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type DeletePostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditPostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetMyPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetPostsByKeywordResponse {
+  ok: Boolean!
+  error: String
+  filterdPosts: [Post]
+}
+
 type Post {
   id: Int!
   title: String!
   body: String!
-  creator: User!
+  userId: Int!
+  user: User!
   claps: [Clap]
   comments: [Comment]
   view: Int!
@@ -103,18 +169,15 @@ type Product {
   updatedAt: String!
 }
 
+type CompleteEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
 type CompletePhoneVerificationResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Mutation {
-  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
-  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
-  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
 }
 
 type EmailSignInResponse {
@@ -135,6 +198,17 @@ type FacebookConnectResponse {
   token: String
 }
 
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type RequestEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
 type User {
   id: Int!
   email: String
@@ -149,7 +223,8 @@ type User {
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
   fbId: String
-  messages: [Message]
+  messagesAsSender: [Message]
+  messagesAsReceiver: [Message]
   certification: Boolean
   exp: Int!
   clapPoint: Int!
@@ -171,6 +246,11 @@ type StartPhoneVerificationResponse {
   error: String
 }
 
+type UpdateMyProfileResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Verification {
   id: Int!
   target: String!
@@ -184,7 +264,8 @@ type Verification {
 type WikiImage {
   id: Int!
   body: String!
-  creator: User!
+  userId: Int!
+  user: User!
   createdAt: String!
   updatedAt: String
 }

@@ -1,7 +1,7 @@
 import {
   BaseEntity,
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -16,16 +16,14 @@ class Message extends BaseEntity {
   @Column({ type: "text" })
   text: string;
 
-  @Column({ type: "int" })
-  senderId: number;
+  @Column() senderId: number;
 
-  @ManyToOne(type => User, user => user.messages)
+  @ManyToOne(type => User, sender => sender.messagesAsSender)
   sender: User;
 
-  @Column({ type: "int" })
-  receiverId: number;
+  @Column() receiverId: number;
 
-  @ManyToOne(type => User, user => user.messages)
+  @ManyToOne(type => User, receiver => receiver.messagesAsReceiver)
   receiver: User;
 
   @CreateDateColumn() createdAt: string;

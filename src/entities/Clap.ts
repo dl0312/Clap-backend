@@ -1,14 +1,14 @@
 import {
   BaseEntity,
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import User from "./User";
 import Post from "./Post";
+import User from "./User";
 
 @Entity()
 class Clap extends BaseEntity {
@@ -17,13 +17,13 @@ class Clap extends BaseEntity {
   @Column({ type: "text" })
   text: string;
 
-  @Column({ type: "int" })
+  @Column({ nullable: true })
   senderId: number;
 
   @ManyToOne(type => User, user => user.clapsAsSender)
   sender: User;
 
-  @Column({ type: "int" })
+  @Column({ nullable: true })
   receiverId: number;
 
   @ManyToOne(type => User, user => user.clapsAsReceiver)

@@ -1,12 +1,11 @@
 type Comment {
   id: Int!
   body: String!
-  creator: User!
+  userId: Int!
+  user: User!
+  postId: Int!
   post: Post!
+  parentCommentId: Int
   createdAt: String!
   updatedAt: String
-}
-
-type Query {
-  comment: Comment
 }

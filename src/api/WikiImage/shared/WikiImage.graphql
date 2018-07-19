@@ -1,7 +1,8 @@
 type WikiImage {
   id: Int!
   body: String!
-  creator: User!
+  userId: Int!
+  user: User!
   createdAt: String!
   updatedAt: String
 }

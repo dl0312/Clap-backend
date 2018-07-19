@@ -1,11 +1,11 @@
 import {
   BaseEntity,
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  OneToOne
+  UpdateDateColumn
 } from "typeorm";
 import Category from "./Category";
 import Image from "./Image";

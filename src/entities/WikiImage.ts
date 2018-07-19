@@ -4,15 +4,23 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne
 } from "typeorm";
+import User from "./User";
 
 @Entity()
 class WikiImage extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
-  text: string;
+  body: string;
+
+  @Column({ nullable: true })
+  userId: number;
+
+  @ManyToOne(type => User, user => user.comments)
+  user: User;
 
   @CreateDateColumn() createdAt: string;
 

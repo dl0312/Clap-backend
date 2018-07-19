@@ -1,17 +1,17 @@
 import {
   BaseEntity,
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  OneToOne
+  UpdateDateColumn
 } from "typeorm";
-import User from "./User";
 import { notificationType } from "../types/types";
-import Post from "./Post";
 import Comment from "./Comment";
+import Post from "./Post";
+import User from "./User";
 
 @Entity()
 class Notification extends BaseEntity {

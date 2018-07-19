@@ -1,15 +1,17 @@
 import {
   BaseEntity,
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import User from "./User";
 import Clap from "./Clap";
 import Comment from "./Comment";
+import User from "./User";
 
 @Entity()
 class Post extends BaseEntity {
@@ -21,13 +23,18 @@ class Post extends BaseEntity {
   @Column({ type: "text" })
   body: string;
 
-  @ManyToOne(type => User, user => user.posts)
-  creator: User;
+  @Column({ nullable: true })
+  userId: number;
 
-  @ManyToOne(type => Clap, clap => clap.post)
+  @ManyToOne(type => User, user => user.posts)
+  user: User;
+
+  @OneToMany(type => Clap, clap => clap.post, { nullable: true })
+  @JoinColumn()
   claps: Clap[];
 
-  @ManyToOne(type => Comment, comment => comment.post)
+  @OneToMany(type => Comment, comment => comment.post, { nullable: true })
+  @JoinColumn()
   comments: Comment[];
 
   @Column({ type: "int", default: 0 })
