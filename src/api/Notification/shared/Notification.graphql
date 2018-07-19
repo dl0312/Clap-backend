@@ -1,6 +1,6 @@
 type Notification {
   id: Int!
-  sender: User
+  receiverId: Int!
   receiver: User!
   type: String!
   postOfFollowers: Post

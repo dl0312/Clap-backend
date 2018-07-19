@@ -1,0 +1,8 @@
+type FollowUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  FollowUser(userId: Int!): FollowUserResponse!
+}

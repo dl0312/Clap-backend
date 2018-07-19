@@ -17,11 +17,10 @@ import User from "./User";
 class Notification extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @ManyToOne(type => User)
-  sender: User[];
+  @Column() receiverId: number;
 
   @ManyToOne(type => User, user => user.notificationsAsReceiver)
-  receiver: User[];
+  receiver: User;
 
   @Column({
     type: "text",

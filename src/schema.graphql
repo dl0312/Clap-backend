@@ -34,6 +34,8 @@ type AddCommentResponse {
 
 type Mutation {
   AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!
+  DeleteComment(commentId: Int!): DeleteCommentResponse!
+  EditComment(commentId: Int!, body: String!): EditCommentResponse!
   AddPost(title: String!, body: String!): AddPostResponse!
   DeletePost(postId: Int!): DeletePostResponse!
   EditPost(postId: Int!, title: String, body: String): EditPostResponse!
@@ -42,9 +44,20 @@ type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(firstName: String!, lastName: String!, email: String, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
+  FollowUser(userId: Int!): FollowUserResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type DeleteCommentResponse {
+  ok: Boolean
+  error: String
+}
+
+type EditCommentResponse {
+  ok: Boolean!
+  error: String
 }
 
 type GetCommentsByPostIdResponse {
@@ -104,7 +117,7 @@ type Message {
 
 type Notification {
   id: Int!
-  sender: User
+  receiverId: Int!
   receiver: User!
   type: String!
   postOfFollowers: Post
@@ -198,6 +211,11 @@ type FacebookConnectResponse {
   token: String
 }
 
+type FollowUserResponse {
+  ok: Boolean!
+  error: String
+}
+
 type GetMyProfileResponse {
   ok: Boolean!
   error: String
@@ -228,9 +246,11 @@ type User {
   certification: Boolean
   exp: Int!
   clapPoint: Int!
+  achievements: [Achievement]
   following: [User]
   followers: [User]
-  achievements: [Achievement]
+  followersCount: Int
+  followingCount: Int
   posts: [Post]
   clapsAsSender: [Clap]
   clapsAsReceiver: [Clap]

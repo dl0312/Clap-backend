@@ -1,13 +1,20 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 import Post from "../../../entities/Post";
-import { GetPostsByKeywordQueryArgs } from "../../../types/graph";
+import {
+  GetPostsByKeywordQueryArgs,
+  GetPostsByKeywordResponse
+} from "../../../types/graph";
 import { Like } from "../../../../node_modules/typeorm";
 
 const resolvers: Resolvers = {
   Query: {
     GetPostsByKeyword: privateResolver(
-      async (_, args: GetPostsByKeywordQueryArgs, { req }) => {
+      async (
+        _,
+        args: GetPostsByKeywordQueryArgs,
+        { req }
+      ): Promise<GetPostsByKeywordResponse> => {
         const { searchType, keyword } = args;
         try {
           const filteredByTitle = await Post.find({

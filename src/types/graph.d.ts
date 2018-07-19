@@ -1,4 +1,4 @@
-export const typeDefs = ["type Achievement {\n  id: Int!\n  name: String!\n  condition: String!\n  achievers: [User]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Category {\n  id: Int!\n  name: String!\n  parent: [Category]\n  child: [Category]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Clap {\n  id: Int!\n  senderId: Int!\n  sender: User!\n  receiverId: Int!\n  receiver: User!\n  # post: Post!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!\n  AddPost(title: String!, body: String!): AddPostResponse!\n  DeletePost(postId: Int!): DeletePostResponse!\n  EditPost(postId: Int!, title: String, body: String): EditPostResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!\n}\n\ntype GetCommentsByPostIdResponse {\n  ok: Boolean!\n  error: String\n  comments: [Comment]\n}\n\ntype Query {\n  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!\n  GetAllPosts(limit: Int!): GetAllPostsResponse!\n  GetMyPosts: GetMyPostsResponse!\n  GetPostsByKeyword(searchType: String, keyword: String!): GetPostsByKeywordResponse!\n  GetMyProfile: GetMyProfileResponse!\n}\n\ntype Comment {\n  id: Int!\n  body: String!\n  userId: Int!\n  user: User!\n  postId: Int!\n  post: Post!\n  parentCommentId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Game {\n  id: Int!\n  title: String!\n  category: Category!\n  logo: Image\n  icon: Image\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Image {\n  id: Int!\n  name: String!\n  filename: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  senderId: Int!\n  sender: User!\n  receiverId: Int!\n  receiver: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Notification {\n  id: Int!\n  sender: User\n  receiver: User!\n  type: String!\n  postOfFollowers: Post\n  commentOnMyPost: Comment\n  commentOnMyComment: Comment\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype DeletePostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditPostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype GetAllPostsResponse {\n  ok: Boolean!\n  error: String\n  posts: [Post]\n}\n\ntype GetMyPostsResponse {\n  ok: Boolean!\n  error: String\n  posts: [Post]\n}\n\ntype GetPostsByKeywordResponse {\n  ok: Boolean!\n  error: String\n  filterdPosts: [Post]\n}\n\ntype Post {\n  id: Int!\n  title: String!\n  body: String!\n  userId: Int!\n  user: User!\n  claps: [Clap]\n  comments: [Comment]\n  view: Int!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Product {\n  id: Int!\n  name: String!\n  price: Int!\n  game: Game!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  age: Int\n  gender: String\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  fbId: String\n  messagesAsSender: [Message]\n  messagesAsReceiver: [Message]\n  certification: Boolean\n  exp: Int!\n  clapPoint: Int!\n  following: [User]\n  followers: [User]\n  achievements: [Achievement]\n  posts: [Post]\n  clapsAsSender: [Clap]\n  clapsAsReceiver: [Clap]\n  comments: [Comment]\n  notificationsAsReceiver: [Notification]\n  wikiImages: [WikiImage]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype WikiImage {\n  id: Int!\n  body: String!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n"];
+export const typeDefs = ["type Achievement {\n  id: Int!\n  name: String!\n  condition: String!\n  achievers: [User]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Category {\n  id: Int!\n  name: String!\n  parent: [Category]\n  child: [Category]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Clap {\n  id: Int!\n  senderId: Int!\n  sender: User!\n  receiverId: Int!\n  receiver: User!\n  # post: Post!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!\n  DeleteComment(commentId: Int!): DeleteCommentResponse!\n  EditComment(commentId: Int!, body: String!): EditCommentResponse!\n  AddPost(title: String!, body: String!): AddPostResponse!\n  DeletePost(postId: Int!): DeletePostResponse!\n  EditPost(postId: Int!, title: String, body: String): EditPostResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  FollowUser(userId: Int!): FollowUserResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!\n}\n\ntype DeleteCommentResponse {\n  ok: Boolean\n  error: String\n}\n\ntype EditCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype GetCommentsByPostIdResponse {\n  ok: Boolean!\n  error: String\n  comments: [Comment]\n}\n\ntype Query {\n  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!\n  GetAllPosts(limit: Int!): GetAllPostsResponse!\n  GetMyPosts: GetMyPostsResponse!\n  GetPostsByKeyword(searchType: String, keyword: String!): GetPostsByKeywordResponse!\n  GetMyProfile: GetMyProfileResponse!\n}\n\ntype Comment {\n  id: Int!\n  body: String!\n  userId: Int!\n  user: User!\n  postId: Int!\n  post: Post!\n  parentCommentId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Game {\n  id: Int!\n  title: String!\n  category: Category!\n  logo: Image\n  icon: Image\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Image {\n  id: Int!\n  name: String!\n  filename: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  senderId: Int!\n  sender: User!\n  receiverId: Int!\n  receiver: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Notification {\n  id: Int!\n  receiverId: Int!\n  receiver: User!\n  type: String!\n  postOfFollowers: Post\n  commentOnMyPost: Comment\n  commentOnMyComment: Comment\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype DeletePostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditPostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype GetAllPostsResponse {\n  ok: Boolean!\n  error: String\n  posts: [Post]\n}\n\ntype GetMyPostsResponse {\n  ok: Boolean!\n  error: String\n  posts: [Post]\n}\n\ntype GetPostsByKeywordResponse {\n  ok: Boolean!\n  error: String\n  filterdPosts: [Post]\n}\n\ntype Post {\n  id: Int!\n  title: String!\n  body: String!\n  userId: Int!\n  user: User!\n  claps: [Clap]\n  comments: [Comment]\n  view: Int!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Product {\n  id: Int!\n  name: String!\n  price: Int!\n  game: Game!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FollowUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  age: Int\n  gender: String\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  fbId: String\n  messagesAsSender: [Message]\n  messagesAsReceiver: [Message]\n  certification: Boolean\n  exp: Int!\n  clapPoint: Int!\n  achievements: [Achievement]\n  following: [User]\n  followers: [User]\n  followersCount: Int\n  followingCount: Int\n  posts: [Post]\n  clapsAsSender: [Clap]\n  clapsAsReceiver: [Clap]\n  comments: [Comment]\n  notificationsAsReceiver: [Notification]\n  wikiImages: [WikiImage]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype WikiImage {\n  id: Int!\n  body: String!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -59,9 +59,11 @@ export interface User {
   certification: boolean | null;
   exp: number;
   clapPoint: number;
+  achievements: Array<Achievement> | null;
   following: Array<User> | null;
   followers: Array<User> | null;
-  achievements: Array<Achievement> | null;
+  followersCount: number | null;
+  followingCount: number | null;
   posts: Array<Post> | null;
   clapsAsSender: Array<Clap> | null;
   clapsAsReceiver: Array<Clap> | null;
@@ -117,7 +119,7 @@ export interface Clap {
 
 export interface Notification {
   id: number;
-  sender: User | null;
+  receiverId: number;
   receiver: User;
   type: string;
   postOfFollowers: Post | null;
@@ -162,6 +164,8 @@ export interface GetMyProfileResponse {
 
 export interface Mutation {
   AddComment: AddCommentResponse;
+  DeleteComment: DeleteCommentResponse;
+  EditComment: EditCommentResponse;
   AddPost: AddPostResponse;
   DeletePost: DeletePostResponse;
   EditPost: EditPostResponse;
@@ -170,6 +174,7 @@ export interface Mutation {
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
+  FollowUser: FollowUserResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
   UpdateMyProfile: UpdateMyProfileResponse;
@@ -178,6 +183,15 @@ export interface Mutation {
 export interface AddCommentMutationArgs {
   postId: number;
   parentCommentId: number | null;
+  body: string;
+}
+
+export interface DeleteCommentMutationArgs {
+  commentId: number;
+}
+
+export interface EditCommentMutationArgs {
+  commentId: number;
   body: string;
 }
 
@@ -227,6 +241,10 @@ export interface FacebookConnectMutationArgs {
   fbId: string;
 }
 
+export interface FollowUserMutationArgs {
+  userId: number;
+}
+
 export interface StartPhoneVerificationMutationArgs {
   phoneNumber: string;
 }
@@ -241,6 +259,16 @@ export interface UpdateMyProfileMutationArgs {
 }
 
 export interface AddCommentResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface DeleteCommentResponse {
+  ok: boolean | null;
+  error: string | null;
+}
+
+export interface EditCommentResponse {
   ok: boolean;
   error: string | null;
 }
@@ -287,6 +315,11 @@ export interface FacebookConnectResponse {
   ok: boolean;
   error: string | null;
   token: string | null;
+}
+
+export interface FollowUserResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface RequestEmailVerificationResponse {

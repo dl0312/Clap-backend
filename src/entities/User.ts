@@ -11,7 +11,8 @@ import {
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  RelationCount
 } from "typeorm";
 import { gender } from "../types/types";
 import Achievement from "./Achievement";
@@ -81,13 +82,18 @@ class User extends BaseEntity {
   @Column({ type: "int", default: 0 })
   clapPoint: number;
 
-  @ManyToMany(type => User, user => user.followers, { nullable: true })
-  @JoinTable()
+  @ManyToMany(type => User, user => user.followers)
   following: User[];
 
-  @ManyToMany(type => User, user => user.following, { nullable: true })
+  @ManyToMany(type => User, user => user.following)
   @JoinTable()
   followers: User[];
+
+  @RelationCount((user: User) => user.followers)
+  followersCount: number;
+
+  @RelationCount((user: User) => user.following)
+  followingCount: number;
 
   @ManyToMany(type => Achievement, achievement => achievement.achievers, {
     nullable: true
