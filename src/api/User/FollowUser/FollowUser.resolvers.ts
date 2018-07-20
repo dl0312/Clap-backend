@@ -1,19 +1,24 @@
 import { Resolvers } from "../../../types/resolvers";
-import privateResolver from "../../../utils/privateResolver";
 import User from "../../../entities/User";
+import {
+  FollowUserMutationArgs,
+  FollowUserResponse
+} from "../../../types/graph";
 
 const resolvers: Resolvers = {
   Mutation: {
-    FollowUser: privateResolver(async (_, args, { req }) => {
+    FollowUser: async (
+      _,
+      args: FollowUserMutationArgs,
+      { req }
+    ): Promise<FollowUserResponse> => {
       const user: User = req.user;
       try {
-        const followedUser = await User.findOne(
-          { id: args.userId },
-          { relations: ["following"] }
-        );
+        const followedUser = await User.findOne({ id: args.userId });
         if (followedUser) {
-          if (followedUser !== user) {
-            await User.update({ id: user.id }, { following: [followedUser] });
+          if (followedUser.id !== user.id) {
+            user.following = [...[followedUser]];
+            user.save();
             return {
               ok: true,
               error: null
@@ -36,7 +41,7 @@ const resolvers: Resolvers = {
           error: error.message
         };
       }
-    })
+    }
   }
 };
 

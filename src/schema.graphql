@@ -16,23 +16,13 @@ type Category {
   updatedAt: String
 }
 
-type Clap {
-  id: Int!
-  senderId: Int!
-  sender: User!
-  receiverId: Int!
-  receiver: User!
-  # post: Post!
-  createdAt: String!
-  updatedAt: String
-}
-
-type AddCommentResponse {
+type SendClapResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
+  SendClap(receiverId: Int!, postId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
@@ -48,6 +38,23 @@ type Mutation {
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type Clap {
+  id: Int!
+  senderId: Int!
+  sender: User!
+  receiverId: Int!
+  receiver: User!
+  postId: Int
+  post: Post!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddCommentResponse {
+  ok: Boolean!
+  error: String
 }
 
 type DeleteCommentResponse {

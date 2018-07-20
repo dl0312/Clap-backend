@@ -29,6 +29,9 @@ class Clap extends BaseEntity {
   @ManyToOne(type => User, user => user.clapsAsReceiver)
   receiver: User;
 
+  @Column({ nullable: true })
+  postId: number;
+
   @ManyToOne(type => Post, post => post.claps)
   post: Post;
 
