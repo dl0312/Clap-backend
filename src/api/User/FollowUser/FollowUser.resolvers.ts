@@ -16,6 +16,11 @@ const resolvers: Resolvers = {
       try {
         const followedUser = await User.findOne({ id: args.userId });
         if (followedUser) {
+          /*
+
+          have to check if you already follow user
+
+          */
           if (followedUser.id !== user.id) {
             user.following = [...[followedUser]];
             user.save();

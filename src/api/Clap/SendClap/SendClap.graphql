@@ -4,5 +4,5 @@ type SendClapResponse {
 }
 
 type Mutation {
-  SendClap(receiverId: Int!, postId: Int!): SendClapResponse!
+  SendClap(postId: Int!): SendClapResponse!
 }

@@ -2,7 +2,9 @@ type Product {
   id: Int!
   name: String!
   price: Int!
-  game: Game!
+  stock: Int!
+  exchanges: [Exchange]
+  category: Category!
   createdAt: String!
   updatedAt: String!
 }

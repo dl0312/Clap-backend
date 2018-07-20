@@ -5,9 +5,11 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from "typeorm";
-import Game from "./Game";
+import Category from "./Category";
+import Exchange from "./Exchange";
 
 @Entity()
 class Product extends BaseEntity {
@@ -19,8 +21,14 @@ class Product extends BaseEntity {
   @Column({ type: "int" })
   price: number;
 
-  @ManyToOne(type => Game)
-  game: Game;
+  @Column({ type: "int", default: 100 })
+  stock: number;
+
+  @OneToMany(type => Exchange, exchange => exchange.product)
+  exchanges: Exchange[];
+
+  @ManyToOne(type => Category)
+  category: Category;
 
   @CreateDateColumn() createdAt: string;
 

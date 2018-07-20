@@ -1,9 +1,0 @@
-type Game {
-  id: Int!
-  title: String!
-  category: Category!
-  logo: Image
-  icon: Image
-  createdAt: String!
-  updatedAt: String
-}

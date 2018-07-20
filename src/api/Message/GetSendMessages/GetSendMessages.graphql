@@ -1,0 +1,9 @@
+type GetSendMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type Query {
+  GetSendMessages: GetSendMessagesResponse!
+}

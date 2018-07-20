@@ -1,25 +1,24 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
-import User from "../../../entities/User";
-import Comment from "../../../entities/Comment";
+import Product from "../../../entities/Product";
+import Category from "../../../entities/Category";
 import {
-  AddCommentMutationArgs,
-  AddCommentResponse
+  AddProductMutationArgs,
+  AddProductResponse
 } from "../../../types/graph";
-import cleanNullArgs from "../../../utils/cleanNullArg";
 
 const resolvers: Resolvers = {
   Mutation: {
-    AddComment: privateResolver(
+    AddProduct: privateResolver(
       async (
         _,
-        args: AddCommentMutationArgs,
+        args: AddProductMutationArgs,
         { req }
-      ): Promise<AddCommentResponse> => {
-        const user: User = req.user;
-        const notNull: any = cleanNullArgs(args);
+      ): Promise<AddProductResponse> => {
+        const { name, price, categoryId } = args;
         try {
-          await Comment.create({ ...notNull, user }).save();
+          const category = await Category.findOne({ id: categoryId });
+          await Product.create({ name, price, category });
           return {
             ok: true,
             error: null

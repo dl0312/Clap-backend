@@ -7,28 +7,24 @@ type Achievement {
   updatedAt: String
 }
 
-type Category {
-  id: Int!
-  name: String!
-  parent: [Category]
-  child: [Category]
-  createdAt: String!
-  updatedAt: String
-}
-
-type SendClapResponse {
+type AddCategoryResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
-  SendClap(receiverId: Int!, postId: Int!): SendClapResponse!
+  AddCategory(name: String!, parentIds: [Int], childrenIds: [Int]): AddCategoryResponse!
+  EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
+  SendClap(postId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
+  AddImage(name: String!, filename: String!): AddImageResponse!
+  SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
   AddPost(title: String!, body: String!): AddPostResponse!
   DeletePost(postId: Int!): DeletePostResponse!
   EditPost(postId: Int!, title: String, body: String): EditPostResponse!
+  AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -38,6 +34,43 @@ type Mutation {
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type EditCategoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllCategoriesResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type Query {
+  GetAllCategories: GetAllCategoriesResponse!
+  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
+  GetReceivedMessages: GetReceivedMessagesResponse!
+  GetSendMessages: GetSendMessagesResponse!
+  GetAllPosts(limit: Int!): GetAllPostsResponse!
+  GetMyPosts: GetMyPostsResponse!
+  GetPostsByKeyword(searchType: String, keyword: String!): GetPostsByKeywordResponse!
+  GetMyProfile: GetMyProfileResponse!
+}
+
+type Category {
+  id: Int!
+  name: String!
+  parent: [Category]
+  children: [Category]
+  # level: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
+type SendClapResponse {
+  ok: Boolean!
+  error: String
 }
 
 type Clap {
@@ -73,14 +106,6 @@ type GetCommentsByPostIdResponse {
   comments: [Comment]
 }
 
-type Query {
-  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
-  GetAllPosts(limit: Int!): GetAllPostsResponse!
-  GetMyPosts: GetMyPostsResponse!
-  GetPostsByKeyword(searchType: String, keyword: String!): GetPostsByKeywordResponse!
-  GetMyProfile: GetMyProfileResponse!
-}
-
 type Comment {
   id: Int!
   body: String!
@@ -93,14 +118,9 @@ type Comment {
   updatedAt: String
 }
 
-type Game {
-  id: Int!
-  title: String!
-  category: Category!
-  logo: Image
-  icon: Image
-  createdAt: String!
-  updatedAt: String
+type AddImageResponse {
+  ok: Boolean!
+  error: String
 }
 
 type Image {
@@ -109,6 +129,23 @@ type Image {
   filename: String!
   createdAt: String!
   updatedAt: String
+}
+
+type GetReceivedMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type GetSendMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type SendMessageResponse {
+  ok: Boolean!
+  error: String
 }
 
 type Message {
@@ -180,11 +217,17 @@ type Post {
   updatedAt: String
 }
 
+type AddProductResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Product {
   id: Int!
   name: String!
   price: Int!
-  game: Game!
+  stock: Int!
+  category: Category!
   createdAt: String!
   updatedAt: String!
 }

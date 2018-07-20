@@ -3,23 +3,26 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  TreeParent,
+  TreeChildren,
+  Tree
 } from "typeorm";
 
 @Entity()
+@Tree("closure-table")
 class Category extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
   name: string;
 
-  @OneToOne(type => Category)
-  parent: Category;
+  @TreeParent() parent: Category[];
 
-  @OneToOne(type => Category)
-  child: Category;
+  @TreeChildren() children: Category[];
+
+  // @TreeLevelColumn() level: number | null;
 
   @CreateDateColumn() createdAt: string;
 

@@ -14,9 +14,6 @@ import User from "./User";
 class Clap extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "text" })
-  text: string;
-
   @Column({ nullable: true })
   senderId: number;
 

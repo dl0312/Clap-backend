@@ -24,13 +24,13 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
 - [x] **User**
   - [x] _Query_
     - [x] Get My Profile
-    - [ ] Get My Followers
-    - [ ] Get My Following
+    - [x] Get My Followers ( Implemented on GetMyProfile )
+    - [x] Get My Following ( Implemented on GetMyProfile )
   - [x] _Mutation_
     - [x] Request Email Verification
     - [x] Complete Email Verification
     - [x] Update my Profile
-    - [ ] Follow User
+    - [x] Follow User
     - [ ] Unfollow User
 - [x] **Post**
   - [x] _Query_
@@ -43,25 +43,26 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [x] Delete Post
 - [ ] **Comment**
   - [ ] _Query_
-    - [ ] Get My Comments
-  - [ ] _Mutation_
-    - [ ] Add Comment On Post
-    - [ ] Add Commnet On Comment
-    - [ ] Edit Comment
-    - [ ] Delete Comment
+    - [ ] Get My Comments ( have to implement? )
+    - [x] Get Comments by Post
+  - [x] _Mutation_
+    - [x] Add Comment On Post
+    - [x] Add Commnet On Comment
+    - [x] Edit Comment
+    - [x] Delete Comment
 - [ ] **Clap**
   - [ ] _Query_
     - [ ] Check My Sended Claps
     - [ ] Check My Received Claps For Each Posts
   - [ ] _Mutation_
-    - [ ] Send Clap to Post
+    - [x] Send Clap to Post
 - [ ] **Image**
   - [ ] _Query_
   - [ ] _Mutation_
     - [ ] Add Image
     - [ ] Edit Image
     - [ ] Delete Image
-- [ ] **Game**
+- [ ] **Game** ( ? )
   - [ ] _Query_
   - [ ] _Mutation_
     - [ ] Add Game
@@ -69,14 +70,15 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
 - [ ] **Category**
   - [ ] _Query_
   - [ ] _Mutation_
-    - [ ] Add Category
-    - [ ] Edit Category
+    - [x] Add Category ( need to implement level )
+    - [ ] Edit Category ( need to fix )
     - [ ] Delete Category
-- [ ] **Message**
-  - [ ] _Query_
-    - [ ] Check Received Messages
-  - [ ] _Mutation_
-    - [ ] Send a Message
+- [x] **Message**
+  - [x] _Query_
+    - [x] Check Received Messages
+    - [x] Check Send Messages
+  - [x] _Mutation_
+    - [x] Send a Message
 - [ ] **Achievement**
   - [ ] _Query_
     - [ ] Check How Many Users Achieve
@@ -87,4 +89,11 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [ ] Get All Products with Game Category
     - [ ] Get Specific Product
   - [ ] _Mutation_
+    - [ ] Add Product
     - [ ] Change amount of Product
+    - [ ] Purchase Product
+- [ ] **Exchange**
+  - [ ] _Query_
+    - [ ] Get My Exchanges
+  - [ ] _Mutation_
+    - [ ] Add Exchange

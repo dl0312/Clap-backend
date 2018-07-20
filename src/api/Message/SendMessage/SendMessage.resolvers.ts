@@ -1,28 +1,30 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 import User from "../../../entities/User";
-import Clap from "../../../entities/Clap";
-import Post from "../../../entities/Post";
-import { SendClapResponse, SendClapMutationArgs } from "../../../types/graph";
+import Message from "../../../entities/Message";
+import {
+  SendMessageResponse,
+  SendMessageMutationArgs
+} from "../../../types/graph";
 
 const resolvers: Resolvers = {
   Mutation: {
-    SendClap: privateResolver(
+    SendMessage: privateResolver(
       async (
         _,
-        args: SendClapMutationArgs,
+        args: SendMessageMutationArgs,
         { req }
-      ): Promise<SendClapResponse> => {
+      ): Promise<SendMessageResponse> => {
         const user: User = req.user;
-        const { postId } = args;
+        const { text, receiverId } = args;
         try {
-          const post = await Post.findOne({ id: postId });
-          if (post) {
-            if (post.userId !== user.id) {
-              await Clap.create({
+          const receiver = await User.findOne({ id: receiverId });
+          if (receiver) {
+            if (receiverId !== user.id) {
+              await Message.create({
                 senderId: user.id,
-                receiverId: post.userId,
-                postId
+                receiverId,
+                text
               }).save();
               return {
                 ok: true,
@@ -31,13 +33,13 @@ const resolvers: Resolvers = {
             } else {
               return {
                 ok: false,
-                error: "You can't clap yourself"
+                error: "You can't send message yourself"
               };
             }
           } else {
             return {
               ok: false,
-              error: "Has no Post with that ID"
+              error: "Has no User with that ID"
             };
           }
         } catch (error) {

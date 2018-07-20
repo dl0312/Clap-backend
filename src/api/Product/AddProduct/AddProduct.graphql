@@ -1,0 +1,8 @@
+type AddProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
+}

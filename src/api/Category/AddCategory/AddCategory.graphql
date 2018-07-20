@@ -1,0 +1,12 @@
+type AddCategoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddCategory(
+    name: String!
+    parentIds: [Int]
+    childrenIds: [Int]
+  ): AddCategoryResponse!
+}

@@ -2,7 +2,8 @@ type Category {
   id: Int!
   name: String!
   parent: [Category]
-  child: [Category]
+  children: [Category]
+  # level: Int!
   createdAt: String!
   updatedAt: String
 }

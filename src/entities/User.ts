@@ -22,6 +22,7 @@ import Message from "./Message";
 import Notification from "./Notification";
 import Post from "./Post";
 import WikiImage from "./WikiImage";
+import Exchange from "./Exchange";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -79,9 +80,6 @@ class User extends BaseEntity {
   @Column({ type: "int", default: 0 })
   exp: number;
 
-  @Column({ type: "int", default: 0 })
-  clapPoint: number;
-
   @ManyToMany(type => User, user => user.followers)
   following: User[];
 
@@ -104,11 +102,17 @@ class User extends BaseEntity {
   @OneToMany(type => Post, post => post.user)
   posts: Post[];
 
-  @OneToMany(type => Clap, clap => clap.sender, { nullable: true })
+  @OneToMany(type => Exchange, exchange => exchange.buyer)
+  exchanges: Exchange[];
+
+  @OneToMany(type => Clap, clap => clap.sender)
   clapsAsSender: Clap[];
 
-  @OneToMany(type => Clap, clap => clap.receiver, { nullable: true })
+  @OneToMany(type => Clap, clap => clap.receiver)
   clapsAsReceiver: Clap[];
+
+  @RelationCount((user: User) => user.clapsAsReceiver)
+  clapsAsReceiverCount: number;
 
   @OneToMany(type => Comment, commnet => commnet.user, { nullable: true })
   comments: Comment[];
@@ -128,6 +132,33 @@ class User extends BaseEntity {
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }
+
+  get clapPoint(): number {
+    // 1.
+    // calculate with sum of all posts clap
+    // if post is deleted, remove clap point
+
+    // if (this.posts) {
+    //   this.posts.forEach(post => (clap += post.claps.length));
+    // }
+
+    // 2.
+    // calculate with sum of given clap ( not related with post )
+    // if post is deleted, would not remove clap point
+    // have danger of abusing
+
+    // if (this.clapsAsReceiver) {
+    //   clap += this.clapsAsReceiver.length;
+    // }
+    let spend = 0;
+    if (this.exchanges) {
+      this.exchanges.forEach(exchange => {
+        spend += exchange.product.price;
+      });
+    }
+    return this.clapsAsReceiverCount - spend;
+  }
+
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }

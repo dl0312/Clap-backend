@@ -23,8 +23,10 @@ type User {
   followersCount: Int
   followingCount: Int
   posts: [Post]
+  exchanges: [Exchange]
   clapsAsSender: [Clap]
   clapsAsReceiver: [Clap]
+  clapsAsReceiverCount: Int
   comments: [Comment]
   notificationsAsReceiver: [Notification]
   wikiImages: [WikiImage]
