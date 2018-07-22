@@ -27,18 +27,17 @@ const resolvers: Resolvers = {
         try {
           const unfollowedUser = await User.findOne({ id: args.userId });
           if (unfollowedUser) {
-            const existingfollowedUser = await User.findOne({
-              where: { following: unfollowedUser }
-            });
-            if (!existingfollowedUser) {
-              return {
-                ok: false,
-                error: "follow user before unfollow"
-              };
+            const followingWithoutFollowedUser = await user.following.filter(
+              followingUser => followingUser.id !== unfollowedUser.id
+            );
+            const isFollowingHaveFollowedUser =
+              followingWithoutFollowedUser.length !== user.following.length;
+            if (!isFollowingHaveFollowedUser) {
+              return { ok: false, error: "follow user before unfollow" };
             }
             if (unfollowedUser.id !== user.id) {
-              await user.following.filter(
-                followinguser => followinguser !== unfollowedUser
+              user.following = await user.following.filter(
+                followinguser => followinguser.id !== unfollowedUser.id
               );
               user.save();
               return {

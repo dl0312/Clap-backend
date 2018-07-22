@@ -20,11 +20,10 @@ const resolvers: Resolvers = {
           };
         }
         try {
-          const following = await user.following;
           return {
             ok: true,
             error: null,
-            following
+            following: user.following
           };
         } catch (error) {
           return {

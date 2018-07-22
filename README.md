@@ -25,13 +25,13 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
   - [x] _Query_
     - [x] Get My Profile
     - [x] Get My Followers ( Implemented on GetMyProfile )
-    - [x] Get My Following ( Implemented on GetMyProfile )
+    - [x] Get My Following
   - [x] _Mutation_
     - [x] Request Email Verification
     - [x] Complete Email Verification
     - [x] Update my Profile
     - [x] Follow User
-    - [ ] Unfollow User
+    - [x] Unfollow User
 - [x] **Post**
   - [x] _Query_
     - [x] Get All Posts
@@ -54,7 +54,7 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
   - [ ] _Query_
     - [ ] Check My Sended Claps
     - [ ] Check My Received Claps For Each Posts
-  - [ ] _Mutation_
+  - [x] _Mutation_
     - [x] Send Clap to Post
 - [ ] **Image**
   - [ ] _Query_
@@ -91,9 +91,9 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
   - [ ] _Mutation_
     - [x] Add Product
     - [ ] Edit Product
-    - [ ] Purchase Product (= Add Exchange)
+    - [x] Purchase Product (= Add Exchange)
 - [ ] **Exchange**
   - [ ] _Query_
     - [ ] Get My Exchanges
-  - [ ] _Mutation_
+  - [x] _Mutation_
     - [x] Add Exchange

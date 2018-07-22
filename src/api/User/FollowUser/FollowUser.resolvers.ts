@@ -23,10 +23,16 @@ const resolvers: Resolvers = {
           have to check if you already follow user
 
           */
-            if (await User.find({ where: { following: followedUser } })) {
+            const followingWithoutFollowedUser = await user.following.filter(
+              followingUser => followingUser.id !== followedUser.id
+            );
+            const isFollowingHaveFollowedUser =
+              followingWithoutFollowedUser.length !== user.following.length;
+            console.log(`is following? ${isFollowingHaveFollowedUser}`);
+            if (isFollowingHaveFollowedUser) {
               return {
                 ok: false,
-                error: "you already follow this user"
+                error: `you already follow this user ${isFollowingHaveFollowedUser}`
               };
             }
             if (followedUser.id !== user.id) {

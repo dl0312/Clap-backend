@@ -11,7 +11,15 @@ const decodeJWT = async (token: string): Promise<User | undefined> => {
     // );
     const user = User.findOne(
       { id },
-      { relations: ["exchanges", "exchanges.product", "clapsAsReceiver"] }
+      {
+        relations: [
+          "following",
+          "followers",
+          "exchanges",
+          "exchanges.product",
+          "clapsAsReceiver"
+        ]
+      }
     );
     return user;
   } catch (error) {
