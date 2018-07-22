@@ -1,5 +1,7 @@
 type Exchange {
   id: Int!
+  buyerId: Int
   buyer: User!
+  productId: Int
   product: Product!
 }

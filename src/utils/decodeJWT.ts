@@ -5,9 +5,13 @@ const decodeJWT = async (token: string): Promise<User | undefined> => {
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_TOKEN || "");
     const { id } = decoded;
-    const user = await User.findOne(
+    // const user = await User.findOne(
+    //   { id },
+    //   { relations: ["following", "followers", "exchanges"] }
+    // );
+    const user = User.findOne(
       { id },
-      { relations: ["following", "followers"] }
+      { relations: ["exchanges", "exchanges.product", "clapsAsReceiver"] }
     );
     return user;
   } catch (error) {

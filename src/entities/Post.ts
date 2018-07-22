@@ -33,7 +33,10 @@ class Post extends BaseEntity {
   @JoinColumn()
   claps: Clap[];
 
-  @OneToMany(type => Comment, comment => comment.post, { nullable: true })
+  @OneToMany(type => Comment, comment => comment.post, {
+    nullable: true,
+    cascade: true
+  })
   @JoinColumn()
   comments: Comment[];
 

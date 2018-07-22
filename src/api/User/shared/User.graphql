@@ -17,11 +17,11 @@ type User {
   certification: Boolean
   exp: Int!
   clapPoint: Int!
-  achievements: [Achievement]
   following: [User]
   followers: [User]
   followersCount: Int
   followingCount: Int
+  achievements: [Achievement]
   posts: [Post]
   exchanges: [Exchange]
   clapsAsSender: [Clap]

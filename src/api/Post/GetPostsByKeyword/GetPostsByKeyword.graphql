@@ -6,7 +6,7 @@ type GetPostsByKeywordResponse {
 
 type Query {
   GetPostsByKeyword(
-    searchType: String
+    searchType: String!
     keyword: String!
   ): GetPostsByKeywordResponse!
 }

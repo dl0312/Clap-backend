@@ -1,0 +1,8 @@
+type UnfollowUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  UnfollowUser(userId: Int!): UnfollowUserResponse!
+}

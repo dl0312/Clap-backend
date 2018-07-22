@@ -4,49 +4,58 @@ import {
   FollowUserMutationArgs,
   FollowUserResponse
 } from "../../../types/graph";
+import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
   Mutation: {
-    FollowUser: async (
-      _,
-      args: FollowUserMutationArgs,
-      { req }
-    ): Promise<FollowUserResponse> => {
-      const user: User = req.user;
-      try {
-        const followedUser = await User.findOne({ id: args.userId });
-        if (followedUser) {
-          /*
+    FollowUser: privateResolver(
+      async (
+        _,
+        args: FollowUserMutationArgs,
+        { req }
+      ): Promise<FollowUserResponse> => {
+        const user: User = req.user;
+        try {
+          const followedUser = await User.findOne({ id: args.userId });
+          if (followedUser) {
+            /*
 
           have to check if you already follow user
 
           */
-          if (followedUser.id !== user.id) {
-            user.following = [...[followedUser]];
-            user.save();
-            return {
-              ok: true,
-              error: null
-            };
+            if (await User.find({ where: { following: followedUser } })) {
+              return {
+                ok: false,
+                error: "you already follow this user"
+              };
+            }
+            if (followedUser.id !== user.id) {
+              user.following = [...[followedUser]];
+              user.save();
+              return {
+                ok: true,
+                error: null
+              };
+            } else {
+              return {
+                ok: false,
+                error: "Yon can't follow yourself"
+              };
+            }
           } else {
             return {
               ok: false,
-              error: "Yon can't follow yourself"
+              error: "Have no User with that Id"
             };
           }
-        } else {
+        } catch (error) {
           return {
             ok: false,
-            error: "Have no User with that Id"
+            error: error.message
           };
         }
-      } catch (error) {
-        return {
-          ok: false,
-          error: error.message
-        };
       }
-    }
+    )
   }
 };
 

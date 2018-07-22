@@ -1,8 +1,8 @@
 type Clap {
   id: Int!
-  senderId: Int!
+  senderId: Int
   sender: User!
-  receiverId: Int!
+  receiverId: Int
   receiver: User!
   postId: Int
   post: Post!

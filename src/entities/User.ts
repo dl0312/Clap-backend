@@ -62,16 +62,16 @@ class User extends BaseEntity {
   @Column({ type: "boolean", default: false })
   verifiedPhoneNumber: boolean;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   profilePhoto: string;
 
   @Column({ type: "text", nullable: true })
   fbId: string;
 
-  @OneToMany(type => Message, message => message.sender)
+  @OneToMany(type => Message, message => message.sender, { nullable: true })
   messagesAsSender: Message[];
 
-  @OneToMany(type => Message, message => message.receiver)
+  @OneToMany(type => Message, message => message.receiver, { nullable: true })
   messagesAsReceiver: Message[];
 
   @Column({ type: "boolean", nullable: true })
@@ -80,10 +80,16 @@ class User extends BaseEntity {
   @Column({ type: "int", default: 0 })
   exp: number;
 
-  @ManyToMany(type => User, user => user.followers)
+  @ManyToMany(type => Achievement, achievement => achievement.achievers, {
+    nullable: true
+  })
+  @JoinTable()
+  achievements: Achievement[];
+
+  @ManyToMany(type => User, user => user.followers, { nullable: true })
   following: User[];
 
-  @ManyToMany(type => User, user => user.following)
+  @ManyToMany(type => User, user => user.following, { nullable: true })
   @JoinTable()
   followers: User[];
 
@@ -93,22 +99,16 @@ class User extends BaseEntity {
   @RelationCount((user: User) => user.following)
   followingCount: number;
 
-  @ManyToMany(type => Achievement, achievement => achievement.achievers, {
-    nullable: true
-  })
-  @JoinTable()
-  achievements: Achievement[];
-
-  @OneToMany(type => Post, post => post.user)
+  @OneToMany(type => Post, post => post.user, { nullable: true })
   posts: Post[];
 
-  @OneToMany(type => Exchange, exchange => exchange.buyer)
+  @OneToMany(type => Exchange, exchange => exchange.buyer, { nullable: true })
   exchanges: Exchange[];
 
-  @OneToMany(type => Clap, clap => clap.sender)
+  @OneToMany(type => Clap, clap => clap.sender, { nullable: true })
   clapsAsSender: Clap[];
 
-  @OneToMany(type => Clap, clap => clap.receiver)
+  @OneToMany(type => Clap, clap => clap.receiver, { nullable: true })
   clapsAsReceiver: Clap[];
 
   @RelationCount((user: User) => user.clapsAsReceiver)
@@ -134,30 +134,23 @@ class User extends BaseEntity {
   }
 
   get clapPoint(): number {
-    // 1.
-    // calculate with sum of all posts clap
-    // if post is deleted, remove clap point
-
-    // if (this.posts) {
-    //   this.posts.forEach(post => (clap += post.claps.length));
-    // }
-
-    // 2.
-    // calculate with sum of given clap ( not related with post )
-    // if post is deleted, would not remove clap point
-    // have danger of abusing
-
-    // if (this.clapsAsReceiver) {
-    //   clap += this.clapsAsReceiver.length;
-    // }
-    let spend = 0;
-    if (this.exchanges) {
-      this.exchanges.forEach(exchange => {
-        spend += exchange.product.price;
-      });
-    }
-    return this.clapsAsReceiverCount - spend;
+    return this.clapsAsReceiverCount;
   }
+
+  // async clapPoint() {
+  //   let spend = 0;
+  //   const user = await User.findOne(
+  //     { id: this.id },
+  //     { relations: ["exchanges", "exchanges.product"] }
+  //   );
+  //   console.log();
+  //   if (user) {
+  //     user.exchanges.forEach(exchange => {
+  //       spend += exchange.product.price;
+  //     });
+  //   }
+  //   return this.clapsAsReceiverCount - spend;
+  // }
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);

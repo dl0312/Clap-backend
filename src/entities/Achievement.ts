@@ -19,7 +19,7 @@ class Achievement extends BaseEntity {
   @Column({ type: "text" })
   condition: string;
 
-  @ManyToMany(type => User, user => user.achievements)
+  @ManyToMany(type => User, user => user.achievements, { nullable: true })
   achievers: User[];
 
   @CreateDateColumn() createdAt: string;

@@ -1,0 +1,8 @@
+type DeleteCategoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
+}

@@ -15,40 +15,38 @@ const resolvers: Resolvers = {
         args: EditCategoryMutationArgs,
         { req }
       ): Promise<EditCategoryResponse> => {
-        const { categoryId, parentIds, childrenIds, name } = args;
+        const { categoryId, parentId, childrenIds, name } = args;
         try {
           const category = await Category.findOne(
             { id: categoryId },
             { relations: ["parent", "children"] }
           );
           if (category) {
-            let parentCategories: Category[] = [];
-            let childrenCategories: Category[] = [];
-            if (parentIds && childrenIds) {
+            let parentCategory: Category | undefined;
+            let childrenCategories: Category[];
+            if (parentId && childrenIds) {
               // have both parent and children
-              parentCategories = await Category.find({
-                where: { id: In(parentIds) }
-              });
+              parentCategory = await Category.findOne({ id: parentId });
               childrenCategories = await Category.find({
-                where: { id: In(childrenIds) }
+                where: {
+                  id: In(childrenIds)
+                }
               });
               await Category.update(
                 { id: categoryId },
                 {
-                  parent: parentCategories,
+                  parent: parentCategory,
                   children: childrenCategories,
                   name
                 }
               );
-            } else if (parentIds) {
+            } else if (parentId) {
               // have only parent
-              parentCategories = await Category.find({
-                where: { id: In(parentIds) }
-              });
+              parentCategory = await Category.findOne({ id: parentId });
               await Category.update(
                 { id: categoryId },
                 {
-                  parent: parentCategories,
+                  parent: parentCategory,
                   name
                 }
               );

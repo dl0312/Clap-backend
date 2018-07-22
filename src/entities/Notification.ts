@@ -17,7 +17,8 @@ import User from "./User";
 class Notification extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column() receiverId: number;
+  @Column({ nullable: true })
+  receiverId: number;
 
   @ManyToOne(type => User, user => user.notificationsAsReceiver)
   receiver: User;

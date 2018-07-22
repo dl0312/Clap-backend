@@ -1,27 +1,32 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
-import Product from "../../../entities/Product";
-import Category from "../../../entities/Category";
 import {
-  AddProductMutationArgs,
-  AddProductResponse
+  EditCategoryMutationArgs,
+  EditCategoryResponse
 } from "../../../types/graph";
+import Category from "../../../entities/Category";
 
 const resolvers: Resolvers = {
   Mutation: {
-    AddProduct: privateResolver(
+    DeleteCategory: privateResolver(
       async (
         _,
-        args: AddProductMutationArgs,
+        args: EditCategoryMutationArgs,
         { req }
-      ): Promise<AddProductResponse> => {
-        const { name, price, categoryId } = args;
+      ): Promise<EditCategoryResponse> => {
+        const { categoryId } = args;
         try {
           const category = await Category.findOne({ id: categoryId });
-          await Product.create({ name, price, category }).save();
+          if (category) {
+            category.remove();
+            return {
+              ok: true,
+              error: null
+            };
+          }
           return {
-            ok: true,
-            error: null
+            ok: false,
+            error: "Has no category with this ID"
           };
         } catch (error) {
           return {

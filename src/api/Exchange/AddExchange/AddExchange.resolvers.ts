@@ -1,24 +1,26 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
+import User from "../../../entities/User";
 import Product from "../../../entities/Product";
-import Category from "../../../entities/Category";
+import Exchange from "../../../entities/Exchange";
 import {
-  AddProductMutationArgs,
-  AddProductResponse
+  AddExchangeMutationArgs,
+  AddExchangeResponse
 } from "../../../types/graph";
 
 const resolvers: Resolvers = {
   Mutation: {
-    AddProduct: privateResolver(
+    AddExchange: privateResolver(
       async (
         _,
-        args: AddProductMutationArgs,
+        args: AddExchangeMutationArgs,
         { req }
-      ): Promise<AddProductResponse> => {
-        const { name, price, categoryId } = args;
+      ): Promise<AddExchangeResponse> => {
+        const buyer: User = req.user;
+        const { productId } = args;
         try {
-          const category = await Category.findOne({ id: categoryId });
-          await Product.create({ name, price, category }).save();
+          const product = await Product.findOne({ id: productId });
+          await Exchange.create({ buyer, product }).save();
           return {
             ok: true,
             error: null

@@ -18,7 +18,7 @@ class Category extends BaseEntity {
   @Column({ type: "text" })
   name: string;
 
-  @TreeParent() parent: Category[];
+  @TreeParent() parent: Category;
 
   @TreeChildren() children: Category[];
 

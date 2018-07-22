@@ -1,11 +1,12 @@
 type Comment {
   id: Int!
   body: String!
-  userId: Int!
+  userId: Int
   user: User!
-  postId: Int!
+  postId: Int
   post: Post!
   parentCommentId: Int
+  parentComment: Comment
   createdAt: String!
   updatedAt: String
 }

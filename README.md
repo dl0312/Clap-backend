@@ -68,11 +68,11 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [ ] Add Game
     - [ ] Delete Game
 - [ ] **Category**
-  - [ ] _Query_
-  - [ ] _Mutation_
+  - [x] _Query_
+  - [x] _Mutation_
     - [x] Add Category ( need to implement level )
-    - [ ] Edit Category ( need to fix )
-    - [ ] Delete Category
+    - [x] Edit Category ( need to fix )
+    - [x] Delete Category
 - [x] **Message**
   - [x] _Query_
     - [x] Check Received Messages
@@ -89,11 +89,11 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [ ] Get All Products with Game Category
     - [ ] Get Specific Product
   - [ ] _Mutation_
-    - [ ] Add Product
-    - [ ] Change amount of Product
-    - [ ] Purchase Product
+    - [x] Add Product
+    - [ ] Edit Product
+    - [ ] Purchase Product (= Add Exchange)
 - [ ] **Exchange**
   - [ ] _Query_
     - [ ] Get My Exchanges
   - [ ] _Mutation_
-    - [ ] Add Exchange
+    - [x] Add Exchange

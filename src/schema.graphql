@@ -13,12 +13,14 @@ type AddCategoryResponse {
 }
 
 type Mutation {
-  AddCategory(name: String!, parentIds: [Int], childrenIds: [Int]): AddCategoryResponse!
-  EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
+  AddCategory(name: String!, parentId: Int, childrenIds: [Int]): AddCategoryResponse!
+  DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
+  EditCategory(categoryId: Int!, parentId: Int, childrenIds: [Int], name: String!): EditCategoryResponse!
   SendClap(postId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
+  AddExchange(productId: Int!): AddExchangeResponse!
   AddImage(name: String!, filename: String!): AddImageResponse!
   SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
   AddPost(title: String!, body: String!): AddPostResponse!
@@ -33,7 +35,13 @@ type Mutation {
   FollowUser(userId: Int!): FollowUserResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  UnfollowUser(userId: Int!): UnfollowUserResponse!
   UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type DeleteCategoryResponse {
+  ok: Boolean!
+  error: String
 }
 
 type EditCategoryResponse {
@@ -54,14 +62,15 @@ type Query {
   GetSendMessages: GetSendMessagesResponse!
   GetAllPosts(limit: Int!): GetAllPostsResponse!
   GetMyPosts: GetMyPostsResponse!
-  GetPostsByKeyword(searchType: String, keyword: String!): GetPostsByKeywordResponse!
+  GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
+  GetMyFollowing: GetMyFollowingResponse!
   GetMyProfile: GetMyProfileResponse!
 }
 
 type Category {
   id: Int!
   name: String!
-  parent: [Category]
+  parent: Category
   children: [Category]
   # level: Int!
   createdAt: String!
@@ -75,9 +84,9 @@ type SendClapResponse {
 
 type Clap {
   id: Int!
-  senderId: Int!
+  senderId: Int
   sender: User!
-  receiverId: Int!
+  receiverId: Int
   receiver: User!
   postId: Int
   post: Post!
@@ -109,13 +118,27 @@ type GetCommentsByPostIdResponse {
 type Comment {
   id: Int!
   body: String!
-  userId: Int!
+  userId: Int
   user: User!
-  postId: Int!
+  postId: Int
   post: Post!
   parentCommentId: Int
+  parentComment: Comment
   createdAt: String!
   updatedAt: String
+}
+
+type AddExchangeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Exchange {
+  id: Int!
+  buyerId: Int
+  buyer: User!
+  productId: Int
+  product: Product!
 }
 
 type AddImageResponse {
@@ -227,6 +250,7 @@ type Product {
   name: String!
   price: Int!
   stock: Int!
+  exchanges: [Exchange]
   category: Category!
   createdAt: String!
   updatedAt: String!
@@ -266,6 +290,12 @@ type FollowUserResponse {
   error: String
 }
 
+type GetMyFollowingResponse {
+  ok: Boolean!
+  error: String
+  following: [User]
+}
+
 type GetMyProfileResponse {
   ok: Boolean!
   error: String
@@ -296,14 +326,16 @@ type User {
   certification: Boolean
   exp: Int!
   clapPoint: Int!
-  achievements: [Achievement]
   following: [User]
   followers: [User]
   followersCount: Int
   followingCount: Int
+  achievements: [Achievement]
   posts: [Post]
+  exchanges: [Exchange]
   clapsAsSender: [Clap]
   clapsAsReceiver: [Clap]
+  clapsAsReceiverCount: Int
   comments: [Comment]
   notificationsAsReceiver: [Notification]
   wikiImages: [WikiImage]
@@ -312,6 +344,11 @@ type User {
 }
 
 type StartPhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UnfollowUserResponse {
   ok: Boolean!
   error: String
 }

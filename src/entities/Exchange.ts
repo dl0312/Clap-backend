@@ -4,7 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
+  Column
 } from "typeorm";
 import User from "./User";
 import Product from "./Product";
@@ -13,8 +14,14 @@ import Product from "./Product";
 class Exchange extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
+  @Column({ nullable: true })
+  buyerId: number;
+
   @ManyToOne(type => User, user => user.exchanges)
   buyer: User;
+
+  @Column({ nullable: true })
+  productId: number;
 
   @ManyToOne(type => Product, product => product.exchanges)
   product: Product;
