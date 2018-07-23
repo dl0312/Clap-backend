@@ -133,22 +133,26 @@ class User extends BaseEntity {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  // Promise<number> ? number error need to fix
-  async clapPoint(): Promise<number> {
-    let spend = 0;
-    const user = await User.findOne(
-      { id: this.id },
-      { relations: ["exchanges", "exchanges.product"] }
-    );
-    console.log();
-    if (user) {
-      user.exchanges.forEach(exchange => {
-        spend += exchange.product.price;
-      });
-    }
-    const point = this.clapsAsReceiverCount - spend;
-    return point;
+  get clapPoint(): number {
+    return this.clapsAsReceiverCount;
   }
+
+  // Promise<number> ? number error need to fix
+  // async clapPoint(): Promise<number> {
+  //   let spend = 0;
+  //   const user = await User.findOne(
+  //     { id: this.id },
+  //     { relations: ["exchanges", "exchanges.product"] }
+  //   );
+  //   console.log();
+  //   if (user) {
+  //     user.exchanges.forEach(exchange => {
+  //       spend += exchange.product.price;
+  //     });
+  //   }
+  //   const point = this.clapsAsReceiverCount - spend;
+  //   return point;
+  // }
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);

@@ -52,14 +52,14 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [x] Delete Comment
 - [ ] **Clap**
   - [ ] _Query_
-    - [ ] Check My Sended Claps
-    - [ ] Check My Received Claps For Each Posts
+    - [ ] Check My Sended Claps ( Implemented on GetMyProfile )
+    - [ ] Check My Received Claps For Each Posts ( Implemented on GetMyProfile )
   - [x] _Mutation_
     - [x] Send Clap to Post
 - [ ] **Image**
   - [ ] _Query_
   - [ ] _Mutation_
-    - [ ] Add Image
+    - [x] Add Image
     - [ ] Edit Image
     - [ ] Delete Image
 - [ ] **Category**
@@ -85,10 +85,11 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [ ] Get Specific Product
   - [ ] _Mutation_
     - [x] Add Product
-    - [ ] Edit Product
+    - [x] Edit Product
+    - [x] Delete Product( need to? )
     - [x] Purchase Product (= Add Exchange)
-- [ ] **Exchange**
-  - [ ] _Query_
-    - [ ] Get My Exchanges
+- [x] **Exchange**
+  - [x] _Query_
+    - [x] Get My Exchanges
   - [x] _Mutation_
     - [x] Add Exchange

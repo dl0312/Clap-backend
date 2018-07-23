@@ -28,6 +28,7 @@ type Mutation {
   EditPost(postId: Int!, title: String, body: String): EditPostResponse!
   AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
   DeleteProduct(productId: Int!): DeleteProductResponse!
+  EditProduct(productId: Int!, name: String, price: Int, stock: Int, categoryId: Int): EditProductResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -65,6 +66,7 @@ type Query {
   GetAllPosts(limit: Int!): GetAllPostsResponse!
   GetMyPosts: GetMyPostsResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
+  GetAllProducts: GetAllProductsResponse!
   GetMyFollowing: GetMyFollowingResponse!
   GetMyProfile: GetMyProfileResponse!
 }
@@ -256,6 +258,17 @@ type AddProductResponse {
 type DeleteProductResponse {
   ok: Boolean!
   error: String
+}
+
+type EditProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllProductsResponse {
+  ok: Boolean!
+  error: String
+  products: [Product]
 }
 
 type Product {

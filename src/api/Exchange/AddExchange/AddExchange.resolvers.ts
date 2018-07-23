@@ -21,6 +21,8 @@ const resolvers: Resolvers = {
         try {
           const product = await Product.findOne({ id: productId });
           await Exchange.create({ buyer, product }).save();
+          product.stock -= 1;
+          product.save();
           return {
             ok: true,
             error: null
