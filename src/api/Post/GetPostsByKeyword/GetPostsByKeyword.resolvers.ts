@@ -1,28 +1,31 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 import Post from "../../../entities/Post";
-import {
-  GetPostsByKeywordQueryArgs,
-  GetPostsByKeywordResponse
-} from "../../../types/graph";
-import { Like } from "../../../../node_modules/typeorm";
+import { GetPostsByKeywordQueryArgs } from "../../../types/graph";
+import { getConnection } from "../../../../node_modules/typeorm";
 
 const resolvers: Resolvers = {
   Query: {
     GetPostsByKeyword: privateResolver(
-      async (
-        _,
-        args: GetPostsByKeywordQueryArgs,
-        { req }
-      ): Promise<GetPostsByKeywordResponse> => {
+      async (_, args: GetPostsByKeywordQueryArgs, { req }) => {
         const { searchType, keyword } = args;
         try {
-          const filteredByTitle = await Post.find({
-            where: { title: Like(`%${keyword}%`) }
-          });
-          const filteredByBody = await Post.find({
-            where: { body: Like(`%${keyword}%`) }
-          });
+          const filteredByTitle = await getConnection()
+            .getRepository(Post)
+            .createQueryBuilder("post")
+            .where("post.title like :key", {
+              key: `%${keyword}%`
+            })
+            .orderBy("post.id", "DESC")
+            .getMany();
+
+          const filteredByBody = await getConnection()
+            .getRepository(Post)
+            .createQueryBuilder("post")
+            .where("post.body like :key", { key: `%${keyword}%` })
+            .orderBy("post.id", "DESC")
+            .getMany();
+
           switch (searchType) {
             case "TITLE":
               return {
@@ -38,14 +41,22 @@ const resolvers: Resolvers = {
                 filterdPosts: filteredByBody
               };
               break;
-            // case "BOTH":
-            //   const filteredByBoth =  filteredByTitle + filteredByBody;
-            //   return {
-            //     ok: true,
-            //     error: null,
-            //     filterdPosts: filteredByBoth
-            //   };
-            //   break;
+            case "BOTH":
+              const filteredByBoth = await getConnection()
+                .getRepository(Post)
+                .createQueryBuilder("post")
+                .where("post.title like :key OR post.body like :key", {
+                  key: `%${keyword}%`
+                })
+                .orderBy("post.id", "DESC")
+                .getMany();
+
+              return {
+                ok: true,
+                error: null,
+                filterdPosts: filteredByBoth
+              };
+              break;
             default:
               return {
                 ok: false,
