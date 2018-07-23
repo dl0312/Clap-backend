@@ -1,0 +1,8 @@
+type DeleteProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteProduct(productId: Int!): DeleteProductResponse!
+}

@@ -18,11 +18,6 @@ const resolvers: Resolvers = {
         try {
           const followedUser = await User.findOne({ id: args.userId });
           if (followedUser) {
-            /*
-
-          have to check if you already follow user
-
-          */
             const followingWithoutFollowedUser = await user.following.filter(
               followingUser => followingUser.id !== followedUser.id
             );

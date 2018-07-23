@@ -1,0 +1,9 @@
+type GetMyExchangesResponse {
+  ok: Boolean!
+  error: String
+  exchanges: [Exchange]
+}
+
+type Query {
+  GetMyExchanges: GetMyExchangesResponse!
+}

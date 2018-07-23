@@ -27,6 +27,7 @@ type Mutation {
   DeletePost(postId: Int!): DeletePostResponse!
   EditPost(postId: Int!, title: String, body: String): EditPostResponse!
   AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
+  DeleteProduct(productId: Int!): DeleteProductResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -58,6 +59,7 @@ type GetAllCategoriesResponse {
 type Query {
   GetAllCategories: GetAllCategoriesResponse!
   GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
+  GetMyExchanges: GetMyExchangesResponse!
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
   GetAllPosts(limit: Int!): GetAllPostsResponse!
@@ -131,6 +133,12 @@ type Comment {
 type AddExchangeResponse {
   ok: Boolean!
   error: String
+}
+
+type GetMyExchangesResponse {
+  ok: Boolean!
+  error: String
+  exchanges: [Exchange]
 }
 
 type Exchange {
@@ -241,6 +249,11 @@ type Post {
 }
 
 type AddProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type DeleteProductResponse {
   ok: Boolean!
   error: String
 }

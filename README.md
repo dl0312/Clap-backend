@@ -35,7 +35,7 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
 - [x] **Post**
   - [x] _Query_
     - [x] Get All Posts
-    - [x] Search by Keyword ( Title, Body, Both(fixing) )
+    - [x] Search by Keyword ( Title, Body, Both )
     - [x] Get My Posts
   - [x] _Mutation_
     - [x] Add Post
@@ -62,11 +62,6 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [ ] Add Image
     - [ ] Edit Image
     - [ ] Delete Image
-- [ ] **Game** ( ? )
-  - [ ] _Query_
-  - [ ] _Mutation_
-    - [ ] Add Game
-    - [ ] Delete Game
 - [ ] **Category**
   - [x] _Query_
   - [x] _Mutation_
