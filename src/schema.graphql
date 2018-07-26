@@ -67,6 +67,8 @@ type Query {
   GetMyPosts: GetMyPostsResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
   GetAllProducts: GetAllProductsResponse!
+  GetProductById(productId: Int!): GetProductByIdResponse!
+  GetProductsByCategory(categoryId: Int!): GetProductsByCategoryResponse!
   GetMyFollowing: GetMyFollowingResponse!
   GetMyProfile: GetMyProfileResponse!
 }
@@ -271,12 +273,25 @@ type GetAllProductsResponse {
   products: [Product]
 }
 
+type GetProductByIdResponse {
+  ok: Boolean!
+  error: String
+  product: Product
+}
+
+type GetProductsByCategoryResponse {
+  ok: Boolean!
+  error: String
+  products: [Product]
+}
+
 type Product {
   id: Int!
   name: String!
   price: Int!
   stock: Int!
   exchanges: [Exchange]
+  categoryId: Int!
   category: Category!
   createdAt: String!
   updatedAt: String!

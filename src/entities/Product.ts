@@ -27,6 +27,9 @@ class Product extends BaseEntity {
   @OneToMany(type => Exchange, exchange => exchange.product)
   exchanges: Exchange[];
 
+  @Column({ nullable: true })
+  categoryId: number;
+
   @ManyToOne(type => Category)
   category: Category;
 

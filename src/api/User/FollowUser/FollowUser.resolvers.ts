@@ -23,11 +23,10 @@ const resolvers: Resolvers = {
             );
             const isFollowingHaveFollowedUser =
               followingWithoutFollowedUser.length !== user.following.length;
-            console.log(`is following? ${isFollowingHaveFollowedUser}`);
             if (isFollowingHaveFollowedUser) {
               return {
                 ok: false,
-                error: `you already follow this user ${isFollowingHaveFollowedUser}`
+                error: `you already follow this user ${followedUser.fullName}`
               };
             }
             if (followedUser.id !== user.id) {

@@ -1,34 +1,43 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 import Product from "../../../entities/Product";
-import { GetAllProductsResponse } from "../../../types/graph";
+import {
+  GetProductByIdResponse,
+  GetProductByIdQueryArgs
+} from "../../../types/graph";
 
 const resolvers: Resolvers = {
   Query: {
-    GetAllProducts: privateResolver(
-      async (_, __, { req }): Promise<GetAllProductsResponse> => {
+    GetProductById: privateResolver(
+      async (
+        _,
+        args: GetProductByIdQueryArgs,
+        { req }
+      ): Promise<GetProductByIdResponse> => {
+        const { productId } = args;
         try {
-          const products = await Product.find({
-            relations: ["category"]
-          });
-          if (products) {
+          const product = await Product.findOne(
+            { id: productId },
+            { relations: ["category"] }
+          );
+          if (product) {
             return {
               ok: true,
               error: null,
-              products
+              product
             };
           } else {
             return {
               ok: false,
-              error: "There's no product",
-              products: null
+              error: "Have no product with this ID",
+              product: null
             };
           }
         } catch (error) {
           return {
             ok: false,
             error: error.message,
-            products: null
+            product: null
           };
         }
       }

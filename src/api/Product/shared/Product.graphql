@@ -4,6 +4,7 @@ type Product {
   price: Int!
   stock: Int!
   exchanges: [Exchange]
+  categoryId: Int!
   category: Category!
   createdAt: String!
   updatedAt: String!

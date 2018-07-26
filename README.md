@@ -41,19 +41,18 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
     - [x] Add Post
     - [x] Edit Post
     - [x] Delete Post
-- [ ] **Comment**
-  - [ ] _Query_
-    - [ ] Get My Comments ( have to implement? )
+- [x] **Comment**
+  - [x] _Query_
     - [x] Get Comments by Post
   - [x] _Mutation_
     - [x] Add Comment On Post
     - [x] Add Commnet On Comment
     - [x] Edit Comment
     - [x] Delete Comment
-- [ ] **Clap**
-  - [ ] _Query_
-    - [ ] Check My Sended Claps ( Implemented on GetMyProfile )
-    - [ ] Check My Received Claps For Each Posts ( Implemented on GetMyProfile )
+- [x] **Clap**
+  - [x] _Query_
+    - [x] Check My Sended Claps ( Implemented on GetMyProfile )
+    - [x] Check My Received Claps For Each Posts ( Implemented on GetMyProfile )
   - [x] _Mutation_
     - [x] Send Clap to Post
 - [ ] **Image**
@@ -80,10 +79,10 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
   - [ ] _Mutation_
 - [ ] **Product**
   - [ ] _Query_
-    - [ ] Get All Products
+    - [x] Get All Products
     - [ ] Get All Products with Game Category
-    - [ ] Get Specific Product
-  - [ ] _Mutation_
+    - [ ] Get Specific Product ( Get Product By ID)
+  - [x] _Mutation_
     - [x] Add Product
     - [x] Edit Product
     - [x] Delete Product( need to? )
