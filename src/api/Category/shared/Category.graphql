@@ -3,7 +3,7 @@ type Category {
   name: String!
   parent: Category
   children: [Category]
-  # level: Int!
+  wikiImages: [WikiImage]
   createdAt: String!
   updatedAt: String
 }

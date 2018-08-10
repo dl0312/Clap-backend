@@ -4,5 +4,5 @@ type AddImageResponse {
 }
 
 type Mutation {
-  AddImage(name: String!, filename: String!): AddImageResponse!
+  AddImage(name: String!, url: String!): AddImageResponse!
 }

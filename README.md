@@ -77,11 +77,11 @@ Server for the CLAP, GraphQL, TypeScript, NodeJS
   - [ ] _Query_
     - [ ] Check How Many Users Achieve
   - [ ] _Mutation_
-- [ ] **Product**
-  - [ ] _Query_
+- [x] **Product**
+  - [x] _Query_
     - [x] Get All Products
-    - [ ] Get All Products with Game Category
-    - [ ] Get Specific Product ( Get Product By ID)
+    - [x] Get All Products with Game Category
+    - [x] Get Specific Product ( Get Product By ID)
   - [x] _Mutation_
     - [x] Add Product
     - [x] Edit Product

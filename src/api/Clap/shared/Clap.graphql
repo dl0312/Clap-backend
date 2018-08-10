@@ -5,7 +5,9 @@ type Clap {
   receiverId: Int
   receiver: User!
   postId: Int
-  post: Post!
+  post: Post
+  wikiImageId: Int
+  wikiImage: WikiImage
   createdAt: String!
   updatedAt: String
 }

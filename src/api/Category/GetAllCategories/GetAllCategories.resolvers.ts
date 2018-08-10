@@ -9,7 +9,12 @@ const resolvers: Resolvers = {
       async (_, __, { req }): Promise<GetAllCategoriesResponse> => {
         try {
           const categories = await Category.find({
-            relations: ["parent", "children"]
+            relations: [
+              "parent",
+              "children",
+              "wikiImages",
+              "wikiImages.shownImage"
+            ]
           });
           if (categories) {
             return {

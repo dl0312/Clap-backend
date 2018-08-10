@@ -9,10 +9,12 @@ import {
 } from "typeorm";
 import Post from "./Post";
 import User from "./User";
+import WikiImage from "./WikiImage";
 
 @Entity()
 class Clap extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ nullable: true })
   senderId: number;
@@ -32,9 +34,17 @@ class Clap extends BaseEntity {
   @ManyToOne(type => Post, post => post.claps)
   post: Post;
 
-  @CreateDateColumn() createdAt: string;
+  @Column({ nullable: true })
+  wikiImageId: number;
 
-  @UpdateDateColumn() updatedAt: string;
+  @ManyToOne(type => WikiImage, wikiImage => wikiImage.claps)
+  wikiImage: WikiImage;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 }
 
 export default Clap;

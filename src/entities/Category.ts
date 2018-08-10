@@ -7,8 +7,10 @@ import {
   UpdateDateColumn,
   TreeParent,
   TreeChildren,
-  Tree
+  Tree,
+  OneToMany
 } from "typeorm";
+import WikiImage from "./WikiImage";
 
 @Entity()
 @Tree("closure-table")
@@ -22,7 +24,9 @@ class Category extends BaseEntity {
 
   @TreeChildren() children: Category[];
 
-  // @TreeLevelColumn() level: number | null;
+  @OneToMany(type => WikiImage, wikiImage => wikiImage.category)
+  wikiImages: WikiImage[];
+
 
   @CreateDateColumn() createdAt: string;
 

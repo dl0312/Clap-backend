@@ -21,11 +21,11 @@ type Mutation {
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
   AddExchange(productId: Int!): AddExchangeResponse!
-  AddImage(name: String!, filename: String!): AddImageResponse!
+  AddImage(name: String!, url: String!): AddImageResponse!
   SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
   AddPost(title: String!, body: String!): AddPostResponse!
   DeletePost(postId: Int!): DeletePostResponse!
-  EditPost(postId: Int!, title: String, body: String): EditPostResponse!
+  EditPost(postId: Int!, title: String, body: String, categoryId: Int): EditPostResponse!
   AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
   DeleteProduct(productId: Int!): DeleteProductResponse!
   EditProduct(productId: Int!, name: String, price: Int, stock: Int, categoryId: Int): EditProductResponse!
@@ -59,12 +59,15 @@ type GetAllCategoriesResponse {
 
 type Query {
   GetAllCategories: GetAllCategoriesResponse!
+  GetCategoriesByKeyword(keyword: String!): GetCategoriesByKeywordResponse!
+  GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
   GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
   GetMyExchanges: GetMyExchangesResponse!
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
   GetAllPosts(limit: Int!): GetAllPostsResponse!
   GetMyPosts: GetMyPostsResponse!
+  GetPostById(postId: Int!): GetPostByIdResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
   GetAllProducts: GetAllProductsResponse!
   GetProductById(productId: Int!): GetProductByIdResponse!
@@ -73,12 +76,24 @@ type Query {
   GetMyProfile: GetMyProfileResponse!
 }
 
+type GetCategoriesByKeywordResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type GetCategoryByIdResponse {
+  ok: Boolean!
+  error: String
+  category: Category
+}
+
 type Category {
   id: Int!
   name: String!
   parent: Category
   children: [Category]
-  # level: Int!
+  wikiImages: [WikiImage]
   createdAt: String!
   updatedAt: String
 }
@@ -95,7 +110,9 @@ type Clap {
   receiverId: Int
   receiver: User!
   postId: Int
-  post: Post!
+  post: Post
+  wikiImageId: Int
+  wikiImage: WikiImage
   createdAt: String!
   updatedAt: String
 }
@@ -161,7 +178,7 @@ type AddImageResponse {
 type Image {
   id: Int!
   name: String!
-  filename: String!
+  url: String!
   createdAt: String!
   updatedAt: String
 }
@@ -233,6 +250,12 @@ type GetMyPostsResponse {
   posts: [Post]
 }
 
+type GetPostByIdResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
 type GetPostsByKeywordResponse {
   ok: Boolean!
   error: String
@@ -242,12 +265,20 @@ type GetPostsByKeywordResponse {
 type Post {
   id: Int!
   title: String!
-  body: String!
+  color: String
+  font: String
+  contentWidth: Int
+  body: String
   userId: Int!
   user: User!
   claps: [Clap]
+  clapsCount: Int
   comments: [Comment]
+  commentsCount: Int
+  category: Category
+  categoryId: Int!
   view: Int!
+  wikiImages: [WikiImage]
   createdAt: String!
   updatedAt: String
 }
@@ -411,9 +442,14 @@ type Verification {
 
 type WikiImage {
   id: Int!
-  body: String!
+  name: String!
   userId: Int!
   user: User!
+  category: Category!
+  categoryId: Int!
+  shownImage: Image!
+  hoverImage: String!
+  claps: [Clap]
   createdAt: String!
   updatedAt: String
 }

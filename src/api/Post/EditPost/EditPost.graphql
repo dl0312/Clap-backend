@@ -4,5 +4,10 @@ type EditPostResponse {
 }
 
 type Mutation {
-  EditPost(postId: Int!, title: String, body: String): EditPostResponse!
+  EditPost(
+    postId: Int!
+    title: String
+    body: String
+    categoryId: Int
+  ): EditPostResponse!
 }

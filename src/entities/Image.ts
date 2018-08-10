@@ -15,7 +15,7 @@ class Image extends BaseEntity {
   name: string;
 
   @Column({ type: "text" })
-  filename: string;
+  url: string;
 
   @CreateDateColumn() createdAt: string;
 
