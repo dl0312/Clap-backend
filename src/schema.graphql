@@ -13,9 +13,9 @@ type AddCategoryResponse {
 }
 
 type Mutation {
-  AddCategory(name: String!, parentId: Int, childrenIds: [Int]): AddCategoryResponse!
+  AddCategory(name: String!, parentIds: [Int], childrenIds: [Int]): AddCategoryResponse!
   DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
-  EditCategory(categoryId: Int!, parentId: Int, childrenIds: [Int], name: String!): EditCategoryResponse!
+  EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
   SendClap(postId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
@@ -32,7 +32,7 @@ type Mutation {
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  EmailSignUp(nickName: String!, email: String!, password: String!, phoneNumber: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
   FollowUser(userId: Int!): FollowUserResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
@@ -91,7 +91,7 @@ type GetCategoryByIdResponse {
 type Category {
   id: Int!
   name: String!
-  parent: Category
+  parent: [Category]
   children: [Category]
   wikiImages: [WikiImage]
   createdAt: String!
@@ -383,8 +383,9 @@ type User {
   id: Int!
   email: String
   verifiedEmail: Boolean!
-  firstName: String!
-  lastName: String!
+  firstName: String
+  lastName: String
+  nickName: String!
   fullName: String
   age: Int
   gender: String
@@ -449,7 +450,10 @@ type WikiImage {
   categoryId: Int!
   shownImage: Image!
   hoverImage: String!
+  posts: [Post]
+  postsCount: Int!
   claps: [Clap]
+  clapsCount: Int!
   createdAt: String!
   updatedAt: String
 }

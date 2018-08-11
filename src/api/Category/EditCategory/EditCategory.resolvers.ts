@@ -15,47 +15,41 @@ const resolvers: Resolvers = {
         args: EditCategoryMutationArgs,
         { req }
       ): Promise<EditCategoryResponse> => {
-        const { categoryId, parentId, childrenIds, name } = args;
+        const { categoryId, parentIds, childrenIds, name } = args;
         try {
           const category = await Category.findOne(
             { id: categoryId },
             { relations: ["parent", "children"] }
           );
           if (category) {
-            let parentCategory: Category | undefined;
+            let parentCategories: Category[];
             let childrenCategories: Category[];
-            if (parentId && childrenIds) {
+            if (parentIds && childrenIds) {
               // have both parent and children
-              parentCategory = await Category.findOne({ id: parentId });
+              parentCategories = await Category.find({
+                where: { id: In(parentIds) }
+              });
               childrenCategories = await Category.find({
-                where: {
-                  id: In(childrenIds)
-                }
+                where: { id: In(childrenIds) }
               });
               await Category.update(
                 { id: categoryId },
-                {
-                  parent: parentCategory,
-                  children: childrenCategories,
-                  name
-                }
+                { parent: parentCategories, children: childrenCategories, name }
               );
-            } else if (parentId) {
+            } else if (parentIds) {
               // have only parent
-              parentCategory = await Category.findOne({ id: parentId });
+              parentCategories = await Category.find({
+                where: { id: In(parentIds) }
+              });
               await Category.update(
                 { id: categoryId },
-                {
-                  parent: parentCategory,
-                  name
-                }
+                { parent: parentCategories, name }
               );
             } else if (childrenIds) {
               // have only child
               childrenCategories = await Category.find({
                 where: { id: In(childrenIds) }
               });
-              console.log(childrenCategories);
               await Category.update(
                 { id: categoryId },
                 { children: childrenCategories, name }

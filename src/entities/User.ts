@@ -28,7 +28,8 @@ const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text", nullable: true })
   @IsEmail()
@@ -37,11 +38,14 @@ class User extends BaseEntity {
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   firstName: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   lastName: string;
+
+  @Column({ type: "text" })
+  nickName: string;
 
   @Column({ type: "int", nullable: true })
   age: number;
@@ -125,9 +129,11 @@ class User extends BaseEntity {
   @OneToMany(type => WikiImage, wikiimage => wikiimage.user, { nullable: true })
   wikiImages: WikiImage[];
 
-  @CreateDateColumn() createdAt: string;
+  @CreateDateColumn()
+  createdAt: string;
 
-  @UpdateDateColumn() updatedAt: string;
+  @UpdateDateColumn()
+  updatedAt: string;
 
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;

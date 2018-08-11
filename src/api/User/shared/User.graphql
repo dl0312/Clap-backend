@@ -2,8 +2,9 @@ type User {
   id: Int!
   email: String
   verifiedEmail: Boolean!
-  firstName: String!
-  lastName: String!
+  firstName: String
+  lastName: String
+  nickName: String!
   fullName: String
   age: Int
   gender: String

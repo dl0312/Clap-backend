@@ -6,7 +6,7 @@ type EditCategoryResponse {
 type Mutation {
   EditCategory(
     categoryId: Int!
-    parentId: Int
+    parentIds: [Int]
     childrenIds: [Int]
     name: String!
   ): EditCategoryResponse!

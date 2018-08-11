@@ -15,22 +15,26 @@ import WikiImage from "./WikiImage";
 @Entity()
 @Tree("closure-table")
 class Category extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text" })
   name: string;
 
-  @TreeParent() parent: Category;
+  @TreeParent()
+  parent: Category[];
 
-  @TreeChildren() children: Category[];
+  @TreeChildren()
+  children: Category[];
 
   @OneToMany(type => WikiImage, wikiImage => wikiImage.category)
   wikiImages: WikiImage[];
 
+  @CreateDateColumn()
+  createdAt: string;
 
-  @CreateDateColumn() createdAt: string;
-
-  @UpdateDateColumn() updatedAt: string;
+  @UpdateDateColumn()
+  updatedAt: string;
 }
 
 export default Category;

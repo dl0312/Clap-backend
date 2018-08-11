@@ -15,26 +15,30 @@ const resolvers: Resolvers = {
         args: AddCategoryMutationArgs,
         { req }
       ): Promise<AddCategoryResponse> => {
-        const { parentId, childrenIds, name } = args;
+        const { parentIds, childrenIds, name } = args;
         try {
-          let parentCategory: Category | undefined;
+          let parentCategories: Category[];
           let childrenCategories: Category[];
-          if (parentId && childrenIds) {
+          if (parentIds && childrenIds) {
             // have both parent and children
-            parentCategory = await Category.findOne({ id: parentId });
+            parentCategories = await Category.find({
+              where: { id: In(parentIds) }
+            });
             childrenCategories = await Category.find({
               where: { id: In(childrenIds) }
             });
             await Category.create({
-              parent: parentCategory,
+              parent: parentCategories,
               children: childrenCategories,
               name
             }).save();
-          } else if (parentId) {
+          } else if (parentIds) {
             // have only parent
-            parentCategory = await Category.findOne({ id: parentId });
+            parentCategories = await Category.find({
+              where: { id: In(parentIds) }
+            });
             await Category.create({
-              parent: parentCategory,
+              parent: parentCategories,
               name
             }).save();
           } else if (childrenIds) {

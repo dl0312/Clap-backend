@@ -6,7 +6,7 @@ type AddCategoryResponse {
 type Mutation {
   AddCategory(
     name: String!
-    parentId: Int
+    parentIds: [Int]
     childrenIds: [Int]
   ): AddCategoryResponse!
 }
