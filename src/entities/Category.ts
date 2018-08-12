@@ -5,15 +5,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  TreeParent,
-  TreeChildren,
-  Tree,
-  OneToMany
+  OneToMany,
+  ManyToMany,
+  JoinTable
 } from "typeorm";
 import WikiImage from "./WikiImage";
 
 @Entity()
-@Tree("closure-table")
 class Category extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -21,10 +19,15 @@ class Category extends BaseEntity {
   @Column({ type: "text" })
   name: string;
 
-  @TreeParent()
+  @ManyToMany(type => Category, category => category.children, {
+    nullable: true
+  })
   parent: Category[];
 
-  @TreeChildren()
+  @ManyToMany(type => Category, category => category.parent, {
+    nullable: true
+  })
+  @JoinTable()
   children: Category[];
 
   @OneToMany(type => WikiImage, wikiImage => wikiImage.category)
