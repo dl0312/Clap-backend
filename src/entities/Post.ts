@@ -26,15 +26,6 @@ class Post extends BaseEntity {
   title: string;
 
   @Column({ type: "text", nullable: true })
-  color: string;
-
-  @Column({ type: "text", nullable: true })
-  font: string;
-
-  @Column({ type: "int", nullable: true })
-  contentWidth: number;
-
-  @Column({ type: "text", nullable: true })
   body: string;
 
   @Column({ nullable: true })

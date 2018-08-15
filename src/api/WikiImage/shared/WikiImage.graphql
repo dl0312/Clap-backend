@@ -1,11 +1,11 @@
 type WikiImage {
   id: Int!
-  name: String!
+  name: String
   userId: Int!
   user: User!
   category: Category!
   categoryId: Int!
-  shownImage: Image!
+  shownImage: String
   hoverImage: String!
   posts: [Post]
   postsCount: Int!

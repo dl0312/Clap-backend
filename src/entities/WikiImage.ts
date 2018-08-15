@@ -14,7 +14,6 @@ import {
 } from "typeorm";
 import User from "./User";
 import Category from "./Category";
-import Image from "./Image";
 import Clap from "./Clap";
 import Post from "./Post";
 
@@ -23,7 +22,7 @@ class WikiImage extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   name: string;
 
   @Column({ nullable: true })
@@ -38,8 +37,8 @@ class WikiImage extends BaseEntity {
   @Column({ nullable: true })
   categoryId: number;
 
-  @ManyToOne(type => Image)
-  shownImage: Image;
+  @Column({ type: "text", nullable: true })
+  shownImage: string;
 
   @Column({ type: "text" })
   hoverImage: string;

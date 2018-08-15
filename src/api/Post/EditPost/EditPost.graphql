@@ -7,7 +7,7 @@ type Mutation {
   EditPost(
     postId: Int!
     title: String
-    body: String
     categoryId: Int
+    body: String
   ): EditPostResponse!
 }

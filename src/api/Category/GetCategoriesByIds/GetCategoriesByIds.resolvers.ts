@@ -23,8 +23,7 @@ const resolvers: Resolvers = {
           };
         }
         const categories = await Category.find({
-          where: { id: In(categoriesIds) },
-          relations: ["wikiImages", "wikiImages.shownImage"]
+          where: { id: In(categoriesIds) }
         });
         if (categories) {
           return {

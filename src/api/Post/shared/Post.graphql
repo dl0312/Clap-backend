@@ -1,9 +1,6 @@
 type Post {
   id: Int!
   title: String!
-  color: String
-  font: String
-  contentWidth: Int
   body: String
   userId: Int!
   user: User!

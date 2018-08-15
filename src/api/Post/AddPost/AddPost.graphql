@@ -4,5 +4,5 @@ type AddPostResponse {
 }
 
 type Mutation {
-  AddPost(title: String!, body: String!): AddPostResponse!
+  AddPost(title: String!, categoryId: Int!, body: String!): AddPostResponse!
 }

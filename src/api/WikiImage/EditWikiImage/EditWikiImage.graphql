@@ -1,0 +1,14 @@
+type EditWikiImageResponse {
+  ok: Boolean
+  error: String
+}
+
+type Mutation {
+  EditWikiImage(
+    wikiImageId: Int!
+    categoryId: Int
+    name: String
+    shownImage: String
+    hoverImage: String
+  ): EditWikiImageResponse!
+}
