@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
           .getRepository(Category)
           .createQueryBuilder("category")
           .leftJoinAndSelect("category.parent", "parent")
-          .innerJoinAndSelect("category.wikiImages", "wikiImages")
+          .leftJoinAndSelect("category.wikiImages", "wikiImages")
           .leftJoinAndSelect("wikiImages.shownImage", "shownImage")
           .where("lower(category.name) like :key", {
             key: `%${keyword.toLowerCase()}%`

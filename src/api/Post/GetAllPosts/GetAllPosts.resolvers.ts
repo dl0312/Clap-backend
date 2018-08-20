@@ -15,7 +15,12 @@ const resolvers: Resolvers = {
       try {
         const limitedPosts = await Post.find({
           take: args.limit,
-          relations: ["category", "category.wikiImages", "user"]
+          relations: [
+            "category",
+            "category.wikiImages",
+            "category.wikiImages.shownImage",
+            "user"
+          ]
         });
         if (limitedPosts) {
           return {

@@ -20,9 +20,12 @@ const resolvers: Resolvers = {
             relations: [
               "parent",
               "parent.wikiImages",
+              "parent.wikiImages.shownImage",
               "children",
               "children.wikiImages",
-              "wikiImages"
+              "children.wikiImages.shownImage",
+              "wikiImages",
+              "wikiImages.shownImage"
             ]
           }
         );

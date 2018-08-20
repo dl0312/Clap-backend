@@ -14,7 +14,10 @@ const resolvers: Resolvers = {
     ): Promise<GetWikiImageByIdResponse> => {
       const { wikiImageId } = args;
       try {
-        const wikiImage = await WikiImage.findOne({ id: wikiImageId });
+        const wikiImage = await WikiImage.findOne(
+          { id: wikiImageId },
+          { relations: ["shownImage"] }
+        );
         if (wikiImage) {
           return {
             ok: true,

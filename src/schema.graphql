@@ -42,7 +42,7 @@ type Mutation {
   UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
   AddWikiImage(categoryId: Int!, name: String, shownImageId: Int!, hoverImage: String!): AddWikiImageResponse!
   DeleteWikiImage(wikiImageId: Int!): DeleteWikiImageResponse!
-  EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImage: String, hoverImage: String): EditWikiImageResponse!
+  EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImageId: Int, hoverImage: String): EditWikiImageResponse!
 }
 
 type DeleteCategoryResponse {
