@@ -22,8 +22,8 @@ const resolvers: Resolvers = {
             { relations: ["parent", "children"] }
           );
           if (category) {
-            let parentCategories: Category[];
-            let childrenCategories: Category[];
+            let parentCategories: Category[] = [];
+            let childrenCategories: Category[] = [];
             if (parentIds.length !== 0 && childrenIds.length !== 0) {
               // have both parent and children
               parentCategories = await Category.find({
@@ -32,32 +32,28 @@ const resolvers: Resolvers = {
               childrenCategories = await Category.find({
                 where: { id: In(childrenIds) }
               });
-              await Category.update(
-                { id: categoryId },
-                { parent: parentCategories, children: childrenCategories, name }
-              );
+              console.log(parentCategories);
             } else if (parentIds.length !== 0) {
               // have only parent
               parentCategories = await Category.find({
                 where: { id: In(parentIds) }
               });
-              await Category.update(
-                { id: categoryId },
-                { parent: parentCategories, name }
-              );
             } else if (childrenIds.length !== 0) {
               // have only child
               childrenCategories = await Category.find({
                 where: { id: In(childrenIds) }
               });
-              await Category.update(
-                { id: categoryId },
-                { children: childrenCategories, name }
-              );
             } else {
               // have no relation
-              await Category.update({ id: categoryId }, { name });
             }
+            category.parent = parentCategories;
+            category.children = childrenCategories;
+            category.name = name;
+            category.save();
+            // await Category.update(
+            //   { id: categoryId },
+            //   { parent: parentCategories, children: childrenCategories, name }
+            // );
             return {
               ok: true,
               error: null

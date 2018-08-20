@@ -1,8 +1,0 @@
-type AddImageResponse {
-  ok: Boolean!
-  error: String
-}
-
-type Mutation {
-  AddImage(name: String!, url: String!): AddImageResponse!
-}

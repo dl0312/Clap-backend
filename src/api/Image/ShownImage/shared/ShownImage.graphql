@@ -1,0 +1,10 @@
+type ShownImage {
+  id: Int!
+  url: String!
+  user: User
+  userId: Int!
+  wikiImage: WikiImage
+  wikiImageId: Int
+  createdAt: String!
+  updatedAt: String
+}

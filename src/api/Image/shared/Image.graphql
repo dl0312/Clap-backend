@@ -1,7 +1,0 @@
-type Image {
-  id: Int!
-  name: String!
-  url: String!
-  createdAt: String!
-  updatedAt: String
-}

@@ -1,6 +1,8 @@
 import cors from "cors";
-import { NextFunction, Response } from "express";
+import express, { NextFunction, Response } from "express";
 import { GraphQLServer, PubSub } from "graphql-yoga";
+import { apolloUploadExpress } from "apollo-upload-server";
+import graphqlHTTP from "express-graphql";
 import helmet from "helmet";
 import logger from "morgan";
 import schema from "./schema";
@@ -23,8 +25,10 @@ class App {
         };
       }
     });
+    this.app.express.use("/uploads", express.static("public/uploads"));
     this.middlewares();
   }
+
   private middlewares = (): void => {
     this.app.express.use(cors());
     this.app.express.use(logger("dev"));
@@ -40,7 +44,7 @@ class App {
     const token = req.get("X-JWT");
     if (token) {
       const user = await decodeJWT(token);
-      // console.log(user);
+      console.log(user);
       if (user) {
         req.user = user;
       } else {
@@ -50,5 +54,14 @@ class App {
     next();
   };
 }
+
+express().use(
+  "/graphql",
+  apolloUploadExpress({
+    maxFileSize: 100000,
+    maxFiles: 10
+  }),
+  graphqlHTTP({ schema })
+);
 
 export default new App().app;

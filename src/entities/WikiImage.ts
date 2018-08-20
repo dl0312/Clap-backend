@@ -10,12 +10,14 @@ import {
   JoinColumn,
   RelationCount,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  OneToOne
 } from "typeorm";
 import User from "./User";
 import Category from "./Category";
 import Clap from "./Clap";
 import Post from "./Post";
+import ShownImage from "./ShownImage";
 
 @Entity()
 class WikiImage extends BaseEntity {
@@ -37,8 +39,14 @@ class WikiImage extends BaseEntity {
   @Column({ nullable: true })
   categoryId: number;
 
-  @Column({ type: "text", nullable: true })
-  shownImage: string;
+  @Column({ nullable: true })
+  shownImageId: number;
+
+  @OneToOne(type => ShownImage, shownImage => shownImage.wikiImage, {
+    nullable: true
+  })
+  @JoinColumn()
+  shownImage: ShownImage;
 
   @Column({ type: "text" })
   hoverImage: string;

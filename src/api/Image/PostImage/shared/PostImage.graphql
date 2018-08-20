@@ -1,0 +1,10 @@
+type PostImage {
+  id: Int!
+  url: String!
+  user: User
+  userId: Int!
+  post: Post
+  postId: Int
+  createdAt: String!
+  updatedAt: String
+}

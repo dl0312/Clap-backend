@@ -5,7 +5,8 @@ type WikiImage {
   user: User!
   category: Category!
   categoryId: Int!
-  shownImage: String
+  shownImageId: Int
+  shownImage: ShownImage
   hoverImage: String!
   posts: [Post]
   postsCount: Int!

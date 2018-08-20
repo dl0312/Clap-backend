@@ -17,8 +17,8 @@ const resolvers: Resolvers = {
       ): Promise<AddCategoryResponse> => {
         const { parentIds, childrenIds, name } = args;
         try {
-          let parentCategories: Category[];
-          let childrenCategories: Category[];
+          let parentCategories: Category[] = [];
+          let childrenCategories: Category[] = [];
           if (parentIds && childrenIds) {
             // have both parent and children
             parentCategories = await Category.find({
@@ -39,6 +39,7 @@ const resolvers: Resolvers = {
             });
             await Category.create({
               parent: parentCategories,
+              children: childrenCategories,
               name
             }).save();
           } else if (childrenIds) {
@@ -47,12 +48,15 @@ const resolvers: Resolvers = {
               where: { id: In(childrenIds) }
             });
             await Category.create({
+              parent: parentCategories,
               children: childrenCategories,
               name
             }).save();
           } else {
             // have no relation
             await Category.create({
+              parent: parentCategories,
+              children: childrenCategories,
               name
             }).save();
           }

@@ -16,6 +16,7 @@ import Comment from "./Comment";
 import User from "./User";
 import Category from "./Category";
 import WikiImage from "./WikiImage";
+import PostImage from "./PostImage";
 
 @Entity()
 class Post extends BaseEntity {
@@ -64,6 +65,9 @@ class Post extends BaseEntity {
     nullable: true
   })
   wikiImages: WikiImage[];
+
+  @OneToMany(type => PostImage, postImage => postImage.post)
+  postImages: PostImage[];
 
   @CreateDateColumn()
   createdAt: string;

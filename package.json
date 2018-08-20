@@ -33,9 +33,15 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "dependencies": {
+    "apollo-server": "^2.0.4",
+    "apollo-upload-server": "^7.0.0",
     "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
     "class-validator": "^0.8.5",
     "cors": "^2.8.4",
+    "express-graphql": "^0.6.12",
+    "fs": "^0.0.1-security",
+    "graphql-server-express": "^1.4.0",
     "graphql-tools": "^3.0.5",
     "graphql-yoga": "^1.14.12",
     "helmet": "^3.12.1",
@@ -45,6 +51,7 @@
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
     "twilio": "^3.18.0",
-    "typeorm": "^0.2.7"
+    "typeorm": "^0.2.7",
+    "uuid": "^3.3.2"
   }
 }

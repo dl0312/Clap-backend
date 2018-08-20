@@ -22,12 +22,12 @@ class Category extends BaseEntity {
   @ManyToMany(type => Category, category => category.children, {
     nullable: true
   })
+  @JoinTable()
   parent: Category[];
 
   @ManyToMany(type => Category, category => category.parent, {
     nullable: true
   })
-  @JoinTable()
   children: Category[];
 
   @OneToMany(type => WikiImage, wikiImage => wikiImage.category)

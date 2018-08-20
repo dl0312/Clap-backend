@@ -1,0 +1,9 @@
+type GetImageResponse {
+  ok: Boolean!
+  error: String
+  image: String
+}
+
+type Query {
+  GetImage(path: String!): GetImageResponse!
+}

@@ -7,7 +7,7 @@ type Mutation {
   AddWikiImage(
     categoryId: Int!
     name: String
-    shownImage: String!
+    shownImageId: Int!
     hoverImage: String!
   ): AddWikiImageResponse!
 }

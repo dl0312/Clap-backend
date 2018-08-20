@@ -21,7 +21,8 @@ type Mutation {
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
   AddExchange(productId: Int!): AddExchangeResponse!
-  AddImage(name: String!, url: String!): AddImageResponse!
+  UploadPostImage(file: Upload!): UploadPostImageResponse!
+  UploadShownImage(file: Upload!): UploadShownImageResponse!
   SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
   AddPost(title: String!, categoryId: Int!, body: String!): AddPostResponse!
   DeletePost(postId: Int!): DeletePostResponse!
@@ -39,7 +40,7 @@ type Mutation {
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UnfollowUser(userId: Int!): UnfollowUserResponse!
   UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
-  AddWikiImage(categoryId: Int!, name: String, shownImage: String!, hoverImage: String!): AddWikiImageResponse!
+  AddWikiImage(categoryId: Int!, name: String, shownImageId: Int!, hoverImage: String!): AddWikiImageResponse!
   DeleteWikiImage(wikiImageId: Int!): DeleteWikiImageResponse!
   EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImage: String, hoverImage: String): EditWikiImageResponse!
 }
@@ -67,6 +68,7 @@ type Query {
   GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
   GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
   GetMyExchanges: GetMyExchangesResponse!
+  GetImage(path: String!): GetImageResponse!
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
   GetAllPosts(limit: Int!): GetAllPostsResponse!
@@ -78,6 +80,7 @@ type Query {
   GetProductsByCategory(categoryId: Int!): GetProductsByCategoryResponse!
   GetMyFollowing: GetMyFollowingResponse!
   GetMyProfile: GetMyProfileResponse!
+  GetWikiImageById(wikiImageId: Int!): GetWikiImageByIdResponse!
 }
 
 type GetCategoriesByIdsResponse {
@@ -180,17 +183,45 @@ type Exchange {
   product: Product!
 }
 
-type AddImageResponse {
+type GetImageResponse {
+  ok: Boolean!
+  error: String
+  image: String
+}
+
+type PostImage {
+  id: Int!
+  url: String!
+  user: User
+  userId: Int!
+  post: Post
+  postId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+scalar Upload
+
+type UploadPostImageResponse {
   ok: Boolean!
   error: String
 }
 
-type Image {
+type ShownImage {
   id: Int!
-  name: String!
   url: String!
+  user: User
+  userId: Int!
+  wikiImage: WikiImage
+  wikiImageId: Int
   createdAt: String!
   updatedAt: String
+}
+
+type UploadShownImageResponse {
+  ok: Boolean!
+  error: String
+  shownImage: ShownImage
 }
 
 type GetReceivedMessagesResponse {
@@ -463,6 +494,12 @@ type EditWikiImageResponse {
   error: String
 }
 
+type GetWikiImageByIdResponse {
+  ok: Boolean!
+  error: String
+  wikiImage: WikiImage
+}
+
 type WikiImage {
   id: Int!
   name: String
@@ -470,7 +507,8 @@ type WikiImage {
   user: User!
   category: Category!
   categoryId: Int!
-  shownImage: String
+  shownImageId: Int
+  shownImage: ShownImage
   hoverImage: String!
   posts: [Post]
   postsCount: Int!

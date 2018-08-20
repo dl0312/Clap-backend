@@ -1,0 +1,9 @@
+type GetWikiImageByIdResponse {
+  ok: Boolean!
+  error: String
+  wikiImage: WikiImage
+}
+
+type Query {
+  GetWikiImageById(wikiImageId: Int!): GetWikiImageByIdResponse!
+}
