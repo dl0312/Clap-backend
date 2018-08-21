@@ -6,7 +6,6 @@ import {
   AddCommentMutationArgs,
   AddCommentResponse
 } from "../../../types/graph";
-import cleanNullArgs from "../../../utils/cleanNullArg";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -17,9 +16,21 @@ const resolvers: Resolvers = {
         { req }
       ): Promise<AddCommentResponse> => {
         const user: User = req.user;
-        const notNull: any = cleanNullArgs(args);
+        const { postId, parentCommentId, body, level } = args;
+        if (parentCommentId) {
+          const parentComment = await Comment.findOne({ id: parentCommentId });
+          console.log(level);
+          await Comment.create({
+            postId,
+            parentComment,
+            body,
+            user,
+            level
+          }).save();
+          return { ok: true, error: null };
+        }
         try {
-          await Comment.create({ ...notNull, user }).save();
+          await Comment.create({ postId, body, level, user }).save();
           return {
             ok: true,
             error: null

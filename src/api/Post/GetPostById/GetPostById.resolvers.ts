@@ -29,6 +29,7 @@ const resolvers: Resolvers = {
           }
         );
         if (post) {
+          // post.comments = await
           return {
             ok: true,
             error: null,

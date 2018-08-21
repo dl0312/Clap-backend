@@ -5,14 +5,19 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  TreeParent,
+  TreeChildren,
+  Tree
 } from "typeorm";
 import Post from "./Post";
 import User from "./User";
 
 @Entity()
+@Tree("closure-table")
 class Comment extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text" })
   body: string;
@@ -29,15 +34,20 @@ class Comment extends BaseEntity {
   @ManyToOne(type => Post, post => post.comments)
   post: Post;
 
-  @Column({ nullable: true })
-  parentCommentId: number;
-
-  @ManyToOne(type => Comment, { nullable: true })
+  @TreeParent()
   parentComment: Comment;
 
-  @CreateDateColumn() createdAt: string;
+  @TreeChildren()
+  childrenComments: Comment[];
 
-  @UpdateDateColumn() updatedAt: string;
+  @Column({ type: "int" })
+  level: number;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 }
 
 export default Comment;

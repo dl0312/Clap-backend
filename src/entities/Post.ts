@@ -43,8 +43,7 @@ class Post extends BaseEntity {
   clapsCount: number;
 
   @OneToMany(type => Comment, comment => comment.post, {
-    nullable: true,
-    cascade: true
+    nullable: true
   })
   @JoinColumn()
   comments: Comment[];

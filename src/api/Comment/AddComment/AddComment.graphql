@@ -8,5 +8,6 @@ type Mutation {
     postId: Int!
     parentCommentId: Int
     body: String!
+    level: Int!
   ): AddCommentResponse!
 }

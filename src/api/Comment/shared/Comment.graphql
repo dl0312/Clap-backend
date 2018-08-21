@@ -5,8 +5,9 @@ type Comment {
   user: User!
   postId: Int
   post: Post!
-  parentCommentId: Int
   parentComment: Comment
+  childrenComments: [Comment]
+  level: Int!
   createdAt: String!
   updatedAt: String
 }
