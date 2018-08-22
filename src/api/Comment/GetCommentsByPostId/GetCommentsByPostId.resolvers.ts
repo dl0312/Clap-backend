@@ -4,7 +4,7 @@ import {
   GetCommentsByPostIdResponse,
   GetCommentsByPostIdQueryArgs
 } from "../../../types/graph";
-// import { getManager } from "typeorm";
+import { getManager } from "typeorm";
 
 const resolvers: Resolvers = {
   Query: {
@@ -15,9 +15,10 @@ const resolvers: Resolvers = {
     ): Promise<GetCommentsByPostIdResponse> => {
       // const { postId } = args;
       try {
-        // const manager = getManager();
-        const { postId } = args;
-        const comments = await Comment.find({ postId });
+        const manager = getManager();
+        // const { postId } = args;
+        // const comments = await Comment.find({ postId });
+        const comments = await manager.getTreeRepository(Comment).findTrees();
         // const comments = commentstrees.find({ postId :  postId });
         console.log(comments);
         if (comments) {

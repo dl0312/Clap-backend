@@ -24,12 +24,28 @@ const resolvers: Resolvers = {
               "category.parent",
               "user",
               "comments",
+              "comments.parentComment",
               "comments.user"
             ]
           }
         );
         if (post) {
-          // post.comments = await
+          const comments = [];
+          post.comments.forEach(comment => {
+            if (comment.level === 1) {
+              comments.push(comment);
+              post.comments.forEach(comment2 => {
+                if (
+                  comment2.level === 2 &&
+                  comment2.parentComment.id === comment.id
+                ) {
+                  comments.push(comment2);
+                }
+              });
+            }
+          });
+          // comments = [...post.comments];
+          post.comments = comments;
           return {
             ok: true,
             error: null,

@@ -17,7 +17,7 @@ type Mutation {
   DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
   EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
   SendClap(postId: Int!): SendClapResponse!
-  AddComment(postId: Int!, parentCommentId: Int, body: String!, level: Int): AddCommentResponse!
+  AddComment(postId: Int!, parentCommentId: Int, body: String!, level: Int!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
   AddExchange(productId: Int!): AddExchangeResponse!
@@ -158,7 +158,6 @@ type Comment {
   user: User!
   postId: Int
   post: Post!
-  # parentCommentId: Int
   parentComment: Comment
   childrenComments: [Comment]
   level: Int!

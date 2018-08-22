@@ -6,15 +6,13 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  TreeParent,
-  TreeChildren,
-  Tree
+  OneToMany,
+  JoinColumn
 } from "typeorm";
 import Post from "./Post";
 import User from "./User";
 
 @Entity()
-@Tree("closure-table")
 class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -34,10 +32,15 @@ class Comment extends BaseEntity {
   @ManyToOne(type => Post, post => post.comments)
   post: Post;
 
-  @TreeParent()
+  @ManyToOne(type => Comment, comment => comment.childrenComments, {
+    onDelete: "SET NULL"
+  })
   parentComment: Comment;
 
-  @TreeChildren()
+  @OneToMany(type => Comment, comment => comment.parentComment, {
+    onDelete: "SET NULL"
+  })
+  @JoinColumn()
   childrenComments: Comment[];
 
   @Column({ type: "int" })
