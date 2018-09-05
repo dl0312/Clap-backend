@@ -17,18 +17,20 @@ const resolvers: Resolvers = {
       ): Promise<AddWikiImageResponse> => {
         const user: User = req.user;
         try {
-          await WikiImage.create({
+          const wikiImage = await WikiImage.create({
             ...args,
             user
           }).save();
           return {
             ok: true,
-            error: null
+            error: null,
+            wikiImageId: wikiImage.id
           };
         } catch (error) {
           return {
             ok: false,
-            error: error.message
+            error: error.message,
+            wikiImageId: null
           };
         }
       }

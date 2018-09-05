@@ -19,6 +19,7 @@ const resolvers: Resolvers = {
         try {
           let parentCategories: Category[] = [];
           let childrenCategories: Category[] = [];
+          let category;
           if (parentIds && childrenIds) {
             // have both parent and children
             parentCategories = await Category.find({
@@ -27,7 +28,7 @@ const resolvers: Resolvers = {
             childrenCategories = await Category.find({
               where: { id: In(childrenIds) }
             });
-            await Category.create({
+            category = await Category.create({
               parent: parentCategories,
               children: childrenCategories,
               name
@@ -37,7 +38,7 @@ const resolvers: Resolvers = {
             parentCategories = await Category.find({
               where: { id: In(parentIds) }
             });
-            await Category.create({
+            category = await Category.create({
               parent: parentCategories,
               children: childrenCategories,
               name
@@ -47,14 +48,14 @@ const resolvers: Resolvers = {
             childrenCategories = await Category.find({
               where: { id: In(childrenIds) }
             });
-            await Category.create({
+            category = await Category.create({
               parent: parentCategories,
               children: childrenCategories,
               name
             }).save();
           } else {
             // have no relation
-            await Category.create({
+            category = await Category.create({
               parent: parentCategories,
               children: childrenCategories,
               name
@@ -62,12 +63,14 @@ const resolvers: Resolvers = {
           }
           return {
             ok: true,
-            error: null
+            error: null,
+            categoryId: category.id
           };
         } catch (error) {
           return {
             ok: false,
-            error: error.message
+            error: error.message,
+            categoryId: null
           };
         }
       }

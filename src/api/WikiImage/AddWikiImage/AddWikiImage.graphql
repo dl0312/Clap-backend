@@ -1,6 +1,7 @@
 type AddWikiImageResponse {
   ok: Boolean
   error: String
+  wikiImageId: Int
 }
 
 type Mutation {

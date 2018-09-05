@@ -10,6 +10,7 @@ type Achievement {
 type AddCategoryResponse {
   ok: Boolean!
   error: String
+  categoryId: Int
 }
 
 type Mutation {
@@ -296,6 +297,7 @@ type GetPostByIdResponse {
   ok: Boolean!
   error: String
   post: Post
+  isClapped: Boolean
 }
 
 type GetPostsByKeywordResponse {
@@ -483,6 +485,7 @@ type Verification {
 type AddWikiImageResponse {
   ok: Boolean
   error: String
+  wikiImageId: Int
 }
 
 type DeleteWikiImageResponse {

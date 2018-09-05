@@ -1,6 +1,7 @@
 type AddCategoryResponse {
   ok: Boolean!
   error: String
+  categoryId: Int
 }
 
 type Mutation {

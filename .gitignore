@@ -59,6 +59,8 @@ typings/
 
 public/uploads
 
+public
+
 # next.js build output
 .next
 .DS_Store

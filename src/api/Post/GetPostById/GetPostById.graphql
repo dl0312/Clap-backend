@@ -2,6 +2,7 @@ type GetPostByIdResponse {
   ok: Boolean!
   error: String
   post: Post
+  isClapped: Boolean
 }
 
 type Query {
