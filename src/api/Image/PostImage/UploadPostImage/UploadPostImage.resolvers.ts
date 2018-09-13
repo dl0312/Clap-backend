@@ -20,10 +20,10 @@ const resolvers: Resolvers = {
     UploadPostImage: privateResolver(async (parent, { file }, { req }) => {
       console.log(file);
       const user: User = req.user;
-      const { filename, stream } = await file;
+      const { stream } = await file;
       // const stream = createReadStream;
       const id = uuid.v4();
-      const newFileName = `${id}-${filename}`;
+      const newFileName = `${id}`;
       const path = `${imgDir}/${newFileName}`;
       await storeUpload({ stream, id, path });
       await PostImage.create({ url: newFileName, userId: user.id });

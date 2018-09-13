@@ -19,15 +19,28 @@ const resolvers: Resolvers = {
           const post = await Post.findOne({ id: postId });
           if (post) {
             if (post.userId !== user.id) {
-              await Clap.create({
+              const clap = await Clap.findOne({
                 senderId: user.id,
                 receiverId: post.userId,
                 postId
-              }).save();
-              return {
-                ok: true,
-                error: null
-              };
+              });
+              if (clap) {
+                clap.remove();
+                return {
+                  ok: true,
+                  error: null
+                };
+              } else {
+                await Clap.create({
+                  senderId: user.id,
+                  receiverId: post.userId,
+                  postId
+                }).save();
+                return {
+                  ok: true,
+                  error: null
+                };
+              }
             } else {
               return {
                 ok: false,

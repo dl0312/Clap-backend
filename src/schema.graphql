@@ -18,6 +18,7 @@ type Mutation {
   DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
   EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
   SendClap(postId: Int!): SendClapResponse!
+  UnClap(postId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!, level: Int!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
@@ -40,7 +41,7 @@ type Mutation {
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UnfollowUser(userId: Int!): UnfollowUserResponse!
-  UpdateMyProfile(firstName: String, lastName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+  UpdateMyProfile(email: String, firstName: String, lastName: String, nickName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
   AddWikiImage(categoryId: Int!, name: String, shownImageId: Int!, hoverImage: String!): AddWikiImageResponse!
   DeleteWikiImage(wikiImageId: Int!): DeleteWikiImageResponse!
   EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImageId: Int, hoverImage: String): EditWikiImageResponse!
@@ -129,6 +130,11 @@ type Clap {
   wikiImage: WikiImage
   createdAt: String!
   updatedAt: String
+}
+
+type UnClapResponse {
+  ok: Boolean!
+  error: String
 }
 
 type AddCommentResponse {
