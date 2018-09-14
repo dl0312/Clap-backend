@@ -72,6 +72,9 @@ class User extends BaseEntity {
   @Column({ type: "text", nullable: true })
   fbId: string;
 
+  @Column({ type: "text", nullable: true })
+  googleId: string;
+
   @OneToMany(type => Message, message => message.sender, { nullable: true })
   messagesAsSender: Message[];
 

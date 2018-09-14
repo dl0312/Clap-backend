@@ -8,6 +8,7 @@ type Mutation {
   FacebookConnect(
     firstName: String!
     lastName: String!
+    nickName: String!
     email: String
     fbId: String!
   ): FacebookConnectResponse!

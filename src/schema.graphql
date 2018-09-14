@@ -36,8 +36,9 @@ type Mutation {
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(nickName: String!, email: String!, password: String!, phoneNumber: String!): EmailSignUpResponse!
-  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
+  FacebookConnect(firstName: String!, lastName: String!, nickName: String!, email: String, fbId: String!): FacebookConnectResponse!
   FollowUser(userId: Int!): FollowUserResponse!
+  GoogleConnect(firstName: String!, lastName: String!, nickName: String!, email: String, googleId: String!): GoogleConnectResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UnfollowUser(userId: Int!): UnfollowUserResponse!
@@ -421,6 +422,12 @@ type GetMyProfileResponse {
   user: User
 }
 
+type GoogleConnectResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
 type RequestEmailVerificationResponse {
   ok: Boolean!
   error: String
@@ -441,6 +448,7 @@ type User {
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
   fbId: String
+  googleId: String
   messagesAsSender: [Message]
   messagesAsReceiver: [Message]
   certification: Boolean
