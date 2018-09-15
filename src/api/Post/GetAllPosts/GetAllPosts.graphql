@@ -5,5 +5,5 @@ type GetAllPostsResponse {
 }
 
 type Query {
-  GetAllPosts(limit: Int!): GetAllPostsResponse!
+  GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
 }

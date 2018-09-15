@@ -12,20 +12,40 @@ const resolvers: Resolvers = {
       args: GetAllPostsQueryArgs,
       { req }
     ): Promise<GetAllPostsResponse> => {
+      const { limit, type } = args;
       try {
-        const limitedPosts = await Post.find({
-          order: {
-            id: "DESC"
-          },
-          take: args.limit,
-          relations: [
-            "category",
-            "category.parent",
-            "category.wikiImages",
-            "category.wikiImages.shownImage",
-            "user"
-          ]
-        });
+        let limitedPosts;
+        if (type === "createdAt") {
+          limitedPosts = await Post.find({
+            order: {
+              createdAt: "DESC"
+            },
+            take: limit,
+            relations: [
+              "category",
+              "category.parent",
+              "category.wikiImages",
+              "category.wikiImages.shownImage",
+              "user"
+            ]
+          });
+        } else if (type === "updatedAt") {
+          limitedPosts = await Post.find({
+            order: {
+              updatedAt: "DESC"
+            },
+            take: limit,
+            relations: [
+              "category",
+              "category.parent",
+              "category.wikiImages",
+              "category.wikiImages.shownImage",
+              "user"
+            ]
+          });
+        } else {
+          return { ok: false, error: "Type is not Valid", posts: null };
+        }
         limitedPosts.forEach(post => {
           const d = new Date(post.createdAt);
           let month = "" + (d.getMonth() + 1);

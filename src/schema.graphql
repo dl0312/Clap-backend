@@ -35,10 +35,10 @@ type Mutation {
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(nickName: String!, email: String!, password: String!, phoneNumber: String!): EmailSignUpResponse!
+  EmailSignUp(nickName: String!, email: String!, password: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, nickName: String!, email: String, fbId: String!): FacebookConnectResponse!
   FollowUser(userId: Int!): FollowUserResponse!
-  GoogleConnect(firstName: String!, lastName: String!, nickName: String!, email: String, googleId: String!): GoogleConnectResponse!
+  GoogleConnect(firstName: String!, lastName: String!, nickName: String!, email: String, profilePhoto: String, googleId: String!): GoogleConnectResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UnfollowUser(userId: Int!): UnfollowUserResponse!
@@ -74,16 +74,19 @@ type Query {
   GetImage(path: String!): GetImageResponse!
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
-  GetAllPosts(limit: Int!): GetAllPostsResponse!
+  GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
   GetMyPosts: GetMyPostsResponse!
   GetPostById(postId: Int!): GetPostByIdResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
   GetAllProducts: GetAllProductsResponse!
   GetProductById(productId: Int!): GetProductByIdResponse!
   GetProductsByCategory(categoryId: Int!): GetProductsByCategoryResponse!
+  EmailOverlap(email: String!): EmailOverlapResponse!
   GetMyFollowing: GetMyFollowingResponse!
   GetMyProfile: GetMyProfileResponse!
+  NickNameOverlap(nickName: String!): NickNameOverlapResponse!
   GetWikiImageById(wikiImageId: Int!): GetWikiImageByIdResponse!
+  GetWikiImages(limit: Int!, type: String!): GetWikiImagesResponse
 }
 
 type GetCategoriesByIdsResponse {
@@ -387,6 +390,11 @@ type CompletePhoneVerificationResponse {
   token: String
 }
 
+type EmailOverlapResponse {
+  ok: Boolean!
+  error: String
+}
+
 type EmailSignInResponse {
   ok: Boolean!
   error: String
@@ -426,6 +434,11 @@ type GoogleConnectResponse {
   ok: Boolean!
   error: String
   token: String
+}
+
+type NickNameOverlapResponse {
+  ok: Boolean!
+  error: String
 }
 
 type RequestEmailVerificationResponse {
@@ -516,6 +529,12 @@ type GetWikiImageByIdResponse {
   ok: Boolean!
   error: String
   wikiImage: WikiImage
+}
+
+type GetWikiImagesResponse {
+  ok: Boolean!
+  error: String
+  wikiImages: [WikiImage]
 }
 
 type WikiImage {
