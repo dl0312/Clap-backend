@@ -1,6 +1,7 @@
 type AddPostResponse {
   ok: Boolean!
   error: String
+  postId: Int
 }
 
 type Mutation {

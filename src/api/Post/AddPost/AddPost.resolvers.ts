@@ -14,18 +14,20 @@ const resolvers: Resolvers = {
       ): Promise<AddPostResponse> => {
         const user: User = req.user;
         try {
-          await Post.create({
+          const post = await Post.create({
             ...args,
             user
           }).save();
           return {
             ok: true,
-            error: null
+            error: null,
+            postId: post.id
           };
         } catch (error) {
           return {
             ok: false,
-            error: error.message
+            error: error.message,
+            postId: null
           };
         }
       }

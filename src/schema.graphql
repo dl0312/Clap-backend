@@ -86,7 +86,7 @@ type Query {
   GetMyProfile: GetMyProfileResponse!
   NickNameOverlap(nickName: String!): NickNameOverlapResponse!
   GetWikiImageById(wikiImageId: Int!): GetWikiImageByIdResponse!
-  GetWikiImages(limit: Int!, type: String!): GetWikiImagesResponse
+  GetWikiImages(limit: Int!, type: String!): GetWikiImagesResponse!
 }
 
 type GetCategoriesByIdsResponse {
@@ -279,6 +279,7 @@ type Notification {
 type AddPostResponse {
   ok: Boolean!
   error: String
+  postId: Int
 }
 
 type DeletePostResponse {
