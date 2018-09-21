@@ -77,6 +77,7 @@ type Query {
   GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
   GetMyPosts: GetMyPostsResponse!
   GetPostById(postId: Int!): GetPostByIdResponse!
+  GetPostsByCategoryId(categoryId: Int!): GetPostsByCategoryIdResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
   GetAllProducts: GetAllProductsResponse!
   GetProductById(productId: Int!): GetProductByIdResponse!
@@ -309,6 +310,12 @@ type GetPostByIdResponse {
   error: String
   post: Post
   isClapped: Boolean
+}
+
+type GetPostsByCategoryIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
 }
 
 type GetPostsByKeywordResponse {
