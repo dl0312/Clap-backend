@@ -17,11 +17,7 @@ const resolvers: Resolvers = {
             "category.wikiImages",
             "category.wikiImages.shownImage",
             "category.parent",
-            "user",
-            "comments",
-            "comments.user",
-            "comments.childrenComments",
-            "comments.childrenComments.user"
+            "user"
           ]
         });
         if (posts) {

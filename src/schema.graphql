@@ -43,9 +43,9 @@ type Mutation {
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   UnfollowUser(userId: Int!): UnfollowUserResponse!
   UpdateMyProfile(email: String, firstName: String, lastName: String, nickName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
-  AddWikiImage(categoryId: Int!, name: String, shownImageId: Int!, hoverImage: String!): AddWikiImageResponse!
+  AddWikiImage(categoryId: Int!, name: String, shownImage: String!, hoverImage: String!): AddWikiImageResponse!
   DeleteWikiImage(wikiImageId: Int!): DeleteWikiImageResponse!
-  EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImageId: Int, hoverImage: String): EditWikiImageResponse!
+  EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImage: String, hoverImage: String): EditWikiImageResponse!
 }
 
 type DeleteCategoryResponse {
@@ -552,8 +552,7 @@ type WikiImage {
   user: User!
   category: Category!
   categoryId: Int!
-  shownImageId: Int
-  shownImage: ShownImage
+  shownImage: String!
   hoverImage: String!
   posts: [Post]
   postsCount: Int!

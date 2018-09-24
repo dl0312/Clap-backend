@@ -8,7 +8,7 @@ type Mutation {
     wikiImageId: Int!
     categoryId: Int
     name: String
-    shownImageId: Int
+    shownImage: String
     hoverImage: String
   ): EditWikiImageResponse!
 }
