@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
               createdAt: "DESC"
             },
             take: limit,
-            relations: ["user", "category", "category.parent", "shownImage"]
+            relations: ["user", "category", "category.parent"]
           });
         } else if (type === "updatedAt") {
           limitedWikiImages = await WikiImage.find({
@@ -21,7 +21,7 @@ const resolvers: Resolvers = {
               updatedAt: "DESC"
             },
             take: limit,
-            relations: ["user", "category", "category.parent", "shownImage"]
+            relations: ["user", "category", "category.parent"]
           });
         } else {
           return { ok: false, error: "Type is not Valid", wikiImages: null };

@@ -25,7 +25,6 @@ const resolvers: Resolvers = {
               "category",
               "category.parent",
               "category.wikiImages",
-              "category.wikiImages.shownImage",
               "user"
             ]
           });
@@ -39,7 +38,6 @@ const resolvers: Resolvers = {
               "category",
               "category.parent",
               "category.wikiImages",
-              "category.wikiImages.shownImage",
               "user"
             ]
           });
