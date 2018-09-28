@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
               "parent.wikiImages",
               "children",
               "children.wikiImages",
-              "wikiImages",
+              "wikiImages"
             ]
           }
         );

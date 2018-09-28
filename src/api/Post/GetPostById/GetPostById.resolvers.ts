@@ -33,6 +33,8 @@ const resolvers: Resolvers = {
           }
         );
         if (post) {
+          post.view += 1;
+          post.save();
           const comments = [];
           post.comments = post.comments;
           const Comments = ({ items }) => {
