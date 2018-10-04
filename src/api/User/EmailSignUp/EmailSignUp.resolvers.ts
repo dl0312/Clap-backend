@@ -49,7 +49,7 @@ const resolvers: Resolvers = {
                   target: "EMAIL"
                 }).save();
                 await sendVerificationEmail(
-                  newUser.fullName,
+                  newUser.nickName,
                   emailVerification.key
                 );
               }
