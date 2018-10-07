@@ -24,8 +24,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "postbuild": "cd src && copy ./api/**/*.graphql ../dist/api",
-    "start": "cd dist && node .",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    "start": "cd dist && node ."
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -60,7 +59,7 @@
     "uuid": "^3.3.2"
   },
   "now": {
-    "name": "Clap-frontend",
-    "dotenv": true
+    "name": "Clap-backend",
+    "dotenv": ".env.production"
   }
 }
