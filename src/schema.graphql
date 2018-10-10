@@ -310,6 +310,7 @@ type GetPostByIdResponse {
   error: String
   post: Post
   isClapped: Boolean
+  isMine: Boolean
 }
 
 type GetPostsByCategoryIdResponse {

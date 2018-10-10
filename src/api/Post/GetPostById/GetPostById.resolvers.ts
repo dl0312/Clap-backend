@@ -59,20 +59,45 @@ const resolvers: Resolvers = {
           });
           // comments = [...post.comments];
           post.comments = comments;
-          const isClapped = await Clap.findOne({ postId, senderId: user.id });
-          if (isClapped) {
-            return {
-              ok: true,
-              error: null,
-              post,
-              isClapped: true
-            };
+          if (user) {
+            if (user.id === post.user.id) {
+              return {
+                ok: true,
+                error: null,
+                post,
+                isClapped: true,
+                isMine: true
+              };
+            } else {
+              const isClapped = await Clap.findOne({
+                postId,
+                senderId: user.id
+              });
+              if (isClapped) {
+                return {
+                  ok: true,
+                  error: null,
+                  post,
+                  isClapped: true,
+                  isMine: false
+                };
+              } else {
+                return {
+                  ok: true,
+                  error: null,
+                  post,
+                  isClapped: false,
+                  isMine: false
+                };
+              }
+            }
           } else {
             return {
               ok: true,
               error: null,
               post,
-              isClapped: false
+              isClapped: false,
+              isMine: false
             };
           }
         } else {
@@ -80,7 +105,8 @@ const resolvers: Resolvers = {
             ok: false,
             error: "Have no post with this ID",
             post: null,
-            isClapped: null
+            isClapped: null,
+            isMine: null
           };
         }
       } catch (error) {
@@ -88,7 +114,8 @@ const resolvers: Resolvers = {
           ok: false,
           error: error.message,
           post: null,
-          isClapped: null
+          isClapped: null,
+          isMine: null
         };
       }
     }

@@ -13,6 +13,7 @@ const resolvers: Resolvers = {
       { req }
     ): Promise<GetAllPostsResponse> => {
       const { limit, type } = args;
+      const { user } = req;
       try {
         let limitedPosts;
         if (type === "createdAt") {
@@ -42,7 +43,11 @@ const resolvers: Resolvers = {
             ]
           });
         } else {
-          return { ok: false, error: "Type is not Valid", posts: null };
+          return {
+            ok: false,
+            error: "Type is not Valid",
+            posts: null,
+          };
         }
         limitedPosts.forEach(post => {
           const d = new Date(post.createdAt);
@@ -59,16 +64,24 @@ const resolvers: Resolvers = {
           post.createdAt = [year, month, day].join("-");
         });
         if (limitedPosts) {
-          return {
-            ok: true,
-            error: null,
-            posts: limitedPosts
-          };
+          if (user) {
+            return {
+              ok: true,
+              error: null,
+              posts: limitedPosts,
+            };
+          } else {
+            return {
+              ok: true,
+              error: null,
+              posts: limitedPosts,
+            };
+          }
         } else {
           return {
             ok: false,
             error: "has no posts",
-            posts: null
+            posts: null,
           };
         }
       } catch (error) {
