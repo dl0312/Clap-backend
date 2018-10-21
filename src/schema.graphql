@@ -17,8 +17,8 @@ type Mutation {
   AddCategory(name: String!, parentIds: [Int], childrenIds: [Int]): AddCategoryResponse!
   DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
   EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
-  SendClap(postId: Int!): SendClapResponse!
-  UnClap(postId: Int!): SendClapResponse!
+  SendClap(postId: Int, wikiImageId: Int): SendClapResponse!
+  UnClap(postId: Int!, wikiImageId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!, level: Int!): AddCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, body: String!): EditCommentResponse!
@@ -26,9 +26,9 @@ type Mutation {
   UploadPostImage(file: Upload!): UploadPostImageResponse!
   UploadShownImage(file: Upload!): UploadShownImageResponse!
   SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
-  AddPost(title: String!, categoryId: Int!, body: String!): AddPostResponse!
+  AddPost(title: String!, titleImg: String, titleImgPos: Float, categoryId: Int!, body: String!): AddPostResponse!
   DeletePost(postId: Int!): DeletePostResponse!
-  EditPost(postId: Int!, title: String, categoryId: Int, body: String): EditPostResponse!
+  EditPost(postId: Int!, title: String, titleImg: String, titleImgPos: Float, categoryId: Int, body: String): EditPostResponse!
   AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
   DeleteProduct(productId: Int!): DeleteProductResponse!
   EditProduct(productId: Int!, name: String, price: Int, stock: Int, categoryId: Int): EditProductResponse!
@@ -114,6 +114,7 @@ type Category {
   parent: [Category]
   children: [Category]
   wikiImages: [WikiImage]
+  topWikiImage: WikiImage
   createdAt: String!
   updatedAt: String
 }
@@ -328,6 +329,8 @@ type GetPostsByKeywordResponse {
 type Post {
   id: Int!
   title: String!
+  titleImg: String
+  titleImgPos: Float
   body: String
   userId: Int!
   user: User!

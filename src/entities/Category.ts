@@ -38,6 +38,22 @@ class Category extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: string;
+
+  async topWikiImage(): Promise<WikiImage> {
+    const wikiImages = await WikiImage.find({ categoryId: this.id });
+    let topWikiImage = wikiImages[0];
+    for (const wikiImage of wikiImages) {
+      if (topWikiImage.clapsCount < wikiImage.clapsCount) {
+        topWikiImage = wikiImage;
+      } else if (topWikiImage.clapsCount === wikiImage.clapsCount) {
+        if (topWikiImage.updatedAt < wikiImage.updatedAt) {
+          topWikiImage = wikiImage;
+        }
+      }
+    }
+    // console.log(topWikiImage);
+    return topWikiImage;
+  }
 }
 
 export default Category;

@@ -27,6 +27,12 @@ class Post extends BaseEntity {
   title: string;
 
   @Column({ type: "text", nullable: true })
+  titleImg: string;
+
+  @Column({ type: "float", nullable: true })
+  titleImgPos: number;
+
+  @Column({ type: "text", nullable: true })
   body: string;
 
   @Column({ nullable: true })

@@ -17,6 +17,6 @@ const sendEmail = (subject: string, html: string) => {
 
 export const sendVerificationEmail = (nickName: string, key: string) => {
   const emailSubject = `Hello! ${nickName}, please verify your email`;
-  const emailBody = `Verify your email by clicking <a href="http://dsfasdfdfadfheeber.com/verification/${key}/">here</a>`;
+  const emailBody = `Verify your email for CLAP by clicking <a href="http://dsfasdfdfadfheeber.com/verification/${key}/">here</a>`;
   return sendEmail(emailSubject, emailBody);
 };

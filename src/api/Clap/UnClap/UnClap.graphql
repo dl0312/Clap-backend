@@ -4,5 +4,5 @@ type UnClapResponse {
 }
 
 type Mutation {
-  UnClap(postId: Int!): SendClapResponse!
+  UnClap(postId: Int!, wikiImageId: Int!): SendClapResponse!
 }

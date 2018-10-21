@@ -4,6 +4,7 @@ type Category {
   parent: [Category]
   children: [Category]
   wikiImages: [WikiImage]
+  topWikiImage: WikiImage
   createdAt: String!
   updatedAt: String
 }

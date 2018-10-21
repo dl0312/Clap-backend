@@ -4,5 +4,5 @@ type SendClapResponse {
 }
 
 type Mutation {
-  SendClap(postId: Int!): SendClapResponse!
+  SendClap(postId: Int, wikiImageId: Int): SendClapResponse!
 }

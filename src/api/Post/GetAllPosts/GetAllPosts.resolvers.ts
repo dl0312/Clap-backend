@@ -46,7 +46,7 @@ const resolvers: Resolvers = {
           return {
             ok: false,
             error: "Type is not Valid",
-            posts: null,
+            posts: null
           };
         }
         limitedPosts.forEach(post => {
@@ -63,25 +63,26 @@ const resolvers: Resolvers = {
           }
           post.createdAt = [year, month, day].join("-");
         });
+        console.log(`post`, limitedPosts);
         if (limitedPosts) {
           if (user) {
             return {
               ok: true,
               error: null,
-              posts: limitedPosts,
+              posts: limitedPosts
             };
           } else {
             return {
               ok: true,
               error: null,
-              posts: limitedPosts,
+              posts: limitedPosts
             };
           }
         } else {
           return {
             ok: false,
             error: "has no posts",
-            posts: null,
+            posts: null
           };
         }
       } catch (error) {
