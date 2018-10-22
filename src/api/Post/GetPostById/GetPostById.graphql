@@ -3,7 +3,7 @@ type GetPostByIdResponse {
   error: String
   post: Post
   isClapped: Boolean
-  isMine: Boolean
+  isMine: Boolean!
 }
 
 type Query {

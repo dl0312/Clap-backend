@@ -41,7 +41,7 @@ class Category extends BaseEntity {
 
   async topWikiImage(): Promise<WikiImage> {
     const wikiImages = await WikiImage.find({ categoryId: this.id });
-    let topWikiImage = wikiImages[0];
+    let topWikiImage: WikiImage = wikiImages[0];
     for (const wikiImage of wikiImages) {
       if (topWikiImage.clapsCount < wikiImage.clapsCount) {
         topWikiImage = wikiImage;
@@ -51,7 +51,6 @@ class Category extends BaseEntity {
         }
       }
     }
-    // console.log(topWikiImage);
     return topWikiImage;
   }
 }
