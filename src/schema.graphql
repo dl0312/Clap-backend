@@ -311,7 +311,7 @@ type GetPostByIdResponse {
   error: String
   post: Post
   isClapped: Boolean
-  isMine: Boolean!
+  isMine: Boolean
 }
 
 type GetPostsByCategoryIdResponse {
@@ -541,6 +541,8 @@ type GetWikiImageByIdResponse {
   ok: Boolean!
   error: String
   wikiImage: WikiImage
+  isClapped: Boolean
+  isMine: Boolean
 }
 
 type GetWikiImagesResponse {

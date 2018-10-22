@@ -2,6 +2,8 @@ type GetWikiImageByIdResponse {
   ok: Boolean!
   error: String
   wikiImage: WikiImage
+  isClapped: Boolean
+  isMine: Boolean
 }
 
 type Query {
