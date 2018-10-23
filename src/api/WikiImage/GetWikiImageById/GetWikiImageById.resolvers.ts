@@ -19,9 +19,10 @@ const resolvers: Resolvers = {
       try {
         const wikiImage = await WikiImage.findOne(
           { id: wikiImageId },
-          { relations: ["user"] }
+          { relations: ["user", "category"] }
         );
         if (wikiImage) {
+          console.log(user.id, wikiImage.user.id);
           if (user.id === wikiImage.user.id) {
             return {
               ok: true,

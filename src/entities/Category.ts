@@ -52,21 +52,6 @@ class Category extends BaseEntity {
     }
     return topWikiImage;
   }
-
-  //   async topWikiImage(): Promise<WikiImage> {
-  //     const wikiImages = await WikiImage.find({ categoryId: this.id });
-  //     let topWikiImage: WikiImage = wikiImages[0];
-  //     for (const wikiImage of wikiImages) {
-  //       if (topWikiImage.clapsCount < wikiImage.clapsCount) {
-  //         topWikiImage = wikiImage;
-  //       } else if (topWikiImage.clapsCount === wikiImage.clapsCount) {
-  //         if (topWikiImage.updatedAt < wikiImage.updatedAt) {
-  //           topWikiImage = wikiImage;
-  //         }
-  //       }
-  //     }
-  //     return topWikiImage;
-  //   }
 }
 
 export default Category;
