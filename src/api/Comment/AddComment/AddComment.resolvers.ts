@@ -19,7 +19,6 @@ const resolvers: Resolvers = {
         const { postId, parentCommentId, body, level } = args;
         if (parentCommentId) {
           const parentComment = await Comment.findOne({ id: parentCommentId });
-          console.log(parentComment);
           await Comment.create({
             postId,
             parentComment,

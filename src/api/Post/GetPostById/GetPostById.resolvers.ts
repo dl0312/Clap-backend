@@ -38,7 +38,6 @@ const resolvers: Resolvers = {
           const comments = [];
           post.comments = post.comments;
           const Comments = ({ items }) => {
-            // console.log(items);
             return items.map(item => {
               const commentTemp = post.comments.find(
                 comment => comment.id === item.id

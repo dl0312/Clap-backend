@@ -18,7 +18,6 @@ const resolvers: Resolvers = {
   Mutation: {
     UploadShownImage: privateResolver(async (parent, { file }, { req }) => {
       const user: User = req.user;
-      console.log(file);
       const { stream } = await file;
       // const stream = createReadStream;
       const id = uuid.v4();
@@ -29,7 +28,6 @@ const resolvers: Resolvers = {
         url: newFileName,
         userId: user.id
       }).save();
-      console.log(shownImage);
       return { ok: true, error: null, shownImage };
     })
   }

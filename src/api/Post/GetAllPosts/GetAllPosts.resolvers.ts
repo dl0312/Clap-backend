@@ -49,21 +49,6 @@ const resolvers: Resolvers = {
             posts: null
           };
         }
-        limitedPosts.forEach(post => {
-          const d = new Date(post.createdAt);
-          let month = "" + (d.getMonth() + 1);
-          let day = "" + d.getDate();
-          const year = d.getFullYear();
-
-          if (month.length < 2) {
-            month = "0" + month;
-          }
-          if (day.length < 2) {
-            day = "0" + day;
-          }
-          post.createdAt = [year, month, day].join("-");
-        });
-        console.log(`post`, limitedPosts);
         if (limitedPosts) {
           if (user) {
             return {

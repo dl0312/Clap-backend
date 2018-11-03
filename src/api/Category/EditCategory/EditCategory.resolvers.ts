@@ -32,7 +32,6 @@ const resolvers: Resolvers = {
               childrenCategories = await Category.find({
                 where: { id: In(childrenIds) }
               });
-              console.log(parentCategories);
             } else if (parentIds.length !== 0) {
               // have only parent
               parentCategories = await Category.find({

@@ -20,7 +20,6 @@ const resolvers: Resolvers = {
         // const comments = await Comment.find({ postId });
         const comments = await manager.getTreeRepository(Comment).findTrees();
         // const comments = commentstrees.find({ postId :  postId });
-        console.log(comments);
         if (comments) {
           return {
             ok: true,

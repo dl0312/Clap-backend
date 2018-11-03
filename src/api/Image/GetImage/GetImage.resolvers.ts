@@ -5,7 +5,6 @@ const resolvers: Resolvers = {
   Query: {
     GetImage: async (parent, { path }) => {
       const image = createReadStream(path);
-      console.log(image);
       return { ok: true, error: null, image };
     }
   }

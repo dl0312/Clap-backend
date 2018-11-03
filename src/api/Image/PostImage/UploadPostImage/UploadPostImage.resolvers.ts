@@ -18,10 +18,8 @@ const storeUpload = ({ stream, id, path }) =>
 const resolvers: Resolvers = {
   Mutation: {
     UploadPostImage: privateResolver(async (parent, { file }, { req }) => {
-      console.log(file);
       const user: User = req.user;
       const { stream } = await file;
-      // const stream = createReadStream;
       const id = uuid.v4();
       const newFileName = `${id}`;
       const path = `${imgDir}/${newFileName}`;
