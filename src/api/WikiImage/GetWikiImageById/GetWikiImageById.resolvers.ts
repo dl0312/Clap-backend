@@ -21,38 +21,48 @@ const resolvers: Resolvers = {
           { id: wikiImageId },
           { relations: ["user", "category"] }
         );
-        if (wikiImage) {
-          console.log(user.id, wikiImage.user.id);
-          if (user.id === wikiImage.user.id) {
-            return {
-              ok: true,
-              error: null,
-              wikiImage,
-              isClapped: true,
-              isMine: true
-            };
-          } else {
-            const isClapped = await Clap.findOne({
-              wikiImageId,
-              senderId: user.id
-            });
-            if (isClapped) {
+        if (wikiImage !== undefined) {
+          if (user !== undefined) {
+            console.log(user.id, wikiImage.user.id);
+            if (user.id === wikiImage.user.id) {
               return {
                 ok: true,
                 error: null,
                 wikiImage,
                 isClapped: true,
-                isMine: false
+                isMine: true
               };
             } else {
-              return {
-                ok: true,
-                error: null,
-                wikiImage,
-                isClapped: false,
-                isMine: false
-              };
+              const isClapped = await Clap.findOne({
+                wikiImageId,
+                senderId: user.id
+              });
+              if (isClapped) {
+                return {
+                  ok: true,
+                  error: null,
+                  wikiImage,
+                  isClapped: true,
+                  isMine: false
+                };
+              } else {
+                return {
+                  ok: true,
+                  error: null,
+                  wikiImage,
+                  isClapped: false,
+                  isMine: false
+                };
+              }
             }
+          } else {
+            return {
+              ok: true,
+              error: null,
+              wikiImage,
+              isClapped: false,
+              isMine: false
+            };
           }
         } else {
           return {

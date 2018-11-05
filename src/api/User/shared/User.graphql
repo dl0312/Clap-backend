@@ -6,7 +6,7 @@ type User {
   lastName: String
   nickName: String!
   fullName: String
-  age: Int
+  birthday: String
   gender: String
   password: String
   phoneNumber: String

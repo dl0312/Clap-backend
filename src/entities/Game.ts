@@ -15,6 +15,12 @@ class Game extends BaseEntity {
   @Column({ type: "text" })
   name: string;
 
+  @Column({ type: "text", nullable: true })
+  icon: string;
+
+  @Column({ type: "text", nullable: true })
+  titlePicture: string;
+
   @CreateDateColumn()
   createdAt: string;
 

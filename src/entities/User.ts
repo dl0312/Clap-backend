@@ -14,7 +14,6 @@ import {
   UpdateDateColumn,
   RelationCount
 } from "typeorm";
-import { gender } from "../types/types";
 import Achievement from "./Achievement";
 import Clap from "./Clap";
 import Comment from "./Comment";
@@ -23,6 +22,7 @@ import Notification from "./Notification";
 import Post from "./Post";
 import WikiImage from "./WikiImage";
 import Exchange from "./Exchange";
+import Game from "./Game";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -47,15 +47,14 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   nickName: string;
 
-  @Column({ type: "int", nullable: true })
-  age: number;
+  @Column({ type: "text", default: "1993-03-12" })
+  birthday: string;
 
   @Column({
     type: "text",
-    enum: ["MALE", "FEMALE"],
     nullable: true
   })
-  gender: gender;
+  gender: string;
 
   @Column({ type: "text", nullable: true })
   password: string;
@@ -131,6 +130,9 @@ class User extends BaseEntity {
 
   @OneToMany(type => WikiImage, wikiimage => wikiimage.user, { nullable: true })
   wikiImages: WikiImage[];
+
+  @ManyToMany(type => Game, { nullable: true })
+  Games: Game[];
 
   @CreateDateColumn()
   createdAt: string;

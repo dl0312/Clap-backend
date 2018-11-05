@@ -6,7 +6,7 @@ import {
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
 import Verification from "../../../entities/Verification";
-import { sendVerificationEmail } from "../../../utils/sendEmail";
+// import { sendVerificationEmail } from "../../../utils/sendEmail";
 
 const validateEmail = email => {
   const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,10 +48,11 @@ const resolvers: Resolvers = {
                   payload: newUser.email,
                   target: "EMAIL"
                 }).save();
-                await sendVerificationEmail(
-                  newUser.nickName,
-                  emailVerification.key
-                );
+                console.log(emailVerification);
+                // await sendVerificationEmail(
+                //   newUser.nickName,
+                //   emailVerification.key
+                // );
               }
               const token = createJWT(newUser.id);
               return { ok: true, error: null, token };

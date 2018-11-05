@@ -35,7 +35,7 @@ type Mutation {
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(nickName: String!, email: String!, password: String!): EmailSignUpResponse!
+  EmailSignUp(email: String!, password: String!, phoneNumber: String!, nickName: String!, gender: String!, birthday: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, nickName: String!, email: String, fbId: String!): FacebookConnectResponse!
   FollowUser(userId: Int!): FollowUserResponse!
   GoogleConnect(firstName: String!, lastName: String!, nickName: String!, email: String, profilePhoto: String, googleId: String!): GoogleConnectResponse!
@@ -195,6 +195,15 @@ type Exchange {
   buyer: User!
   productId: Int
   product: Product!
+}
+
+type Game {
+  id: Int!
+  name: String!
+  icon: String!
+  titlePicture: String!
+  createdAt: String!
+  updatedAt: String
 }
 
 type GetImageResponse {
@@ -466,7 +475,7 @@ type User {
   lastName: String
   nickName: String!
   fullName: String
-  age: Int
+  birthday: String
   gender: String
   password: String
   phoneNumber: String
