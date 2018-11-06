@@ -17,7 +17,13 @@ const decodeJWT = async (token: string): Promise<User | undefined> => {
           "followers",
           "exchanges",
           "exchanges.product",
-          "clapsAsReceiver"
+          "clapsAsReceiver",
+          "clapsAsReceiver.post",
+          "clapsAsReceiver.wikiImage",
+          "clapsAsSender",
+          "clapsAsSender.post",
+          "clapsAsSender.wikiImage",
+          "posts"
         ]
       }
     );

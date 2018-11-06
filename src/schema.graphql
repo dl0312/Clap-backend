@@ -75,10 +75,12 @@ type Query {
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
   GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
+  GetClappedPosts: GetClappedPostsResponse!
   GetMyPosts: GetMyPostsResponse!
   GetPostById(postId: Int!): GetPostByIdResponse!
   GetPostsByCategoryId(categoryId: Int!): GetPostsByCategoryIdResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
+  GetRisingPosts: GetRisingPostsResponse!
   GetAllProducts: GetAllProductsResponse!
   GetProductById(productId: Int!): GetProductByIdResponse!
   GetProductsByCategory(categoryId: Int!): GetProductsByCategoryResponse!
@@ -309,6 +311,12 @@ type GetAllPostsResponse {
   posts: [Post]
 }
 
+type GetClappedPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
 type GetMyPostsResponse {
   ok: Boolean!
   error: String
@@ -333,6 +341,12 @@ type GetPostsByKeywordResponse {
   ok: Boolean!
   error: String
   filterdPosts: [Post]
+}
+
+type GetRisingPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
 }
 
 type Post {

@@ -12,7 +12,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  RelationCount
+  RelationCount,
+  JoinColumn
 } from "typeorm";
 import Achievement from "./Achievement";
 import Clap from "./Clap";
@@ -105,16 +106,17 @@ class User extends BaseEntity {
   @RelationCount((user: User) => user.following)
   followingCount: number;
 
-  @OneToMany(type => Post, post => post.user, { nullable: true })
+  @OneToMany(type => Post, post => post.user)
   posts: Post[];
 
-  @OneToMany(type => Exchange, exchange => exchange.buyer, { nullable: true })
+  @OneToMany(type => Exchange, exchange => exchange.buyer)
   exchanges: Exchange[];
 
-  @OneToMany(type => Clap, clap => clap.sender, { nullable: true })
+  @OneToMany(type => Clap, clap => clap.sender)
+  @JoinColumn()
   clapsAsSender: Clap[];
 
-  @OneToMany(type => Clap, clap => clap.receiver, { nullable: true })
+  @OneToMany(type => Clap, clap => clap.receiver)
   clapsAsReceiver: Clap[];
 
   @RelationCount((user: User) => user.clapsAsReceiver)

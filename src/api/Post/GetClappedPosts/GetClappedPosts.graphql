@@ -1,0 +1,9 @@
+type GetClappedPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  GetClappedPosts: GetClappedPostsResponse!
+}

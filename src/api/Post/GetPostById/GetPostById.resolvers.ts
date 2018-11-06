@@ -22,8 +22,8 @@ const resolvers: Resolvers = {
           {
             relations: [
               "category",
-              "category.wikiImages",
               "category.parent",
+              "category.wikiImages",
               "user",
               "comments",
               "comments.user",

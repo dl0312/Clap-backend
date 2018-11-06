@@ -31,13 +31,15 @@ class Clap extends BaseEntity {
   @Column({ nullable: true })
   postId: number;
 
-  @ManyToOne(type => Post, post => post.claps)
+  @ManyToOne(type => Post, post => post.claps, { nullable: true })
   post: Post;
 
   @Column({ nullable: true })
   wikiImageId: number;
 
-  @ManyToOne(type => WikiImage, wikiImage => wikiImage.claps)
+  @ManyToOne(type => WikiImage, wikiImage => wikiImage.claps, {
+    nullable: true
+  })
   wikiImage: WikiImage;
 
   @CreateDateColumn()
