@@ -24,7 +24,8 @@ const resolvers: Resolvers = {
         }
         const categories = await Category.find({
           where: { id: In(categoriesIds) }
-        });
+          ,relations: ["parent","children","children.wikiImages","wikiImages"]
+        },);
         if (categories) {
           return {
             ok: true,

@@ -1,8 +1,9 @@
 type Category {
   id: Int!
   name: String!
-  parent: [Category]
+  parent: Category
   children: [Category]
+  length: Int
   wikiImages: [WikiImage]
   topWikiImage: WikiImage
   createdAt: String!

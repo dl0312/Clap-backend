@@ -15,31 +15,31 @@ const resolvers: Resolvers = {
         args: AddCategoryMutationArgs,
         { req }
       ): Promise<AddCategoryResponse> => {
-        const { parentIds, childrenIds, name } = args;
+        const { parentId, childrenIds, name } = args;
         try {
-          let parentCategories: Category[] = [];
+          let parentCategory: Category | null = null;
           let childrenCategories: Category[] = [];
           let category;
-          if (parentIds && childrenIds) {
+          if (parentId && childrenIds) {
             // have both parent and children
-            parentCategories = await Category.find({
-              where: { id: In(parentIds) }
+            parentCategory = await Category.findOne({
+              where: { id: parentId }
             });
             childrenCategories = await Category.find({
               where: { id: In(childrenIds) }
             });
             category = await Category.create({
-              parent: parentCategories,
+              parent: parentCategory,
               children: childrenCategories,
               name
             }).save();
-          } else if (parentIds) {
+          } else if (parentId) {
             // have only parent
-            parentCategories = await Category.find({
-              where: { id: In(parentIds) }
+            parentCategory = await Category.findOne({
+              where: { id: parentId }
             });
             category = await Category.create({
-              parent: parentCategories,
+              parent: parentCategory,
               children: childrenCategories,
               name
             }).save();
@@ -49,14 +49,14 @@ const resolvers: Resolvers = {
               where: { id: In(childrenIds) }
             });
             category = await Category.create({
-              parent: parentCategories,
+              parent: parentCategory,
               children: childrenCategories,
               name
             }).save();
           } else {
             // have no relation
             category = await Category.create({
-              parent: parentCategories,
+              parent: parentCategory,
               children: childrenCategories,
               name
             }).save();

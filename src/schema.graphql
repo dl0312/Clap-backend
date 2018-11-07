@@ -14,9 +14,9 @@ type AddCategoryResponse {
 }
 
 type Mutation {
-  AddCategory(name: String!, parentIds: [Int], childrenIds: [Int]): AddCategoryResponse!
+  AddCategory(name: String!, parentId: Int, childrenIds: [Int]): AddCategoryResponse!
   DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
-  EditCategory(categoryId: Int!, parentIds: [Int], childrenIds: [Int], name: String!): EditCategoryResponse!
+  EditCategory(categoryId: Int!, parentId: Int, childrenIds: [Int], name: String!): EditCategoryResponse!
   SendClap(postId: Int, wikiImageId: Int): SendClapResponse!
   UnClap(postId: Int!, wikiImageId: Int!): SendClapResponse!
   AddComment(postId: Int!, parentCommentId: Int, body: String!, level: Int!): AddCommentResponse!
@@ -113,8 +113,9 @@ type GetCategoryByIdResponse {
 type Category {
   id: Int!
   name: String!
-  parent: [Category]
+  parent: Category
   children: [Category]
+  length: Int
   wikiImages: [WikiImage]
   topWikiImage: WikiImage
   createdAt: String!

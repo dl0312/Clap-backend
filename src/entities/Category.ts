@@ -6,12 +6,14 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   OneToMany,
-  ManyToMany,
-  JoinTable
+  TreeChildren,
+  TreeParent,
+  Tree
 } from "typeorm";
 import WikiImage from "./WikiImage";
 
 @Entity()
+@Tree("closure-table")
 class Category extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,16 +21,23 @@ class Category extends BaseEntity {
   @Column({ type: "text" })
   name: string;
 
-  @ManyToMany(type => Category, category => category.children, {
-    nullable: true
-  })
-  @JoinTable()
-  parent: Category[];
+  @TreeParent()
+  parent: Category;
 
-  @ManyToMany(type => Category, category => category.parent, {
-    nullable: true
-  })
+  @TreeChildren({ cascade: true })
   children: Category[];
+
+  @Column({ nullable: true, default: 0 })
+  length: number;
+
+  // console.log(
+  //   JSON.stringify(
+  //     getConnection()
+  //       .getRepository(Category)
+  //       .manager.getTreeRepository(Category)
+  //       .findRoots()
+  //   )
+  // );
 
   @OneToMany(type => WikiImage, wikiImage => wikiImage.category)
   wikiImages: WikiImage[];

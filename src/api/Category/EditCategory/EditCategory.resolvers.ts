@@ -15,27 +15,27 @@ const resolvers: Resolvers = {
         args: EditCategoryMutationArgs,
         { req }
       ): Promise<EditCategoryResponse> => {
-        const { categoryId, parentIds, childrenIds, name } = args;
+        const { categoryId, parentId, childrenIds, name } = args;
         try {
           const category = await Category.findOne(
             { id: categoryId },
             { relations: ["parent", "children"] }
           );
           if (category) {
-            let parentCategories: Category[] = [];
+            let parentCategory: Category | null = null;
             let childrenCategories: Category[] = [];
-            if (parentIds.length !== 0 && childrenIds.length !== 0) {
+            if (parentId && childrenIds !== undefined) {
               // have both parent and children
-              parentCategories = await Category.find({
-                where: { id: In(parentIds) }
+              parentCategory = await Category.findOne({
+                where: { id: parentId }
               });
               childrenCategories = await Category.find({
                 where: { id: In(childrenIds) }
               });
-            } else if (parentIds.length !== 0) {
+            } else if (parentId) {
               // have only parent
-              parentCategories = await Category.find({
-                where: { id: In(parentIds) }
+              parentCategory = await Category.findOne({
+                where: { id: parentId }
               });
             } else if (childrenIds.length !== 0) {
               // have only child
@@ -45,7 +45,7 @@ const resolvers: Resolvers = {
             } else {
               // have no relation
             }
-            category.parent = parentCategories;
+            category.parent = parentCategory;
             category.children = childrenCategories;
             category.name = name;
             category.save();
