@@ -8,18 +8,20 @@ const resolvers: Resolvers = {
       const { user } = req;
       try {
         console.log(user.clapsAsSender);
-        const posts = user.clapsAsSender.map(clap =>
-          Post.findOne(
-            { id: clap.postId },
-            {
-              relations: ["category", "category.wikiImages", "user"]
-            }
-          )
+        const posts = user.clapsAsSender.map(
+          clap =>
+            clap.postId &&
+            Post.findOne(
+              { id: clap.postId },
+              {
+                relations: ["category", "category.wikiImages", "user"]
+              }
+            )
         );
         return {
           ok: true,
           error: null,
-          posts
+          posts: posts.filter(obj => obj)
         };
       } catch (error) {
         return {

@@ -20,7 +20,7 @@ const resolvers: Resolvers = {
           let parentCategory: Category | null = null;
           let childrenCategories: Category[] = [];
           let category;
-          if (parentId && childrenIds) {
+          if (parentId && (childrenIds && childrenIds.length !== 0)) {
             // have both parent and children
             parentCategory = await Category.findOne({
               where: { id: parentId }
@@ -43,7 +43,7 @@ const resolvers: Resolvers = {
               children: childrenCategories,
               name
             }).save();
-          } else if (childrenIds) {
+          } else if (childrenIds && childrenIds.length !== 0) {
             // have only child
             childrenCategories = await Category.find({
               where: { id: In(childrenIds) }

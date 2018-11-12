@@ -17,6 +17,7 @@ const resolvers: Resolvers = {
       ): Promise<EditCategoryResponse> => {
         const { categoryId, parentId, childrenIds, name } = args;
         try {
+          console.log(childrenIds, childrenIds.length === 0);
           const category = await Category.findOne(
             { id: categoryId },
             { relations: ["parent", "children"] }
@@ -24,7 +25,7 @@ const resolvers: Resolvers = {
           if (category) {
             let parentCategory: Category | null = null;
             let childrenCategories: Category[] = [];
-            if (parentId && childrenIds !== undefined) {
+            if (parentId && childrenIds.length !== 0) {
               // have both parent and children
               parentCategory = await Category.findOne({
                 where: { id: parentId }
