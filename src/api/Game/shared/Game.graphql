@@ -1,8 +1,10 @@
 type Game {
   id: Int!
-  name: String!
-  icon: String!
-  titlePicture: String!
+  title: String!
+  icon: String
+  logo: String
+  officialSite: String
+  categories: [Category]
   createdAt: String!
   updatedAt: String
 }

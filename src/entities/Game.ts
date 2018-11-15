@@ -4,8 +4,10 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from "typeorm";
+import Category from "./Category";
 
 @Entity()
 class Game extends BaseEntity {
@@ -13,13 +15,19 @@ class Game extends BaseEntity {
   id: number;
 
   @Column({ type: "text" })
-  name: string;
+  title: string;
 
   @Column({ type: "text", nullable: true })
   icon: string;
 
   @Column({ type: "text", nullable: true })
-  titlePicture: string;
+  logo: string;
+
+  @Column({ type: "text", nullable: true })
+  officialSite: string;
+
+  @OneToMany(type => Category, category => category.game)
+  categories: Category[];
 
   @CreateDateColumn()
   createdAt: string;

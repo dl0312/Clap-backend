@@ -8,9 +8,11 @@ import {
   OneToMany,
   TreeChildren,
   TreeParent,
-  Tree
+  Tree,
+  ManyToOne
 } from "typeorm";
 import WikiImage from "./WikiImage";
+import Game from "./Game";
 
 @Entity()
 @Tree("closure-table")
@@ -21,6 +23,9 @@ class Category extends BaseEntity {
   @Column({ type: "text" })
   name: string;
 
+  @ManyToOne(type => Game, game => game.categories, { nullable: true })
+  game: Game;
+
   @TreeParent()
   parent: Category;
 
@@ -29,15 +34,6 @@ class Category extends BaseEntity {
 
   @Column({ nullable: true, default: 0 })
   length: number;
-
-  // console.log(
-  //   JSON.stringify(
-  //     getConnection()
-  //       .getRepository(Category)
-  //       .manager.getTreeRepository(Category)
-  //       .findRoots()
-  //   )
-  // );
 
   @OneToMany(type => WikiImage, wikiImage => wikiImage.category)
   wikiImages: WikiImage[];

@@ -113,6 +113,7 @@ type GetCategoryByIdResponse {
 type Category {
   id: Int!
   name: String!
+  game: Game
   parent: Category
   children: [Category]
   length: Int
@@ -202,9 +203,11 @@ type Exchange {
 
 type Game {
   id: Int!
-  name: String!
-  icon: String!
-  titlePicture: String!
+  title: String!
+  icon: String
+  logo: String
+  officialSite: String
+  categories: [Category]
   createdAt: String!
   updatedAt: String
 }

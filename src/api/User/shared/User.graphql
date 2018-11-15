@@ -32,6 +32,7 @@ type User {
   comments: [Comment]
   notificationsAsReceiver: [Notification]
   wikiImages: [WikiImage]
+  games: [Game]
   createdAt: String!
   updatedAt: String
 }
