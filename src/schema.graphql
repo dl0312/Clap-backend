@@ -34,6 +34,7 @@ type Mutation {
   EditProduct(productId: Int!, name: String, price: Int, stock: Int, categoryId: Int): EditProductResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
+  EditMyGames(gameIds: [Int]): EditMyGamesResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(email: String!, password: String!, phoneNumber: String!, nickName: String!, gender: String!, birthday: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, nickName: String!, email: String, fbId: String!): FacebookConnectResponse!
@@ -71,6 +72,7 @@ type Query {
   GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
   GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
   GetMyExchanges: GetMyExchangesResponse!
+  GetAllGames: GetAllGamesResponse
   GetImage(path: String!): GetImageResponse!
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
@@ -199,6 +201,12 @@ type Exchange {
   buyer: User!
   productId: Int
   product: Product!
+}
+
+type GetAllGamesResponse {
+  ok: Boolean!
+  error: String
+  games: [Game]
 }
 
 type Game {
@@ -429,6 +437,11 @@ type CompletePhoneVerificationResponse {
   token: String
 }
 
+type EditMyGamesResponse {
+  ok: Boolean!
+  error: String
+}
+
 type EmailOverlapResponse {
   ok: Boolean!
   error: String
@@ -519,6 +532,7 @@ type User {
   comments: [Comment]
   notificationsAsReceiver: [Notification]
   wikiImages: [WikiImage]
+  games: [Game]
   createdAt: String!
   updatedAt: String
 }

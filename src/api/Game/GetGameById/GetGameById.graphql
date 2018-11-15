@@ -1,0 +1,9 @@
+type GetGameByIdResponse {
+  ok: Boolean!
+  error: String
+  game: Game
+}
+
+type Query {
+  GetGameById(gameId: Int!): GetGameByIdResponse!
+}

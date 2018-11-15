@@ -5,6 +5,7 @@ type Game {
   logo: String
   officialSite: String
   categories: [Category]
+  users: [User]
   createdAt: String!
   updatedAt: String
 }

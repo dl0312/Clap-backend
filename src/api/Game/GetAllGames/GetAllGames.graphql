@@ -1,0 +1,9 @@
+type GetAllGamesResponse {
+  ok: Boolean!
+  error: String
+  games: [Game]
+}
+
+type Query {
+  GetAllGames: GetAllGamesResponse
+}

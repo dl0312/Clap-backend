@@ -5,9 +5,12 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  ManyToMany,
+  JoinTable
 } from "typeorm";
 import Category from "./Category";
+import User from "./User";
 
 @Entity()
 class Game extends BaseEntity {
@@ -28,6 +31,10 @@ class Game extends BaseEntity {
 
   @OneToMany(type => Category, category => category.game)
   categories: Category[];
+
+  @ManyToMany(type => User, user => user.games, { nullable: true })
+  @JoinTable()
+  users: User[];
 
   @CreateDateColumn()
   createdAt: string;

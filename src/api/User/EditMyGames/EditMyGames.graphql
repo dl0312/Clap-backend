@@ -1,0 +1,8 @@
+type EditMyGamesResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditMyGames(gameIds: [Int]): EditMyGamesResponse!
+}

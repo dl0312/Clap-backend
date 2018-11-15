@@ -20,7 +20,8 @@ const decodeJWT = async (token: string): Promise<User | undefined> => {
           "clapsAsSender",
           "clapsAsSender.post",
           "clapsAsSender.wikiImage",
-          "posts"
+          "posts",
+          "games"
         ]
       }
     );
