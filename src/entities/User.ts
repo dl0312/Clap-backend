@@ -134,7 +134,7 @@ class User extends BaseEntity {
   wikiImages: WikiImage[];
 
   @ManyToMany(type => Game, { nullable: true })
-  Games: Game[];
+  games: Game[];
 
   @CreateDateColumn()
   createdAt: string;
