@@ -1,0 +1,9 @@
+type GetClappedPostsByGameIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  GetClappedPostsByGameId(gameId: Int!): GetClappedPostsByGameIdResponse!
+}

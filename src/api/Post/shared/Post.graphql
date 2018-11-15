@@ -14,6 +14,9 @@ type Post {
   categoryId: Int!
   view: Int!
   wikiImages: [WikiImage]
+  game: Game
+  gameId: Int
+  tags: [Tag]
   createdAt: String!
   updatedAt: String
 }

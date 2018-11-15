@@ -27,6 +27,9 @@ class Game extends BaseEntity {
   logo: string;
 
   @Column({ type: "text", nullable: true })
+  wallpaper: string;
+
+  @Column({ type: "text", nullable: true })
   officialSite: string;
 
   @OneToMany(type => Category, category => category.game)

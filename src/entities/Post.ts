@@ -9,7 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   RelationCount,
-  ManyToMany
+  ManyToMany,
+  JoinTable
 } from "typeorm";
 import Clap from "./Clap";
 import Comment from "./Comment";
@@ -17,6 +18,8 @@ import User from "./User";
 import Category from "./Category";
 import WikiImage from "./WikiImage";
 import PostImage from "./PostImage";
+import Game from "./Game";
+import Tag from "./Tag";
 
 @Entity()
 class Post extends BaseEntity {
@@ -70,6 +73,16 @@ class Post extends BaseEntity {
     nullable: true
   })
   wikiImages: WikiImage[];
+
+  @ManyToOne(type => Game)
+  game: Game;
+
+  @Column({ nullable: true })
+  gameId: number;
+
+  @ManyToMany(type => Tag, tag => tag.posts)
+  @JoinTable()
+  tags: Tag[];
 
   @OneToMany(type => PostImage, postImage => postImage.post)
   postImages: PostImage[];

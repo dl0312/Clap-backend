@@ -1,0 +1,9 @@
+type GetPostsByGameIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  GetPostsByGameId(gameId: Int!): GetPostsByGameIdResponse!
+}

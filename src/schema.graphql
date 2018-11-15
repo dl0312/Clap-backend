@@ -73,16 +73,20 @@ type Query {
   GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
   GetMyExchanges: GetMyExchangesResponse!
   GetAllGames: GetAllGamesResponse
+  GetGameById(gameId: Int!): GetGameByIdResponse!
   GetImage(path: String!): GetImageResponse!
   GetReceivedMessages: GetReceivedMessagesResponse!
   GetSendMessages: GetSendMessagesResponse!
   GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
   GetClappedPosts: GetClappedPostsResponse!
+  GetClappedPostsByGameId(gameId: Int!): GetClappedPostsByGameIdResponse!
   GetMyPosts: GetMyPostsResponse!
   GetPostById(postId: Int!): GetPostByIdResponse!
   GetPostsByCategoryId(categoryId: Int!): GetPostsByCategoryIdResponse!
+  GetPostsByGameId(gameId: Int!): GetPostsByGameIdResponse!
   GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
   GetRisingPosts: GetRisingPostsResponse!
+  GetRisingPostsByGameId(gameId: Int!): GetRisingPostsByGameIdResponse!
   GetAllProducts: GetAllProductsResponse!
   GetProductById(productId: Int!): GetProductByIdResponse!
   GetProductsByCategory(categoryId: Int!): GetProductsByCategoryResponse!
@@ -209,13 +213,27 @@ type GetAllGamesResponse {
   games: [Game]
 }
 
+type GetGameByIdResponse {
+  ok: Boolean!
+  error: String
+  game: Game
+}
+
 type Game {
   id: Int!
   title: String!
   icon: String
   logo: String
+  wallpaper: String
   officialSite: String
   categories: [Category]
+  users: [User]
+  createdAt: String!
+  updatedAt: String
+  id: Int!
+  name: String!
+  count: Int
+  category: Category
   createdAt: String!
   updatedAt: String
 }
@@ -329,6 +347,12 @@ type GetClappedPostsResponse {
   posts: [Post]
 }
 
+type GetClappedPostsByGameIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
 type GetMyPostsResponse {
   ok: Boolean!
   error: String
@@ -349,6 +373,12 @@ type GetPostsByCategoryIdResponse {
   posts: [Post]
 }
 
+type GetPostsByGameIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
 type GetPostsByKeywordResponse {
   ok: Boolean!
   error: String
@@ -356,6 +386,12 @@ type GetPostsByKeywordResponse {
 }
 
 type GetRisingPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetRisingPostsByGameIdResponse {
   ok: Boolean!
   error: String
   posts: [Post]
@@ -377,6 +413,8 @@ type Post {
   categoryId: Int!
   view: Int!
   wikiImages: [WikiImage]
+  game: Game
+  gameId: Int
   createdAt: String!
   updatedAt: String
 }
