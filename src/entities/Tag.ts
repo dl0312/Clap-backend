@@ -5,11 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  OneToOne,
-  ManyToMany
+  OneToOne
 } from "typeorm";
 import Category from "./Category";
-import Post from "./Post";
 
 @Entity()
 class Tag extends BaseEntity {
@@ -24,9 +22,6 @@ class Tag extends BaseEntity {
 
   @OneToOne(type => Category, { nullable: true })
   category: Category;
-
-  @ManyToMany(type => Post, post => post.tags)
-  posts: Post[];
 
   @CreateDateColumn()
   createdAt: string;

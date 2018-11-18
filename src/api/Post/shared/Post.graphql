@@ -10,13 +10,11 @@ type Post {
   clapsCount: Int
   comments: [Comment]
   commentsCount: Int
-  category: Category
-  categoryId: Int!
   view: Int!
   wikiImages: [WikiImage]
   game: Game
   gameId: Int
-  tags: [Tag]
+  tags: [String]
   createdAt: String!
   updatedAt: String
 }

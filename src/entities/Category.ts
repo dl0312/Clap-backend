@@ -23,6 +23,9 @@ class Category extends BaseEntity {
   @Column({ type: "text" })
   name: string;
 
+  @Column({ nullable: true })
+  gameId: number;
+
   @ManyToOne(type => Game, game => game.categories, { nullable: true })
   game: Game;
 
@@ -45,17 +48,21 @@ class Category extends BaseEntity {
   updatedAt: string;
 
   get topWikiImage(): WikiImage {
-    let topWikiImage: WikiImage = this.wikiImages[0];
-    for (const wikiImage of this.wikiImages) {
-      if (topWikiImage.clapsCount < wikiImage.clapsCount) {
-        topWikiImage = wikiImage;
-      } else if (topWikiImage.clapsCount === wikiImage.clapsCount) {
-        if (topWikiImage.updatedAt < wikiImage.updatedAt) {
+    if (!this.wikiImages) {
+      return null;
+    } else {
+      let topWikiImage: WikiImage = this.wikiImages[0];
+      for (const wikiImage of this.wikiImages) {
+        if (topWikiImage.clapsCount < wikiImage.clapsCount) {
           topWikiImage = wikiImage;
+        } else if (topWikiImage.clapsCount === wikiImage.clapsCount) {
+          if (topWikiImage.updatedAt < wikiImage.updatedAt) {
+            topWikiImage = wikiImage;
+          }
         }
       }
+      return topWikiImage;
     }
-    return topWikiImage;
   }
 }
 

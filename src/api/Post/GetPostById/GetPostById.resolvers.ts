@@ -21,9 +21,6 @@ const resolvers: Resolvers = {
           { id: postId },
           {
             relations: [
-              "category",
-              "category.parent",
-              "category.wikiImages",
               "user",
               "comments",
               "comments.user",

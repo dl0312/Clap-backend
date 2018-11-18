@@ -26,9 +26,9 @@ type Mutation {
   UploadPostImage(file: Upload!): UploadPostImageResponse!
   UploadShownImage(file: Upload!): UploadShownImageResponse!
   SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
-  AddPost(title: String!, titleImg: String, titleImgPos: Float, categoryId: Int!, body: String!): AddPostResponse!
+  AddPost(title: String!, titleImg: String, titleImgPos: Float, tags: [String], body: String!, gameId: Int!): AddPostResponse!
   DeletePost(postId: Int!): DeletePostResponse!
-  EditPost(postId: Int!, title: String, titleImg: String, titleImgPos: Float, categoryId: Int, body: String): EditPostResponse!
+  EditPost(postId: Int!, title: String, titleImg: String, titleImgPos: Float, tags: [String], body: String, gameId: Int!): EditPostResponse!
   AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
   DeleteProduct(productId: Int!): DeleteProductResponse!
   EditProduct(productId: Int!, name: String, price: Int, stock: Int, categoryId: Int): EditProductResponse!
@@ -67,6 +67,7 @@ type GetAllCategoriesResponse {
 
 type Query {
   GetAllCategories: GetAllCategoriesResponse!
+  GetCategoriesByGameId(gameId: Int!): GetCategoriesByGameIdResponse!
   GetCategoriesByIds(categoriesIds: [Int]): GetCategoriesByIdsResponse!
   GetCategoriesByKeyword(keyword: String!): GetCategoriesByKeywordResponse!
   GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
@@ -98,6 +99,12 @@ type Query {
   GetWikiImages(limit: Int!, type: String!): GetWikiImagesResponse!
 }
 
+type GetCategoriesByGameIdResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
 type GetCategoriesByIdsResponse {
   ok: Boolean!
   error: String
@@ -119,6 +126,7 @@ type GetCategoryByIdResponse {
 type Category {
   id: Int!
   name: String!
+  gameId: Int
   game: Game
   parent: Category
   children: [Category]
@@ -228,12 +236,6 @@ type Game {
   officialSite: String
   categories: [Category]
   users: [User]
-  createdAt: String!
-  updatedAt: String
-  id: Int!
-  name: String!
-  count: Int
-  category: Category
   createdAt: String!
   updatedAt: String
 }
@@ -409,12 +411,11 @@ type Post {
   clapsCount: Int
   comments: [Comment]
   commentsCount: Int
-  category: Category
-  categoryId: Int!
   view: Int!
   wikiImages: [WikiImage]
   game: Game
   gameId: Int
+  tags: [String]
   createdAt: String!
   updatedAt: String
 }
@@ -462,6 +463,15 @@ type Product {
   category: Category!
   createdAt: String!
   updatedAt: String!
+}
+
+type Tag {
+  id: Int!
+  name: String!
+  count: Int
+  category: Category
+  createdAt: String!
+  updatedAt: String
 }
 
 type CompleteEmailVerificationResponse {

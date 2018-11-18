@@ -1,0 +1,9 @@
+type GetCategoriesByGameIdResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type Query {
+  GetCategoriesByGameId(gameId: Int!): GetCategoriesByGameIdResponse!
+}

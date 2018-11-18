@@ -9,17 +9,14 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   RelationCount,
-  ManyToMany,
-  JoinTable
+  ManyToMany
 } from "typeorm";
 import Clap from "./Clap";
 import Comment from "./Comment";
 import User from "./User";
-import Category from "./Category";
 import WikiImage from "./WikiImage";
 import PostImage from "./PostImage";
 import Game from "./Game";
-import Tag from "./Tag";
 
 @Entity()
 class Post extends BaseEntity {
@@ -60,12 +57,6 @@ class Post extends BaseEntity {
   @RelationCount((post: Post) => post.comments)
   commentsCount: number;
 
-  @ManyToOne(type => Category)
-  category: Category;
-
-  @Column({ nullable: true })
-  categoryId: number;
-
   @Column({ type: "int", default: 0 })
   view: number;
 
@@ -80,9 +71,8 @@ class Post extends BaseEntity {
   @Column({ nullable: true })
   gameId: number;
 
-  @ManyToMany(type => Tag, tag => tag.posts)
-  @JoinTable()
-  tags: Tag[];
+  @Column("simple-array", { nullable: true })
+  tags: string[];
 
   @OneToMany(type => PostImage, postImage => postImage.post)
   postImages: PostImage[];

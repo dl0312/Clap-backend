@@ -1,6 +1,7 @@
 type Category {
   id: Int!
   name: String!
+  gameId: Int
   game: Game
   parent: Category
   children: [Category]

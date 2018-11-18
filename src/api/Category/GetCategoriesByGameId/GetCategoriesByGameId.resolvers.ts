@@ -1,28 +1,25 @@
 import { Resolvers } from "../../../types/resolvers";
-import Post from "../../../entities/Post";
+import Category from "../../../entities/Category";
 
 const resolvers: Resolvers = {
   Query: {
-    GetPostsByGameId: async (_, args, { req }) => {
-      const { gameId } = args;
+    GetCategoriesByGameId: async (_, args, { req }) => {
       try {
-        const posts = await Post.find({
-          where: { gameId },
-          order: {
-            createdAt: "DESC"
-          },
-          relations: ["user"]
+        const { gameId } = args;
+        const categories = await Category.find({
+          where: gameId,
+          relations: ["parent", "children", "wikiImages"]
         });
         return {
           ok: true,
           error: null,
-          posts
+          categories
         };
       } catch (error) {
         return {
           ok: false,
           error: error.message,
-          posts: null
+          categories: null
         };
       }
     }

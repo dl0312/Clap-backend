@@ -9,7 +9,8 @@ type Mutation {
     title: String!
     titleImg: String
     titleImgPos: Float
-    categoryId: Int!
+    tags: [String]
     body: String!
+    gameId: Int!
   ): AddPostResponse!
 }

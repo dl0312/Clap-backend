@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
           order: {
             view: "DESC"
           },
-          relations: ["category", "category.wikiImages", "user"]
+          relations: ["user"]
         });
         const filterdPosts = [];
         posts.map(post => {

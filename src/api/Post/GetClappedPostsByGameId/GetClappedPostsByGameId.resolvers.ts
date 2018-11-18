@@ -19,7 +19,7 @@ const resolvers: Resolvers = {
           Post.findOne(
             { id: clap.postId },
             {
-              relations: ["category", "category.wikiImages", "user", "game"]
+              relations: ["user", "game"]
             }
           )
         );
