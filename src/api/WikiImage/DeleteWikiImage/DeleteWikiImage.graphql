@@ -1,0 +1,8 @@
+type DeleteWikiImageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteWikiImage(wikiImageId: Int!): DeleteWikiImageResponse!
+}

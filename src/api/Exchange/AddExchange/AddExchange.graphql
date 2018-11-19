@@ -1,0 +1,8 @@
+type AddExchangeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddExchange(productId: Int!): AddExchangeResponse!
+}

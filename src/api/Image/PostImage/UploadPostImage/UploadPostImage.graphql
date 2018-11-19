@@ -1,0 +1,10 @@
+scalar Upload
+
+type UploadPostImageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  UploadPostImage(file: Upload!): UploadPostImageResponse!
+}

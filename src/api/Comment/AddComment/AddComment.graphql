@@ -1,0 +1,13 @@
+type AddCommentResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddComment(
+    postId: Int!
+    parentCommentId: Int
+    body: String!
+    level: Int!
+  ): AddCommentResponse!
+}

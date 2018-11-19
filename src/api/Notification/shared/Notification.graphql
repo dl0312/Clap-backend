@@ -1,0 +1,11 @@
+type Notification {
+  id: Int!
+  receiverId: Int!
+  receiver: User!
+  type: String!
+  postOfFollowers: Post
+  commentOnMyPost: Comment
+  commentOnMyComment: Comment
+  createdAt: String!
+  updatedAt: String
+}

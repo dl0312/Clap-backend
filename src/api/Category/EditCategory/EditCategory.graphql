@@ -1,0 +1,13 @@
+type EditCategoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditCategory(
+    categoryId: Int!
+    parentId: Int
+    childrenIds: [Int]
+    name: String!
+  ): EditCategoryResponse!
+}

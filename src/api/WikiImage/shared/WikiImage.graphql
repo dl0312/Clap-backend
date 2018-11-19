@@ -1,0 +1,16 @@
+type WikiImage {
+  id: Int!
+  name: String
+  userId: Int!
+  user: User!
+  category: Category!
+  categoryId: Int!
+  shownImage: String!
+  hoverImage: String!
+  posts: [Post]
+  postsCount: Int!
+  claps: [Clap]
+  clapsCount: Int!
+  createdAt: String!
+  updatedAt: String
+}

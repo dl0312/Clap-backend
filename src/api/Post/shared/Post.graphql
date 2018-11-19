@@ -1,0 +1,19 @@
+type Post {
+  id: Int!
+  title: String!
+  titleImg: String
+  titleImgPos: Float
+  body: String
+  userId: Int!
+  user: User!
+  claps: [Clap]
+  clapsCount: Int
+  comments: [Comment]
+  commentsCount: Int
+  category: Category
+  categoryId: Int!
+  view: Int!
+  wikiImages: [WikiImage]
+  createdAt: String!
+  updatedAt: String
+}

@@ -1,0 +1,8 @@
+type SendClapResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  SendClap(postId: Int, wikiImageId: Int): SendClapResponse!
+}

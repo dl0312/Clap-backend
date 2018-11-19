@@ -1,0 +1,8 @@
+type EmailOverlapResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Query {
+  EmailOverlap(email: String!): EmailOverlapResponse!
+}

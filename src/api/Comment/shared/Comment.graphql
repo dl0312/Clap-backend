@@ -1,0 +1,13 @@
+type Comment {
+  id: Int!
+  body: String!
+  userId: Int
+  user: User!
+  postId: Int
+  post: Post!
+  parentComment: Comment
+  childrenComments: [Comment]
+  level: Int!
+  createdAt: String!
+  updatedAt: String
+}

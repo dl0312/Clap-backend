@@ -1,0 +1,593 @@
+type Achievement {
+  id: Int!
+  name: String!
+  condition: String!
+  achievers: [User]
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddCategoryResponse {
+  ok: Boolean!
+  error: String
+  categoryId: Int
+}
+
+type Mutation {
+  AddCategory(name: String!, parentId: Int, childrenIds: [Int]): AddCategoryResponse!
+  DeleteCategory(categoryId: Int!): DeleteCategoryResponse!
+  EditCategory(categoryId: Int!, parentId: Int, childrenIds: [Int], name: String!): EditCategoryResponse!
+  SendClap(postId: Int, wikiImageId: Int): SendClapResponse!
+  UnClap(postId: Int!, wikiImageId: Int!): SendClapResponse!
+  AddComment(postId: Int!, parentCommentId: Int, body: String!, level: Int!): AddCommentResponse!
+  DeleteComment(commentId: Int!): DeleteCommentResponse!
+  EditComment(commentId: Int!, body: String!): EditCommentResponse!
+  AddExchange(productId: Int!): AddExchangeResponse!
+  UploadPostImage(file: Upload!): UploadPostImageResponse!
+  UploadShownImage(file: Upload!): UploadShownImageResponse!
+  SendMessage(text: String!, receiverId: Int!): SendMessageResponse!
+  AddPost(title: String!, titleImg: String, titleImgPos: Float, categoryId: Int!, body: String!): AddPostResponse!
+  DeletePost(postId: Int!): DeletePostResponse!
+  EditPost(postId: Int!, title: String, titleImg: String, titleImgPos: Float, categoryId: Int, body: String): EditPostResponse!
+  AddProduct(name: String!, price: Int!, categoryId: Int!): AddProductResponse!
+  DeleteProduct(productId: Int!): DeleteProductResponse!
+  EditProduct(productId: Int!, name: String, price: Int, stock: Int, categoryId: Int): EditProductResponse!
+  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
+  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(email: String!, password: String!, phoneNumber: String!, nickName: String!, gender: String!, birthday: String!): EmailSignUpResponse!
+  FacebookConnect(firstName: String!, lastName: String!, nickName: String!, email: String, fbId: String!): FacebookConnectResponse!
+  FollowUser(userId: Int!): FollowUserResponse!
+  GoogleConnect(firstName: String!, lastName: String!, nickName: String!, email: String, profilePhoto: String, googleId: String!): GoogleConnectResponse!
+  RequestEmailVerification: RequestEmailVerificationResponse!
+  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  UnfollowUser(userId: Int!): UnfollowUserResponse!
+  UpdateMyProfile(email: String, firstName: String, lastName: String, nickName: String, age: Int, gender: String, password: String, profilePhoto: String): UpdateMyProfileResponse!
+  AddWikiImage(categoryId: Int!, name: String, shownImage: String!, hoverImage: String!): AddWikiImageResponse!
+  DeleteWikiImage(wikiImageId: Int!): DeleteWikiImageResponse!
+  EditWikiImage(wikiImageId: Int!, categoryId: Int, name: String, shownImage: String, hoverImage: String): EditWikiImageResponse!
+}
+
+type DeleteCategoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditCategoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllCategoriesResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type Query {
+  GetAllCategories: GetAllCategoriesResponse!
+  GetCategoriesByIds(categoriesIds: [Int]): GetCategoriesByIdsResponse!
+  GetCategoriesByKeyword(keyword: String!): GetCategoriesByKeywordResponse!
+  GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
+  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
+  GetMyExchanges: GetMyExchangesResponse!
+  GetImage(path: String!): GetImageResponse!
+  GetReceivedMessages: GetReceivedMessagesResponse!
+  GetSendMessages: GetSendMessagesResponse!
+  GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
+  GetClappedPosts: GetClappedPostsResponse!
+  GetMyPosts: GetMyPostsResponse!
+  GetPostById(postId: Int!): GetPostByIdResponse!
+  GetPostsByCategoryId(categoryId: Int!): GetPostsByCategoryIdResponse!
+  GetPostsByKeyword(searchType: String!, keyword: String!): GetPostsByKeywordResponse!
+  GetRisingPosts: GetRisingPostsResponse!
+  GetAllProducts: GetAllProductsResponse!
+  GetProductById(productId: Int!): GetProductByIdResponse!
+  GetProductsByCategory(categoryId: Int!): GetProductsByCategoryResponse!
+  EmailOverlap(email: String!): EmailOverlapResponse!
+  GetMyFollowing: GetMyFollowingResponse!
+  GetMyProfile: GetMyProfileResponse!
+  NickNameOverlap(nickName: String!): NickNameOverlapResponse!
+  GetWikiImageById(wikiImageId: Int!): GetWikiImageByIdResponse!
+  GetWikiImages(limit: Int!, type: String!): GetWikiImagesResponse!
+}
+
+type GetCategoriesByIdsResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type GetCategoriesByKeywordResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type GetCategoryByIdResponse {
+  ok: Boolean!
+  error: String
+  category: Category
+}
+
+type Category {
+  id: Int!
+  name: String!
+  parent: Category
+  children: [Category]
+  length: Int
+  wikiImages: [WikiImage]
+  topWikiImage: WikiImage
+  createdAt: String!
+  updatedAt: String
+}
+
+type SendClapResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Clap {
+  id: Int!
+  senderId: Int
+  sender: User!
+  receiverId: Int
+  receiver: User!
+  postId: Int
+  post: Post
+  wikiImageId: Int
+  wikiImage: WikiImage
+  createdAt: String!
+  updatedAt: String
+}
+
+type UnClapResponse {
+  ok: Boolean!
+  error: String
+}
+
+type AddCommentResponse {
+  ok: Boolean!
+  error: String
+}
+
+type DeleteCommentResponse {
+  ok: Boolean
+  error: String
+}
+
+type EditCommentResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetCommentsByPostIdResponse {
+  ok: Boolean!
+  error: String
+  comments: [Comment]
+}
+
+type Comment {
+  id: Int!
+  body: String!
+  userId: Int
+  user: User!
+  postId: Int
+  post: Post!
+  parentComment: Comment
+  childrenComments: [Comment]
+  level: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddExchangeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetMyExchangesResponse {
+  ok: Boolean!
+  error: String
+  exchanges: [Exchange]
+}
+
+type Exchange {
+  id: Int!
+  buyerId: Int
+  buyer: User!
+  productId: Int
+  product: Product!
+}
+
+type Game {
+  id: Int!
+  name: String!
+  icon: String!
+  titlePicture: String!
+  createdAt: String!
+  updatedAt: String
+}
+
+type GetImageResponse {
+  ok: Boolean!
+  error: String
+  image: String
+}
+
+type PostImage {
+  id: Int!
+  url: String!
+  user: User
+  userId: Int!
+  post: Post
+  postId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+scalar Upload
+
+type UploadPostImageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ShownImage {
+  id: Int!
+  url: String!
+  user: User
+  userId: Int!
+  wikiImage: WikiImage
+  wikiImageId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+type UploadShownImageResponse {
+  ok: Boolean!
+  error: String
+  shownImage: ShownImage
+}
+
+type GetReceivedMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type GetSendMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type SendMessageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  senderId: Int!
+  sender: User!
+  receiverId: Int!
+  receiver: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Notification {
+  id: Int!
+  receiverId: Int!
+  receiver: User!
+  type: String!
+  postOfFollowers: Post
+  commentOnMyPost: Comment
+  commentOnMyComment: Comment
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddPostResponse {
+  ok: Boolean!
+  error: String
+  postId: Int
+}
+
+type DeletePostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditPostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetClappedPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetMyPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetPostByIdResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+  isClapped: Boolean
+  isMine: Boolean
+}
+
+type GetPostsByCategoryIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type GetPostsByKeywordResponse {
+  ok: Boolean!
+  error: String
+  filterdPosts: [Post]
+}
+
+type GetRisingPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Post {
+  id: Int!
+  title: String!
+  titleImg: String
+  titleImgPos: Float
+  body: String
+  userId: Int!
+  user: User!
+  claps: [Clap]
+  clapsCount: Int
+  comments: [Comment]
+  commentsCount: Int
+  category: Category
+  categoryId: Int!
+  view: Int!
+  wikiImages: [WikiImage]
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type DeleteProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditProductResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllProductsResponse {
+  ok: Boolean!
+  error: String
+  products: [Product]
+}
+
+type GetProductByIdResponse {
+  ok: Boolean!
+  error: String
+  product: Product
+}
+
+type GetProductsByCategoryResponse {
+  ok: Boolean!
+  error: String
+  products: [Product]
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Int!
+  stock: Int!
+  exchanges: [Exchange]
+  categoryId: Int!
+  category: Category!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type CompleteEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type CompletePhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type EmailOverlapResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EmailSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type EmailSignUpResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type FacebookConnectResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type FollowUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetMyFollowingResponse {
+  ok: Boolean!
+  error: String
+  following: [User]
+}
+
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type GoogleConnectResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type NickNameOverlapResponse {
+  ok: Boolean!
+  error: String
+}
+
+type RequestEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type User {
+  id: Int!
+  email: String
+  verifiedEmail: Boolean!
+  firstName: String
+  lastName: String
+  nickName: String!
+  fullName: String
+  birthday: String
+  gender: String
+  password: String
+  phoneNumber: String
+  verifiedPhoneNumber: Boolean!
+  profilePhoto: String
+  fbId: String
+  googleId: String
+  messagesAsSender: [Message]
+  messagesAsReceiver: [Message]
+  certification: Boolean
+  exp: Int!
+  clapPoint: Int!
+  following: [User]
+  followers: [User]
+  followersCount: Int
+  followingCount: Int
+  achievements: [Achievement]
+  posts: [Post]
+  exchanges: [Exchange]
+  clapsAsSender: [Clap]
+  clapsAsReceiver: [Clap]
+  clapsAsReceiverCount: Int
+  comments: [Comment]
+  notificationsAsReceiver: [Notification]
+  wikiImages: [WikiImage]
+  createdAt: String!
+  updatedAt: String
+}
+
+type StartPhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UnfollowUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateMyProfileResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  key: String!
+  verified: Boolean!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddWikiImageResponse {
+  ok: Boolean
+  error: String
+  wikiImageId: Int
+}
+
+type DeleteWikiImageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditWikiImageResponse {
+  ok: Boolean
+  error: String
+}
+
+type GetWikiImageByIdResponse {
+  ok: Boolean!
+  error: String
+  wikiImage: WikiImage
+  isClapped: Boolean
+  isMine: Boolean
+}
+
+type GetWikiImagesResponse {
+  ok: Boolean!
+  error: String
+  wikiImages: [WikiImage]
+}
+
+type WikiImage {
+  id: Int!
+  name: String
+  userId: Int!
+  user: User!
+  category: Category!
+  categoryId: Int!
+  shownImage: String!
+  hoverImage: String!
+  posts: [Post]
+  postsCount: Int!
+  claps: [Clap]
+  clapsCount: Int!
+  createdAt: String!
+  updatedAt: String
+}

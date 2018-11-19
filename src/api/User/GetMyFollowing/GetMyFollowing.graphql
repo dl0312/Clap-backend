@@ -1,0 +1,9 @@
+type GetMyFollowingResponse {
+  ok: Boolean!
+  error: String
+  following: [User]
+}
+
+type Query {
+  GetMyFollowing: GetMyFollowingResponse!
+}

@@ -1,0 +1,9 @@
+type GetPostsByCategoryIdResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  GetPostsByCategoryId(categoryId: Int!): GetPostsByCategoryIdResponse!
+}

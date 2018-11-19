@@ -1,0 +1,9 @@
+type GetReceivedMessagesResponse {
+  ok: Boolean!
+  error: String
+  messages: [Message]
+}
+
+type Query {
+  GetReceivedMessages: GetReceivedMessagesResponse!
+}

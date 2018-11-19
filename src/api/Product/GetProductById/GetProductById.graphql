@@ -1,0 +1,9 @@
+type GetProductByIdResponse {
+  ok: Boolean!
+  error: String
+  product: Product
+}
+
+type Query {
+  GetProductById(productId: Int!): GetProductByIdResponse!
+}

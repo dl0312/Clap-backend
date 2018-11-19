@@ -1,0 +1,13 @@
+type Clap {
+  id: Int!
+  senderId: Int
+  sender: User!
+  receiverId: Int
+  receiver: User!
+  postId: Int
+  post: Post
+  wikiImageId: Int
+  wikiImage: WikiImage
+  createdAt: String!
+  updatedAt: String
+}

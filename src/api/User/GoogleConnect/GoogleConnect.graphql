@@ -1,0 +1,16 @@
+type GoogleConnectResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  GoogleConnect(
+    firstName: String!
+    lastName: String!
+    nickName: String!
+    email: String
+    profilePhoto: String
+    googleId: String!
+  ): GoogleConnectResponse!
+}

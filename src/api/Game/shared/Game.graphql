@@ -1,0 +1,8 @@
+type Game {
+  id: Int!
+  name: String!
+  icon: String!
+  titlePicture: String!
+  createdAt: String!
+  updatedAt: String
+}

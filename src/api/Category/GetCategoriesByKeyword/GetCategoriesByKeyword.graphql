@@ -1,0 +1,9 @@
+type GetCategoriesByKeywordResponse {
+  ok: Boolean!
+  error: String
+  categories: [Category]
+}
+
+type Query {
+  GetCategoriesByKeyword(keyword: String!): GetCategoriesByKeywordResponse!
+}

@@ -1,0 +1,9 @@
+type GetRisingPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  GetRisingPosts: GetRisingPostsResponse!
+}

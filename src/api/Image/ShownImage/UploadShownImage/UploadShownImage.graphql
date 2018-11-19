@@ -1,0 +1,9 @@
+type UploadShownImageResponse {
+  ok: Boolean!
+  error: String
+  shownImage: ShownImage
+}
+
+type Mutation {
+  UploadShownImage(file: Upload!): UploadShownImageResponse!
+}

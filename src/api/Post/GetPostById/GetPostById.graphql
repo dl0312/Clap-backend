@@ -1,0 +1,11 @@
+type GetPostByIdResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+  isClapped: Boolean
+  isMine: Boolean
+}
+
+type Query {
+  GetPostById(postId: Int!): GetPostByIdResponse!
+}

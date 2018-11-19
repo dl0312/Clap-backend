@@ -1,0 +1,10 @@
+type Message {
+  id: Int!
+  text: String!
+  senderId: Int!
+  sender: User!
+  receiverId: Int!
+  receiver: User!
+  createdAt: String!
+  updatedAt: String
+}

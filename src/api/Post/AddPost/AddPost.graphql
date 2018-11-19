@@ -1,0 +1,15 @@
+type AddPostResponse {
+  ok: Boolean!
+  error: String
+  postId: Int
+}
+
+type Mutation {
+  AddPost(
+    title: String!
+    titleImg: String
+    titleImgPos: Float
+    categoryId: Int!
+    body: String!
+  ): AddPostResponse!
+}

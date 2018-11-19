@@ -1,0 +1,9 @@
+type GetCommentsByPostIdResponse {
+  ok: Boolean!
+  error: String
+  comments: [Comment]
+}
+
+type Query {
+  GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
+}

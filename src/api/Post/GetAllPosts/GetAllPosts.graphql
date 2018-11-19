@@ -1,0 +1,9 @@
+type GetAllPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  GetAllPosts(limit: Int!, type: String!): GetAllPostsResponse!
+}

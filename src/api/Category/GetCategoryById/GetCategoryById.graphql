@@ -1,0 +1,9 @@
+type GetCategoryByIdResponse {
+  ok: Boolean!
+  error: String
+  category: Category
+}
+
+type Query {
+  GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
+}
