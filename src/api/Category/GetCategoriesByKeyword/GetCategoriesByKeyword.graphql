@@ -5,5 +5,8 @@ type GetCategoriesByKeywordResponse {
 }
 
 type Query {
-  GetCategoriesByKeyword(keyword: String!): GetCategoriesByKeywordResponse!
+  GetCategoriesByKeyword(
+    gameId: Int!
+    keyword: String!
+  ): GetCategoriesByKeywordResponse!
 }

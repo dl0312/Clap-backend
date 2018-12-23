@@ -5,7 +5,7 @@ import Category from "../../../entities/Category";
 const resolvers: Resolvers = {
   Query: {
     GetCategoriesByKeyword: async (_, args, { req }) => {
-      const { keyword } = args;
+      const { gameId, keyword } = args;
       try {
         const categories = await getConnection()
           .getRepository(Category)
@@ -13,7 +13,8 @@ const resolvers: Resolvers = {
           .leftJoinAndSelect("category.parent", "parent")
           .leftJoinAndSelect("category.children", "children")
           .leftJoinAndSelect("category.wikiImages", "wikiImages")
-          .where("lower(category.name) like :key", {
+          .where("category.gameId = :gameId", { gameId })
+          .andWhere("lower(category.name) like :key", {
             key: `%${keyword.toLowerCase()}%`
           })
           .orderBy("category.id", "DESC")

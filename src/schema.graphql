@@ -69,7 +69,7 @@ type Query {
   GetAllCategories: GetAllCategoriesResponse!
   GetCategoriesByGameId(gameId: Int!): GetCategoriesByGameIdResponse!
   GetCategoriesByIds(categoriesIds: [Int]): GetCategoriesByIdsResponse!
-  GetCategoriesByKeyword(keyword: String!): GetCategoriesByKeywordResponse!
+  GetCategoriesByKeyword(gameId: Int!, keyword: String!): GetCategoriesByKeywordResponse!
   GetCategoryById(categoryId: Int!): GetCategoryByIdResponse!
   GetCommentsByPostId(postId: Int!): GetCommentsByPostIdResponse!
   GetMyExchanges: GetMyExchangesResponse!
