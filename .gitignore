@@ -56,7 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
-
+.env.production
 public/uploads
 
 public
