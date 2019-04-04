@@ -24,7 +24,8 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "postbuild": "cd src && copy ./api/**/*.graphql ../dist/api",
-    "start": "cd dist && node ."
+    "prestart": "yarn run types",
+    "start": "cd src && nodemon --exec ts-node index.ts -e ts,graphql"
   },
   "dependencies": {
     "@types/moment": "^2.13.0",
@@ -59,9 +60,5 @@
     "typeorm": "^0.2.8",
     "typescript": "^3.1.0-dev.20180804",
     "uuid": "^3.3.2"
-  },
-  "now": {
-    "name": "Clap-backend",
-    "dotenv": ".env.production"
   }
 }
